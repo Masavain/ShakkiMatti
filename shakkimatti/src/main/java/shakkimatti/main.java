@@ -3,6 +3,7 @@ package shakkimatti;
 
 public class main {
     public static void main(String[] args) {
-        System.out.println("tervetuloa shakkiin");
+        Pelilauta a = new Pelilauta();
+        a.tulosta();
     }
 }
