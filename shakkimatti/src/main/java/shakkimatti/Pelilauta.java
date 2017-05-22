@@ -3,50 +3,53 @@ package shakkimatti;
 import java.util.*;
 
 public class Pelilauta {
-    
-    private char[][] lauta;
-    
+
+    private Nappula[][] lauta;
+
     public Pelilauta() {
-        this.lauta = new char[8][8];
+        this.lauta = new Nappula[8][8];
         alustus();
     }
-    
+
     public void alustus() {
         for (int i = 0; i < 8; i++) {
-            this.lauta[i][6]='S';
-            this.lauta[i][1]='S';
+            this.lauta[i][6] = new Sotilas(i, 6, 1);
+            this.lauta[i][1] = new Sotilas(i, 1, 0);
         }
-        
-        this.lauta[4][7]='K';
-        this.lauta[3][7]='Q';
-        this.lauta[4][0]='K';
-        this.lauta[3][0]='Q';
-        
-        this.lauta[0][0]='T';
-        this.lauta[7][0]='T';
-        this.lauta[0][7]='T';
-        this.lauta[7][7]='T';
-        
-        this.lauta[1][7]='R';
-        this.lauta[6][7]='R';
-        this.lauta[1][0]='R';
-        this.lauta[6][0]='R';
-        
-        this.lauta[2][7]='L';
-        this.lauta[5][7]='L';
-        this.lauta[2][0]='L';
-        this.lauta[5][0]='L';
-        
-        
+
+        this.lauta[4][7] = new Kuningas(4, 7, 1);
+        this.lauta[3][7] = new Kuningatar(3, 7, 1);
+        this.lauta[4][0] = new Kuningas(4, 0, 0);
+        this.lauta[3][0] = new Kuningatar(3, 0, 0);
+
+        this.lauta[0][0] = new Torni(0, 0, 0);
+        this.lauta[7][0] = new Torni(7, 0, 0);
+        this.lauta[0][7] = new Torni(0, 7, 1);
+        this.lauta[7][7] = new Torni(7, 7, 1);
+
+        this.lauta[1][7] = new Ratsu(1, 7, 1);
+        this.lauta[6][7] = new Ratsu(6, 7, 1);
+        this.lauta[1][0] = new Ratsu(1, 0, 0);
+        this.lauta[6][0] = new Ratsu(6, 0, 0);
+
+        this.lauta[2][7] = new Lahetti(2, 7, 1);
+        this.lauta[5][7] = new Lahetti(5, 7, 1);
+        this.lauta[2][0] = new Lahetti(2, 0, 0);
+        this.lauta[5][0] = new Lahetti(5, 0, 0);
+
     }
-    
-    public void tulosta(){
+
+    public void tulosta() {
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
-                System.out.print(this.lauta[j][i]);
+                if (this.lauta[j][i] != null) {
+                    System.out.print(this.lauta[j][i]);
+                } else { 
+                    System.out.print(".");
+                }
             }
             System.out.println("");
         }
     }
-    
+
 }

@@ -4,7 +4,8 @@ package shakkimatti;
 public abstract class Nappula {
     
     private int x, y, color;
-
+    public String merkki;
+    
     public Nappula(int x, int y, int color) {
         this.x = x;
         this.y = y;
@@ -39,6 +40,11 @@ public abstract class Nappula {
 
     public void setColor(int color) {
         this.color = color;
+    }
+
+    @Override
+    public String toString() {
+        return merkki;
     }
     
     
