@@ -1,5 +1,6 @@
 
 package shakkimatti;
+import java.util.*;
 
 public abstract class Nappula {
     
@@ -46,6 +47,8 @@ public abstract class Nappula {
     public String toString() {
         return merkki;
     }
+    
+    public abstract List<String> mahdollisetSiirrot();
     
     
 }

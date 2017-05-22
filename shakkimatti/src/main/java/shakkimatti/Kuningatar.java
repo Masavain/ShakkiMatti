@@ -1,6 +1,8 @@
 
 package shakkimatti;
 
+import java.util.*;
+
 
 public class Kuningatar extends Nappula {
 
@@ -8,5 +10,13 @@ public class Kuningatar extends Nappula {
         super(x, y, color);
         this.merkki = "Q";
     }
+
+    @Override
+    public List<String> mahdollisetSiirrot() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    
+
     
 }

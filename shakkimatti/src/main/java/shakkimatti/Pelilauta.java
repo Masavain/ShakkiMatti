@@ -4,7 +4,7 @@ import java.util.*;
 
 public class Pelilauta {
 
-    private Nappula[][] lauta;
+    public Nappula[][] lauta;
 
     public Pelilauta() {
         this.lauta = new Nappula[8][8];
