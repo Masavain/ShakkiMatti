@@ -16,8 +16,8 @@ public class Kuningas extends Nappula {
     public List<String> mahdollisetSiirrot() {
         List<String> siirrot = new ArrayList<String>();
         if (y > 0) siirrot.add(x + "," + (y-1));
-        if (y < 7) siirrot.add(x + "," + (y+1));
-        if (x < 7) siirrot.add((x+1) + "," + y);
+        if (y < 8) siirrot.add(x + "," + (y+1));
+        if (x < 8) siirrot.add((x+1) + "," + y);
         if (x > 0) siirrot.add((x-1) + "," + y);
         return siirrot;
     }
