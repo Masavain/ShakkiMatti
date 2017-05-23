@@ -4,10 +4,21 @@ import java.util.*;
 
 public class Pelilauta {
 
+    public List<Ruutu> ruudut;
     public Nappula[][] lauta;
 
     public Pelilauta() {
         this.lauta = new Nappula[8][8];
+        this.ruudut = new ArrayList();
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 8; j++) {
+                if (j==1 || j==0) {
+                    ruudut.add(new VarattuRuutu(j,i));
+                } else {
+                    ruudut.add(new TyhjaRuutu(j,i));
+                }
+            }
+        }
         alustus();
     }
 
@@ -52,4 +63,10 @@ public class Pelilauta {
         }
     }
 
+    
+    public void tulostaRuudut(){
+        for (int i = 0; i < ruudut.size(); i++) {
+            System.out.println(ruudut.get(i));
+        }
+    }
 }
