@@ -13,10 +13,8 @@ public class Sotilas extends Nappula {
     @Override
     public List<String> mahdollisetSiirrot() {
         List<String> siirrot = new ArrayList<String>();
-        siirrot.add(getX() +"," + (getY()+1));
+        siirrot.add(x +"," + (y+1));
         return siirrot;
     }
-    
-    
-    
+        
 }

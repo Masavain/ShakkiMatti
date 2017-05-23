@@ -1,8 +1,6 @@
-
 package shakkimatti;
 
 import java.util.*;
-
 
 public class Kuningatar extends Nappula {
 
@@ -13,10 +11,25 @@ public class Kuningatar extends Nappula {
 
     @Override
     public List<String> mahdollisetSiirrot() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<String> siirrot = new ArrayList<String>();
+        for (int i = 1; i < 8; i++) {
+            if (x + i < 8 && y + i < 8) {
+                siirrot.add((x + i) + "," + (y + i));
+            }
+            if (x + i < 8 && y - i >= 0) {
+                siirrot.add((x + i) + "," + (y - i));
+            }
+            if (x - i >= 0 && y + i < 7) {
+                siirrot.add((x - i) + "," + (y + i));
+            }
+            if (x - i >= 0 && y - i >= 0) {
+                siirrot.add((x - i) + "," + (y - i));
+            }
+            if(i!=x) siirrot.add(i + "," + y);
+            if (i!=y) siirrot.add(x + "," + i);
+            
+        }
+        return siirrot;
     }
 
-    
-
-    
 }

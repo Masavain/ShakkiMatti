@@ -1,8 +1,7 @@
-
 package shakkimatti;
 
+import java.util.ArrayList;
 import java.util.List;
-
 
 public class Torni extends Nappula {
 
@@ -13,7 +12,14 @@ public class Torni extends Nappula {
 
     @Override
     public List<String> mahdollisetSiirrot() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<String> siirrot = new ArrayList<String>();
+        for (int i = 0; i < 8; i++) {
+            if(i!=x) siirrot.add(i + "," + y);
+            if (i!=y) siirrot.add(x + "," + i);
+        }
+        
+        
+        return siirrot;
     }
-    
+
 }

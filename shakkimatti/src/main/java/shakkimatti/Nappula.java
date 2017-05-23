@@ -4,7 +4,7 @@ import java.util.*;
 
 public abstract class Nappula {
     
-    private int x, y, color;
+    public int x, y, color;
     public String merkki;
     
     public Nappula(int x, int y, int color) {
