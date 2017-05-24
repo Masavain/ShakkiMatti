@@ -9,8 +9,6 @@ import java.util.*;
 import static org.junit.Assert.*;
 
 public class SotilasTest {
-
-    private Pelilauta lauta;
     
     public SotilasTest() {
         
@@ -26,7 +24,6 @@ public class SotilasTest {
 
     @Before
     public void setUp() {
-        lauta = new Pelilauta();
     }
 
     @After
@@ -36,28 +33,55 @@ public class SotilasTest {
     @Test
     public void tarkastaLiikutettu() {
         // testaa, että liikutettu on liikkumisen jälkeen true
-        Sotilas sotilas = (Sotilas)lauta.lauta[0][1];
+        Sotilas sotilas = new Sotilas(0,1,0);
         sotilas.liiku(0, 2);
         assertTrue(sotilas.liikutettu);
     }
     
     @Test
+    public void liikkuuOikeaanKoordinaattiin() {
+        // testaa, että liikutettu on liikkumisen jälkeen true
+        Sotilas sotilas = new Sotilas(0,1,0);
+        sotilas.liiku(0, 2);
+        assertEquals(sotilas.x+","+sotilas.y, "0,2");
+    }
+    
+    @Test
     public void aluksiVoiLiikkuaKaksi() {
         // testaa, että sotilasta on mahdollista siirtää aluksi 2 ruutua 
-        Sotilas sotilas = (Sotilas)lauta.lauta[0][1];
+        Sotilas sotilas = new Sotilas(0,1,0);
         assertTrue(sotilas.mahdollisetSiirrot().contains("0,3"));
     }
     
     @Test
     public void aluksiVoiLiikkuaYhden() {
-        Sotilas sotilas = (Sotilas)lauta.lauta[0][1];
+        Sotilas sotilas = new Sotilas(0,1,0);
         assertTrue(sotilas.mahdollisetSiirrot().contains("0,2"));
+    }
+        
+    @Test
+    public void eiVoiLiikkuaTaakse() {
+        Sotilas sotilas = new Sotilas(0,1,0);
+        assertTrue(!sotilas.mahdollisetSiirrot().contains("0,0"));
     }
     
     @Test
-    public void siirtoLiikuttaa() {
-        Sotilas sotilas = (Sotilas)lauta.lauta[0][1];
-        sotilas.liiku(0, 2);
-        assertEquals(sotilas.y, 2);
+    public void eiPaaseLaudaltaPois() {
+        Sotilas sotilas = new Sotilas(0,8,0);
+        assertTrue(!sotilas.mahdollisetSiirrot().contains("0,9"));
+    }
+    
+    @Test
+    public void eiVoiLiikkuaSivulle() {
+        Sotilas sotilas = new Sotilas(0,1,0);
+        sotilas.liiku(1, 1);
+        assertEquals(0, sotilas.x);
+    }
+    
+    @Test
+    public void eiVoiLiikkuaSivullePoisLaudalta() {
+        Sotilas sotilas = new Sotilas(0,1,0);
+        sotilas.liiku(-1, 1);
+        assertEquals(0, sotilas.x);
     }
 }

@@ -15,7 +15,6 @@ public class Pelilauta {
                 ruudut[j][i] = false;
             }
         }
-        alustus();
     }
 
     public void alustus() {
@@ -74,6 +73,27 @@ public class Pelilauta {
             }
             System.out.println("");
         }
+    }
+
+    public String toString() {
+        String palautus = "";
+        for (int i = 7; i >= 0; i--) {
+            for (int j = 0; j < 8; j++) {
+                if (this.lauta[j][i] != null) {
+                    palautus += this.lauta[j][i];
+                } else {
+                    palautus += ".";
+                }
+            }
+            palautus += "\n";
+        }
+        return palautus;
+    }
+
+    public void siirto(Nappula n, int xMihin, int yMihin) {
+        lauta[n.x][n.y] = null;
+        lauta[xMihin][yMihin] = n;
+        n.liiku(xMihin, yMihin);
     }
 
 }

@@ -1,22 +1,24 @@
-
 package shakkimatti;
+
 import java.util.*;
 
 public abstract class Nappula {
-    
+
     public int x, y, color;
     public String merkki;
-    
+
     public Nappula(int x, int y, int color) {
         this.x = x;
         this.y = y;
         this.color = color;
     }
-    
-    
+
     public void liiku(int x, int y) {
-        this.x = x;
-        this.y = y;
+        List<String> mahdSiirrot = this.mahdollisetSiirrot();
+        if (mahdSiirrot.contains(x + "," + y))  {
+            this.x = x;
+            this.y = y;
+        }
     }
 
     public int getX() {
@@ -47,8 +49,7 @@ public abstract class Nappula {
     public String toString() {
         return merkki;
     }
-    
+
     public abstract List<String> mahdollisetSiirrot();
-    
-    
+
 }
