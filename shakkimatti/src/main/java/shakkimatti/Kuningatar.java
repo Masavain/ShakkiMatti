@@ -25,9 +25,13 @@ public class Kuningatar extends Nappula {
             if (x - i >= 0 && y - i >= 0) {
                 siirrot.add((x - i) + "," + (y - i));
             }
-            if(i!=x) siirrot.add(i + "," + y);
-            if (i!=y) siirrot.add(x + "," + i);
-            
+            if (i != x) {
+                siirrot.add(i + "," + y);
+            }
+            if (i != y) {
+                siirrot.add(x + "," + i);
+            }
+
         }
         return siirrot;
     }

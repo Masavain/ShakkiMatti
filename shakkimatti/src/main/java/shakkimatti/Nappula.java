@@ -15,7 +15,7 @@ public abstract class Nappula {
 
     public void liiku(int x, int y) {
         List<String> mahdSiirrot = this.mahdollisetSiirrot();
-        if (mahdSiirrot.contains(x + "," + y))  {
+        if (mahdSiirrot.contains(x + "," + y)) {
             this.x = x;
             this.y = y;
         }

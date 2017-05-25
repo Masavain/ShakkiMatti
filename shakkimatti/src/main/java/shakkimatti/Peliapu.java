@@ -19,15 +19,18 @@ public class Peliapu {
         int vuoro = 0;
         while (true) {
             // valkoisen siirto
-            
-            if (vuoro%2 == 0) System.out.println("valkoinen, anna lähtökoordinaatti:");
-            else if (vuoro%2 == 1) System.out.println("musta, anna lähtökoordinaatti:");
+
+            if (vuoro % 2 == 0) {
+                System.out.println("valkoinen, anna lähtökoordinaatti:");
+            } else if (vuoro % 2 == 1) {
+                System.out.println("musta, anna lähtökoordinaatti:");
+            }
             String lahto = lukija.nextLine();
             int xMista = kirjaimet.indexOf(lahto.substring(0, 1));
             int yMista = Integer.parseInt(lahto.substring(1, 2)) - 1;
 
-            if (validiSiirrettava(vuoro%2, xMista, yMista)) {
-                vuoro(vuoro%2, xMista, yMista);
+            if (validiSiirrettava(vuoro % 2, xMista, yMista)) {
+                vuoro(vuoro % 2, xMista, yMista);
             }
             pelilauta.tulosta();
 
