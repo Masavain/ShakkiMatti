@@ -13,11 +13,11 @@ public abstract class Nappula {
         this.color = color;
     }
 
-    public void liiku(int x, int y) {
-        List<String> mahdSiirrot = this.mahdollisetSiirrot();
-        if (mahdSiirrot.contains(x + "," + y)) {
-            this.x = x;
-            this.y = y;
+    public void liiku(int xMihin, int yMihin, Nappula[][] lauta) {
+        List<String> mahdSiirrot = this.mahdollisetSiirrot(lauta);
+        if (mahdSiirrot.contains(xMihin + "," + yMihin)) {
+            setX(xMihin);
+            setY(yMihin);
         }
     }
 
@@ -50,6 +50,7 @@ public abstract class Nappula {
         return merkki;
     }
 
-    public abstract List<String> mahdollisetSiirrot();
+    public abstract List<String> mahdollisetSiirrot(Nappula[][] tilanne);
 
+    public abstract List<String> mahdollisetSyonnit(Nappula[][] tilanne);
 }

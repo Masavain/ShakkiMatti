@@ -3,19 +3,21 @@ package shakkimatti;
 import java.util.*;
 
 public class Peliapu {
-
+    
     public Pelilauta pelilauta;
     public ArrayList<String> kirjaimet = new ArrayList<String>(Arrays.asList(new String[]{"a", "b", "c", "d", "e", "f", "g", "h"}));
     public Scanner lukija;
-
+    
     public Peliapu() {
         this.pelilauta = new Pelilauta();
         this.lukija = new Scanner(System.in);
     }
-
+    
     public void kaynnista() {
         pelilauta.alustus();
+        
         pelilauta.tulosta();
+
         int vuoro = 0;
         while (true) {
             // valkoisen siirto
@@ -26,8 +28,10 @@ public class Peliapu {
                 System.out.println("musta, anna lähtökoordinaatti:");
             }
             String lahto = lukija.nextLine();
-            int xMista = kirjaimet.indexOf(lahto.substring(0, 1));
-            int yMista = Integer.parseInt(lahto.substring(1, 2)) - 1;
+            String[] koord = lahto.split("");
+            
+            int xMista = kirjaimet.indexOf(koord[0]);
+            int yMista = Integer.parseInt(koord[1]) - 1;
 
             if (validiSiirrettava(vuoro % 2, xMista, yMista)) {
                 vuoro(vuoro % 2, xMista, yMista);
@@ -48,20 +52,24 @@ public class Peliapu {
     }
 
     public void vuoro(int pelaaja, int xMista, int yMista) {
-        Nappula siirrettava = pelilauta.lauta[xMista][yMista];
-        List<String> mahdSiirrot = siirrettava.mahdollisetSiirrot();
-//                System.out.println(mahdSiirrot);
+        Nappula siirrettava = pelilauta.getLauta()[xMista][yMista];
+        System.out.println(siirrettava.getX() + "  " + siirrettava.getY());
+        List<String> mahdSiirrot = siirrettava.mahdollisetSiirrot(pelilauta.getLauta());
+        System.out.println(mahdSiirrot);
+        List<String> mahdSyotavat = siirrettava.mahdollisetSyonnit(pelilauta.getLauta());
+        System.out.println(mahdSyotavat);
 
         while (true) {
             System.out.println("anna päätekoordinaatti:");
             String paate = lukija.nextLine();
-            int xMihin = kirjaimet.indexOf(paate.substring(0, 1));
-            int yMihin = Integer.parseInt(paate.substring(1, 2)) - 1;
-            if (mahdSiirrot.contains(xMihin + "," + yMihin)) {
-                pelilauta.siirto(siirrettava, xMihin, yMihin);
+            String[] koord = paate.split("");
+            int xMihin = kirjaimet.indexOf(koord[0]);
+            int yMihin = Integer.parseInt(koord[1]) - 1;
+            if (mahdSiirrot.contains(xMihin + "," + yMihin) || mahdSyotavat.contains(xMihin + "," + yMihin) ) {
+                pelilauta.siirto(xMista, yMista, xMihin, yMihin);
+                
                 break;
             }
         }
     }
-
 }

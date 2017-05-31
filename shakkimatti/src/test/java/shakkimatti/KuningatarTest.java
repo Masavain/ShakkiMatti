@@ -10,6 +10,7 @@ import static org.junit.Assert.*;
 
 public class KuningatarTest {
     
+    private Pelilauta lauta;
     public KuningatarTest() {
     }
     
@@ -23,6 +24,7 @@ public class KuningatarTest {
     
     @Before
     public void setUp() {
+        this.lauta = new Pelilauta();
     }
     
     @After
@@ -32,21 +34,21 @@ public class KuningatarTest {
     @Test
     public void eiLiikuJosEiMahdollinenSiirto(){
         Kuningatar kuningatar = new Kuningatar(3,0,0);
-        kuningatar.liiku(8, 8);
+        kuningatar.liiku(8, 8, lauta.getLauta());
         assertEquals(kuningatar.x+","+kuningatar.y, "3,0");
     }
     
     @Test
     public void liikkuuOikeaanKoordinaattiin(){
         Kuningatar kuningatar = new Kuningatar(3,0,0);
-        kuningatar.liiku(3, 5);
+        kuningatar.liiku(3, 5, lauta.getLauta());
         assertEquals(kuningatar.x+","+kuningatar.y, "3,5");
     }
     
     @Test
     public void eiPaaseLaudaltaPois(){
         Kuningatar kuningatar = new Kuningatar(3,0,0);
-        kuningatar.liiku(0, -2);
+        kuningatar.liiku(0, -2, lauta.getLauta());
         assertEquals(kuningatar.x+","+kuningatar.y, "3,0");
     }
 }

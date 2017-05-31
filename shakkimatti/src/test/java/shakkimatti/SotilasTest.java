@@ -10,6 +10,8 @@ import static org.junit.Assert.*;
 
 public class SotilasTest {
     
+    private Pelilauta lauta;
+    
     public SotilasTest() {
         
     }
@@ -24,6 +26,7 @@ public class SotilasTest {
 
     @Before
     public void setUp() {
+        this.lauta = new Pelilauta();
     }
 
     @After
@@ -33,55 +36,55 @@ public class SotilasTest {
     @Test
     public void tarkastaLiikutettu() {
         // testaa, että liikutettu on liikkumisen jälkeen true
-        Sotilas sotilas = new Sotilas(0,1,0);
-        sotilas.liiku(0, 2);
+        Sotilas sotilas = new Sotilas(0,1,0, false);
+        sotilas.liiku(0, 2, lauta.getLauta());
         assertTrue(sotilas.liikutettu);
     }
     
     @Test
     public void liikkuuOikeaanKoordinaattiin() {
         // testaa, että liikutettu on liikkumisen jälkeen true
-        Sotilas sotilas = new Sotilas(0,1,0);
-        sotilas.liiku(0, 2);
+        Sotilas sotilas = new Sotilas(0,1,0, false);
+        sotilas.liiku(0, 2, lauta.getLauta());
         assertEquals(sotilas.x+","+sotilas.y, "0,2");
     }
     
     @Test
     public void aluksiVoiLiikkuaKaksi() {
         // testaa, että sotilasta on mahdollista siirtää aluksi 2 ruutua 
-        Sotilas sotilas = new Sotilas(0,1,0);
-        assertTrue(sotilas.mahdollisetSiirrot().contains("0,3"));
+        Sotilas sotilas = new Sotilas(0,1,0, false);
+        assertTrue(sotilas.mahdollisetSiirrot(lauta.getLauta()).contains("0,3"));
     }
     
     @Test
     public void aluksiVoiLiikkuaYhden() {
-        Sotilas sotilas = new Sotilas(0,1,0);
-        assertTrue(sotilas.mahdollisetSiirrot().contains("0,2"));
+        Sotilas sotilas = new Sotilas(0,1,0, false);
+        assertTrue(sotilas.mahdollisetSiirrot(lauta.getLauta()).contains("0,2"));
     }
         
     @Test
     public void eiVoiLiikkuaTaakse() {
-        Sotilas sotilas = new Sotilas(0,1,0);
-        assertTrue(!sotilas.mahdollisetSiirrot().contains("0,0"));
+        Sotilas sotilas = new Sotilas(0,1,0, false);
+        assertTrue(!sotilas.mahdollisetSiirrot(lauta.getLauta()).contains("0,0"));
     }
     
     @Test
     public void eiPaaseLaudaltaPois() {
-        Sotilas sotilas = new Sotilas(0,8,0);
-        assertTrue(!sotilas.mahdollisetSiirrot().contains("0,9"));
+        Sotilas sotilas = new Sotilas(0,8,0, false);
+        assertTrue(!sotilas.mahdollisetSiirrot(lauta.getLauta()).contains("0,9"));
     }
     
     @Test
     public void eiVoiLiikkuaSivulle() {
-        Sotilas sotilas = new Sotilas(0,1,0);
-        sotilas.liiku(1, 1);
+        Sotilas sotilas = new Sotilas(0,1,0, false);
+        sotilas.liiku(1, 1, lauta.getLauta());
         assertEquals(0, sotilas.x);
     }
     
     @Test
     public void eiVoiLiikkuaSivullePoisLaudalta() {
-        Sotilas sotilas = new Sotilas(0,1,0);
-        sotilas.liiku(-1, 1);
+        Sotilas sotilas = new Sotilas(0,1,0, false);
+        sotilas.liiku(-1, 1, lauta.getLauta());
         assertEquals(0, sotilas.x);
     }
 }

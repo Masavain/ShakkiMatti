@@ -63,7 +63,7 @@ public class PelilautaTest {
         lauta.alustus();
 
         Nappula namiska = lauta.lauta[1][1];
-        lauta.siirto(namiska, 1, 2);
+        lauta.siirto(namiska.getX(), namiska.getY(), 1, 2);
 
         String tostring = lauta.toString();
         assertEquals("TRLQKLRT\n"

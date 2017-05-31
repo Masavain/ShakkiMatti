@@ -11,6 +11,7 @@ import static org.junit.Assert.*;
 
 public class RatsuTest {
     
+    private Pelilauta lauta;
     
     public RatsuTest() {
     }
@@ -25,6 +26,7 @@ public class RatsuTest {
     
     @Before
     public void setUp() {
+        this.lauta = new Pelilauta();
     }
     
     @After
@@ -34,21 +36,21 @@ public class RatsuTest {
     @Test
     public void eiLiikuJosEiMahdollinenSiirto(){
         Ratsu ratsu = new Ratsu(1,0,0);
-        ratsu.liiku(1, 1);
+        ratsu.liiku(1, 1, lauta.getLauta());
         assertEquals(ratsu.x+","+ratsu.y, "1,0");
     }
     
     @Test
     public void liikkuuOikeaanKoordinaattiin(){
         Ratsu ratsu = new Ratsu(1,0,0);
-        ratsu.liiku(0, 2);
+        ratsu.liiku(0, 2, lauta.getLauta());
         assertEquals(ratsu.x+","+ratsu.y, "0,2");
     }
     
     @Test
     public void eiPaaseLaudaltaPois(){
         Ratsu ratsu = new Ratsu(1,0,0);
-        ratsu.liiku(0, -2);
+        ratsu.liiku(0, -2, lauta.getLauta());
         assertEquals(ratsu.x+","+ratsu.y, "1,0");
     }
 }

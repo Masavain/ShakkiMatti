@@ -10,6 +10,7 @@ import static org.junit.Assert.*;
 
 public class TorniTest {
     
+    private Pelilauta lauta;
     public TorniTest() {
     }
     
@@ -23,6 +24,7 @@ public class TorniTest {
     
     @Before
     public void setUp() {
+        this.lauta = new Pelilauta();
     }
     
     @After
@@ -32,21 +34,21 @@ public class TorniTest {
     @Test
     public void eiLiikuJosEiMahdollinenSiirto(){
         Torni torni = new Torni(0,0,0);
-        torni.liiku(1, 1);
+        torni.liiku(1, 1, lauta.getLauta());
         assertEquals(torni.x+","+torni.y, "0,0");
     }
     
     @Test
     public void liikkuuOikeaanKoordinaattiin(){
         Torni torni = new Torni(0,0,0);
-        torni.liiku(0, 2);
+        torni.liiku(0, 2, lauta.getLauta());
         assertEquals(torni.x+","+torni.y, "0,2");
     }
     
     @Test
     public void eiPaaseLaudaltaPois(){
         Torni torni = new Torni(0,0,0);
-        torni.liiku(0, -2);
+        torni.liiku(0, -2, lauta.getLauta());
         assertEquals(torni.x+","+torni.y, "0,0");
     }
 }
