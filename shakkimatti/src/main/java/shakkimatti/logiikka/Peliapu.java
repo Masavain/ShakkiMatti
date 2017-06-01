@@ -54,11 +54,8 @@ public class Peliapu {
 
     public void vuoro(int pelaaja, int xMista, int yMista) {
         Nappula siirrettava = pelilauta.getLauta()[xMista][yMista];
-        System.out.println(siirrettava.getX() + "  " + siirrettava.getY());
         List<String> mahdSiirrot = siirrettava.mahdollisetSiirrot(pelilauta.getLauta());
-        System.out.println(mahdSiirrot);
         List<String> mahdSyotavat = siirrettava.mahdollisetSyonnit(pelilauta.getLauta());
-        System.out.println(mahdSyotavat);
 
         while (true) {
             System.out.println("anna päätekoordinaatti:");
