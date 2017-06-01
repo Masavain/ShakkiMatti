@@ -7,4 +7,4 @@
 **toiminnot:** Pelaaja voi vuorollaan siirtää yhtä nappulaa, tai syödä vastustajan nappulan mahdollisella siirroolla.
 
 **luokkakaavio** 
-![luokkakaavio](http://i.imgur.com/mUUEvQG.png)
+![luokkakaavio](http://i.imgur.com/RGhFlMD.jpg)
