@@ -1,5 +1,8 @@
 package shakkimatti;
 
+import shakkimatti.logiikka.Pelilauta;
+import shakkimatti.nappulat.Nappula;
+import java.util.*;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -75,5 +78,5 @@ public class PelilautaTest {
                 + "S.SSSSSS\n"
                 + "TRLQKLRT\n", tostring);
     }
-
+    
 }

@@ -1,4 +1,4 @@
-package shakkimatti;
+package shakkimatti.nappulat;
 
 import java.util.*;
 
@@ -15,7 +15,8 @@ public abstract class Nappula {
 
     public void liiku(int xMihin, int yMihin, Nappula[][] lauta) {
         List<String> mahdSiirrot = this.mahdollisetSiirrot(lauta);
-        if (mahdSiirrot.contains(xMihin + "," + yMihin)) {
+        List<String> mahdSyonnit = this.mahdollisetSyonnit(lauta);
+        if (mahdSiirrot.contains(xMihin + "," + yMihin) || mahdSyonnit.contains(xMihin + "," + yMihin)) {
             setX(xMihin);
             setY(yMihin);
         }
@@ -53,4 +54,5 @@ public abstract class Nappula {
     public abstract List<String> mahdollisetSiirrot(Nappula[][] tilanne);
 
     public abstract List<String> mahdollisetSyonnit(Nappula[][] tilanne);
+
 }

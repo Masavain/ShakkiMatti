@@ -1,11 +1,15 @@
 package shakkimatti;
 
+import shakkimatti.logiikka.Pelilauta;
+import shakkimatti.nappulat.Lahetti;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import shakkimatti.nappulat.Kuningas;
+import shakkimatti.nappulat.Sotilas;
 
 public class LahettiTest {
 
@@ -50,5 +54,35 @@ public class LahettiTest {
         Lahetti lahetti = new Lahetti(2, 0, 0);
         lahetti.liiku(0, -2, lauta.getLauta());
         assertEquals(lahetti.x + "," + lahetti.y, "2,0");
+    }
+    
+    @Test
+    public void syotavaListalla(){
+        Lahetti lahetti = new Lahetti(2,0,0);
+        Sotilas solttu = new Sotilas(2,1,1,false);
+        lauta.asetaNappula(lahetti, 2, 0);
+        lauta.asetaNappula(solttu, 3, 1);
+        
+        assertTrue(lahetti.mahdollisetSyonnit(lauta.getLauta()).contains("3,1"));
+    }
+    
+    @Test
+    public void eiVoiSyodaOmanVarista(){
+        Lahetti lahetti = new Lahetti(2,0,0);
+        Sotilas solttu = new Sotilas(2,1,0,false);
+        lauta.asetaNappula(lahetti, 2, 0);
+        lauta.asetaNappula(solttu, 3, 1);
+        
+        assertFalse(lahetti.mahdollisetSyonnit(lauta.getLauta()).contains("3,1"));
+    }
+    
+    @Test
+    public void kuningastaEiVoiSyoda(){
+        Lahetti lahetti = new Lahetti(2,0,0);
+        Kuningas kunkku = new Kuningas(2,1,1);
+        lauta.asetaNappula(lahetti, 2, 0);
+        lauta.asetaNappula(kunkku, 3, 1);
+        
+        assertFalse(lahetti.mahdollisetSyonnit(lauta.getLauta()).contains("3,1"));
     }
 }

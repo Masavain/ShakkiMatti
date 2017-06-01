@@ -46,20 +46,6 @@ under the License.
           <tbody>
                           <tr>
                 <td>
-                  <a href="${project.url}/checkstyle.html#shakkimatti.Kuningatar.java">shakkimatti/Kuningatar.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
                   <a href="${project.url}/checkstyle.html#shakkimatti.Main.java">shakkimatti/Main.java</a>
                 </td>
                 <td>
@@ -74,7 +60,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="${project.url}/checkstyle.html#shakkimatti.Kuningas.java">shakkimatti/Kuningas.java</a>
+                  <a href="${project.url}/checkstyle.html#shakkimatti.nappulat.Nappula.java">shakkimatti/nappulat/Nappula.java</a>
                 </td>
                 <td>
                   0
@@ -88,7 +74,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="${project.url}/checkstyle.html#shakkimatti.Nappula.java">shakkimatti/Nappula.java</a>
+                  <a href="${project.url}/checkstyle.html#shakkimatti.nappulat.Ratsu.java">shakkimatti/nappulat/Ratsu.java</a>
                 </td>
                 <td>
                   0
@@ -102,7 +88,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="${project.url}/checkstyle.html#shakkimatti.Peliapu.java">shakkimatti/Peliapu.java</a>
+                  <a href="${project.url}/checkstyle.html#shakkimatti.logiikka.Pelilauta.java">shakkimatti/logiikka/Pelilauta.java</a>
                 </td>
                 <td>
                   0
@@ -116,7 +102,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="${project.url}/checkstyle.html#shakkimatti.Ratsu.java">shakkimatti/Ratsu.java</a>
+                  <a href="${project.url}/checkstyle.html#shakkimatti.nappulat.Kuningatar.java">shakkimatti/nappulat/Kuningatar.java</a>
                 </td>
                 <td>
                   0
@@ -130,7 +116,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="${project.url}/checkstyle.html#shakkimatti.Sotilas.java">shakkimatti/Sotilas.java</a>
+                  <a href="${project.url}/checkstyle.html#shakkimatti.nappulat.Kuningas.java">shakkimatti/nappulat/Kuningas.java</a>
                 </td>
                 <td>
                   0
@@ -144,7 +130,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="${project.url}/checkstyle.html#shakkimatti.Lahetti.java">shakkimatti/Lahetti.java</a>
+                  <a href="${project.url}/checkstyle.html#shakkimatti.logiikka.Peliapu.java">shakkimatti/logiikka/Peliapu.java</a>
                 </td>
                 <td>
                   0
@@ -158,7 +144,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="${project.url}/checkstyle.html#shakkimatti.Pelilauta.java">shakkimatti/Pelilauta.java</a>
+                  <a href="${project.url}/checkstyle.html#shakkimatti.nappulat.Lahetti.java">shakkimatti/nappulat/Lahetti.java</a>
                 </td>
                 <td>
                   0
@@ -172,7 +158,21 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="${project.url}/checkstyle.html#shakkimatti.Torni.java">shakkimatti/Torni.java</a>
+                  <a href="${project.url}/checkstyle.html#shakkimatti.nappulat.Torni.java">shakkimatti/nappulat/Torni.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#shakkimatti.nappulat.Sotilas.java">shakkimatti/nappulat/Sotilas.java</a>
                 </td>
                 <td>
                   0

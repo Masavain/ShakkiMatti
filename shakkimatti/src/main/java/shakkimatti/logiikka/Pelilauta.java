@@ -1,5 +1,12 @@
-package shakkimatti;
+package shakkimatti.logiikka;
 
+import shakkimatti.nappulat.Sotilas;
+import shakkimatti.nappulat.Nappula;
+import shakkimatti.nappulat.Lahetti;
+import shakkimatti.nappulat.Kuningas;
+import shakkimatti.nappulat.Torni;
+import shakkimatti.nappulat.Ratsu;
+import shakkimatti.nappulat.Kuningatar;
 import java.util.*;
 
 public class Pelilauta {
@@ -38,19 +45,6 @@ public class Pelilauta {
 
     }
 
-    public void tulosta() {
-        for (int i = 7; i >= 0; i--) {
-            for (int j = 0; j < 8; j++) {
-                if (this.lauta[j][i] != null) {
-                    System.out.print(this.lauta[j][i]);
-                } else {
-                    System.out.print(".");
-                }
-            }
-            System.out.println("");
-        }
-    }
-
     public String toString() {
         String palautus = "";
         for (int i = 7; i >= 0; i--) {
@@ -78,8 +72,8 @@ public class Pelilauta {
         return lauta;
     }
 
-    public void torni() {
-        this.lauta[3][0] = new Torni(3, 0, 0);
+    public void asetaNappula(Nappula n, int x, int y) {
+        this.lauta[x][y] = n;
     }
 
 }

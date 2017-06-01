@@ -1,22 +1,23 @@
-package shakkimatti;
+package shakkimatti.logiikka;
 
+import shakkimatti.nappulat.Nappula;
 import java.util.*;
 
 public class Peliapu {
-    
+
     public Pelilauta pelilauta;
     public ArrayList<String> kirjaimet = new ArrayList<String>(Arrays.asList(new String[]{"a", "b", "c", "d", "e", "f", "g", "h"}));
     public Scanner lukija;
-    
+
     public Peliapu() {
         this.pelilauta = new Pelilauta();
         this.lukija = new Scanner(System.in);
     }
-    
+
     public void kaynnista() {
         pelilauta.alustus();
-        
-        pelilauta.tulosta();
+
+        System.out.println(pelilauta.toString());
 
         int vuoro = 0;
         while (true) {
@@ -29,14 +30,14 @@ public class Peliapu {
             }
             String lahto = lukija.nextLine();
             String[] koord = lahto.split("");
-            
+
             int xMista = kirjaimet.indexOf(koord[0]);
             int yMista = Integer.parseInt(koord[1]) - 1;
 
             if (validiSiirrettava(vuoro % 2, xMista, yMista)) {
                 vuoro(vuoro % 2, xMista, yMista);
             }
-            pelilauta.tulosta();
+            System.out.println(pelilauta.toString());
 
             vuoro++;
         }
@@ -65,9 +66,8 @@ public class Peliapu {
             String[] koord = paate.split("");
             int xMihin = kirjaimet.indexOf(koord[0]);
             int yMihin = Integer.parseInt(koord[1]) - 1;
-            if (mahdSiirrot.contains(xMihin + "," + yMihin) || mahdSyotavat.contains(xMihin + "," + yMihin) ) {
+            if (mahdSiirrot.contains(xMihin + "," + yMihin) || mahdSyotavat.contains(xMihin + "," + yMihin)) {
                 pelilauta.siirto(xMista, yMista, xMihin, yMihin);
-                
                 break;
             }
         }

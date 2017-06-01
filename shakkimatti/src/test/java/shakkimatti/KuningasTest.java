@@ -1,12 +1,15 @@
 
 package shakkimatti;
 
+import shakkimatti.logiikka.Pelilauta;
+import shakkimatti.nappulat.Kuningas;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import shakkimatti.nappulat.Sotilas;
 
 
 public class KuningasTest {
@@ -51,5 +54,35 @@ public class KuningasTest {
         Kuningas kingi = new Kuningas(4,0,0);
         kingi.liiku(0, -2, lauta.getLauta());
         assertEquals(kingi.x+","+kingi.y, "4,0");
+    }
+    
+    @Test
+    public void syotavaListalla(){
+        Kuningas kingi = new Kuningas(4,0,0);
+        Sotilas solttu = new Sotilas(4,1,1,false);
+        lauta.asetaNappula(kingi, 4, 0);
+        lauta.asetaNappula(solttu, 4, 1);
+        
+        assertTrue(kingi.mahdollisetSyonnit(lauta.getLauta()).contains("4,1"));
+    }
+    
+    @Test
+    public void eiVoiSyodaOmanVarista(){
+        Kuningas kingi = new Kuningas(4,0,0);
+        Sotilas solttu = new Sotilas(4,1,0,false);
+        lauta.asetaNappula(kingi, 4, 0);
+        lauta.asetaNappula(solttu, 4, 1);
+        
+        assertFalse(kingi.mahdollisetSyonnit(lauta.getLauta()).contains("4,1"));
+    }
+    
+    @Test
+    public void kuningastaEiVoiSyoda(){
+        Kuningas kingi = new Kuningas(4,0,0);
+        Kuningas kunkku = new Kuningas(4,1,1);
+        lauta.asetaNappula(kingi, 4, 0);
+        lauta.asetaNappula(kunkku, 4, 1);
+        
+        assertFalse(kingi.mahdollisetSyonnit(lauta.getLauta()).contains("4,1"));
     }
 }

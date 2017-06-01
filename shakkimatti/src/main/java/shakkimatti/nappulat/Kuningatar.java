@@ -1,4 +1,4 @@
-package shakkimatti;
+package shakkimatti.nappulat;
 
 import java.util.*;
 
@@ -31,7 +31,6 @@ public class Kuningatar extends Nappula {
                 }
             }
         }
-
         if (y < 8) {
             for (int i = y + 1; i < 8; i++) {
 
@@ -54,7 +53,6 @@ public class Kuningatar extends Nappula {
         if (x < 8) {
             int yi = y + 1;
             for (int i = x + 1; i < 8; i++) {
-
                 if (yi == 7) {
                     break;
                 }
@@ -66,7 +64,6 @@ public class Kuningatar extends Nappula {
                 yi++;
             }
         }
-
         if (x < 8) {
             int yi = y - 1;
             for (int i = x + 1; i < 8; i++) {
@@ -109,25 +106,93 @@ public class Kuningatar extends Nappula {
                 yi--;
             }
         }
-
         return siirrot;
     }
 
     @Override
     public List<String> mahdollisetSyonnit(Nappula[][] tilanne) {
-        List<String> siirrot = this.mahdollisetSiirrot(tilanne);
         List<String> syonnit = new ArrayList<String>();
+        if (x < 8) {
+            int yi = y + 1;
+            for (int i = x + 1; i < 8; i++) {
 
-        for (String koord : siirrot) {
-            String[] temp = koord.split(",");
-            int ax = Integer.parseInt(temp[0]);
-            int ay = Integer.parseInt(temp[1]);
-
-            if (tilanne[ax][ay] != null && !tilanne[ax][ay].merkki.equals("K") && tilanne[ax][ay].color != this.color) {
-                syonnit.add(koord);
+                if (yi == 7) {
+                    break;
+                }
+                if (tilanne[i][yi] != null && tilanne[i][yi].color != this.color && !tilanne[i][yi].merkki.equals("K")) {
+                    syonnit.add((i) + "," + (yi));
+                }
+                yi++;
+            }
+        }
+        if (x < 8) {
+            int yi = y - 1;
+            for (int i = x + 1; i < 8; i++) {
+                if (yi == -1) {
+                    break;
+                }
+                if (tilanne[i][yi] != null && tilanne[i][yi].color != this.color && !tilanne[i][yi].merkki.equals("K")) {
+                    syonnit.add((i) + "," + (yi));
+                }
+                yi--;
+            }
+        }
+        if (x > 0) {
+            int yi = y + 1;
+            for (int i = x - 1; i >= 0; i--) {
+                if (yi == 7) {
+                    break;
+                }
+                if (tilanne[i][yi] != null && tilanne[i][yi].color != this.color && !tilanne[i][yi].merkki.equals("K")) {
+                    syonnit.add((i) + "," + (yi));
+                }
+                yi++;
+            }
+        }
+        if (x > 0) {
+            int yi = y - 1;
+            for (int i = x - 1; i >= 0; i--) {
+                if (yi == -1) {
+                    break;
+                }
+                if (tilanne[i][yi] != null && tilanne[i][yi].color != this.color && !tilanne[i][yi].merkki.equals("K")) {
+                    syonnit.add((i) + "," + (yi));
+                }
+                yi--;
+            }
+        }
+        if (this.x < 8) {
+            for (int i = this.x + 1; i < 8; i++) {
+                if (tilanne[i][this.y] != null && tilanne[i][this.y].color != this.color && !tilanne[i][this.y].merkki.equals("K")) {
+                    syonnit.add(i + "," + this.y);
+                    break;
+                }
+            }
+        }
+        if (this.x > 0) {
+            for (int i = this.x - 1; i >= 0; i--) {
+                if (tilanne[i][this.y] != null && tilanne[i][this.y].color != this.color && !tilanne[i][this.y].merkki.equals("K")) {
+                    syonnit.add(i + "," + this.y);
+                    break;
+                }
+            }
+        }
+        if (this.y < 8) {
+            for (int i = this.y + 1; i < 8; i++) {
+                if (tilanne[this.x][i] != null && tilanne[this.x][i].color != this.color && !tilanne[this.x][i].merkki.equals("K")) {
+                    syonnit.add(this.x + "," + i);
+                    break;
+                }
+            }
+        }
+        if (this.y > 0) {
+            for (int i = this.y - 1; i >= 0; i--) {
+                if (tilanne[this.x][i] != null && tilanne[this.x][i].color != this.color && !tilanne[this.x][i].merkki.equals("K")) {
+                    syonnit.add(this.x + "," + i);
+                    break;
+                }
             }
         }
         return syonnit;
     }
-
 }

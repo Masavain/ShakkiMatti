@@ -1,5 +1,6 @@
 package shakkimatti;
 
+import shakkimatti.logiikka.Peliapu;
 import java.util.*;
 
 public class Main {
