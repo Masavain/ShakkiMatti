@@ -15,14 +15,14 @@ public class Sotilas extends Nappula {
     @Override
     public List<String> mahdollisetSiirrot(Nappula[][] tilanne) {
         List<String> siirrot = new ArrayList<String>();
-        if (this.color == 0) {
+        if (this.color == 1) {
             if (y < 7) {
                 siirrot.add(x + "," + (y + 1));
                 if (!this.liikutettu) {
                     siirrot.add(x + "," + (y + 2));
                 }
             }
-        } else if (this.color == 1) {
+        } else if (this.color == 0) {
             if (y > 0) {
                 siirrot.add(x + "," + (y - 1));
                 if (!this.liikutettu) {

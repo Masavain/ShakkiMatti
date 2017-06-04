@@ -1,4 +1,4 @@
-package shakkimatti.logiikka;
+package shakkimatti.gui;
 
 import javafx.application.Application;
 import javafx.stage.Stage;

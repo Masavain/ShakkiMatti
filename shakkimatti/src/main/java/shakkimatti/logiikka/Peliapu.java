@@ -1,5 +1,6 @@
 package shakkimatti.logiikka;
 
+import shakkimatti.gui.Pelilauta;
 import shakkimatti.nappulat.Nappula;
 import java.util.*;
 import javafx.scene.layout.*;

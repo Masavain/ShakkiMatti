@@ -10,7 +10,6 @@ import javafx.geometry.VPos;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.paint.Color;
 import javafx.scene.image.*;
-import shakkimatti.logiikka.Pelilauta;
 
 public class Kayttoliittyma extends Application {
 

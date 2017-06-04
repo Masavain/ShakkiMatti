@@ -8,7 +8,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import shakkimatti.logiikka.Peliapu;
-import shakkimatti.logiikka.Pelilauta;
+import shakkimatti.gui.Pelilauta;
 import shakkimatti.nappulat.Kuningas;
 
 public class PeliapuTest {

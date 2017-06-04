@@ -1,6 +1,6 @@
-package shakkimatti.logiikka;
+package shakkimatti.gui;
 
-import shakkimatti.logiikka.Pelilauta;
+import shakkimatti.gui.Pelilauta;
 import shakkimatti.nappulat.Nappula;
 import java.util.*;
 import javafx.scene.layout.GridPane;

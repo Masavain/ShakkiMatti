@@ -2,7 +2,7 @@ package shakkimatti.nappula;
 
 import java.util.Arrays;
 import java.util.List;
-import shakkimatti.logiikka.Pelilauta;
+import shakkimatti.gui.Pelilauta;
 import shakkimatti.nappulat.Torni;
 import org.junit.After;
 import org.junit.AfterClass;

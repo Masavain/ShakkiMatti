@@ -8,9 +8,8 @@ import shakkimatti.gui.Kayttoliittyma;
 
 public class Main {
 
-//    public static void main(String[] args) {
-//        Kayttoliittyma kayttis = new Kayttoliittyma();
-////        Peliapu apu = new Peliapu();
-////        apu.kaynnista();
-//    }
+    public static void main(String[] args) {
+        Peliapu apu = new Peliapu();
+        apu.kaynnista();
+    }
 }

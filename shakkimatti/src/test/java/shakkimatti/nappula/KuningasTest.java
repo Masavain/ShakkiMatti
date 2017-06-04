@@ -1,7 +1,7 @@
 
 package shakkimatti.nappula;
 
-import shakkimatti.logiikka.Pelilauta;
+import shakkimatti.gui.Pelilauta;
 import shakkimatti.nappulat.Kuningas;
 import org.junit.After;
 import org.junit.AfterClass;
