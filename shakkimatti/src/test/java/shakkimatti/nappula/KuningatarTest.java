@@ -1,5 +1,5 @@
 
-package shakkimatti;
+package shakkimatti.nappula;
 
 import shakkimatti.logiikka.Pelilauta;
 import shakkimatti.nappulat.Kuningatar;
@@ -11,6 +11,8 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 import shakkimatti.nappulat.Kuningas;
 import shakkimatti.nappulat.Sotilas;
+import javafx.scene.layout.*;
+
 
 public class KuningatarTest {
     
@@ -28,7 +30,7 @@ public class KuningatarTest {
     
     @Before
     public void setUp() {
-        this.lauta = new Pelilauta();
+        this.lauta = new Pelilauta(new GridPane());
     }
     
     @After

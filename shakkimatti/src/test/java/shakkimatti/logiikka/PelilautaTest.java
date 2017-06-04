@@ -1,8 +1,9 @@
-package shakkimatti;
+package shakkimatti.logiikka;
 
 import shakkimatti.logiikka.Pelilauta;
 import shakkimatti.nappulat.Nappula;
 import java.util.*;
+import javafx.scene.layout.GridPane;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -27,7 +28,7 @@ public class PelilautaTest {
 
     @Before
     public void setUp() {
-        lauta = new Pelilauta();
+        this.lauta = new Pelilauta(new GridPane());
     }
 
     @After

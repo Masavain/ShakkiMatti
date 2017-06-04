@@ -2,6 +2,7 @@ package shakkimatti.logiikka;
 
 import shakkimatti.nappulat.Nappula;
 import java.util.*;
+import javafx.scene.layout.*;
 
 public class Peliapu {
 
@@ -10,7 +11,7 @@ public class Peliapu {
     public Scanner lukija;
 
     public Peliapu() {
-        this.pelilauta = new Pelilauta();
+        this.pelilauta = new Pelilauta(new GridPane());
         this.lukija = new Scanner(System.in);
     }
 

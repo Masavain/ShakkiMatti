@@ -1,4 +1,4 @@
-package shakkimatti;
+package shakkimatti.nappula;
 
 import java.util.Arrays;
 import java.util.List;
@@ -12,6 +12,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 import shakkimatti.nappulat.Kuningas;
 import shakkimatti.nappulat.Sotilas;
+import javafx.scene.layout.*;
 
 public class TorniTest {
 
@@ -30,7 +31,7 @@ public class TorniTest {
 
     @Before
     public void setUp() {
-        this.lauta = new Pelilauta();
+        this.lauta = new Pelilauta(new GridPane());
     }
 
     @After
@@ -84,11 +85,10 @@ public class TorniTest {
         lauta.asetaNappula(solttu2, 6, 5);
         lauta.asetaNappula(solttu3, 5, 4);
         lauta.asetaNappula(solttu3, 4, 5);
-        
-        String[] koordit  = new String[]{"6,5", "4,5", "5,6", "5,4"};
+
+        String[] koordit = new String[]{"6,5", "4,5", "5,6", "5,4"};
         List<String> oikearivi = Arrays.asList(koordit);
-        
-                
+
         assertEquals(torni.mahdollisetSyonnit(lauta.getLauta()), oikearivi);
 
     }

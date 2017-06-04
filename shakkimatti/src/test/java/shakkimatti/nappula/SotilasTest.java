@@ -1,4 +1,4 @@
-package shakkimatti;
+package shakkimatti.nappula;
 
 import shakkimatti.logiikka.Pelilauta;
 import shakkimatti.nappulat.Sotilas;
@@ -9,6 +9,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import java.util.*;
 import static org.junit.Assert.*;
+import javafx.scene.layout.*;
 
 public class SotilasTest {
 
@@ -28,7 +29,7 @@ public class SotilasTest {
 
     @Before
     public void setUp() {
-        this.lauta = new Pelilauta();
+        this.lauta = new Pelilauta(new GridPane());
     }
 
     @After
