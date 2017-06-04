@@ -4,7 +4,7 @@
 
 **Käyttäjät:** Shakki on kahden pelaajan peli, jossa pelaajat vaihtavat vuoroa siirtojen välissä.
 
-**toiminnot:** Pelaaja voi vuorollaan siirtää yhtä nappulaa, tai syödä vastustajan nappulan mahdollisella siirroolla.
+**toiminnot:** Pelaaja voi vuorollaan siirtää yhtä nappulaa, tai syödä vastustajan nappulan mahdollisella siirroolla. Siirto tapahtuu toistaiseksi antamalla lähtökoordinaatti (esim a2) ja sen jälkeen päätekoordinaatti (esim a4).
 
 **luokkakaavio** 
-![luokkakaavio](http://i.imgur.com/mUUEvQG.png)
+![luokkakaavio](http://i.imgur.com/RGhFlMD.jpg)
