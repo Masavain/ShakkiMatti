@@ -1,31 +1,31 @@
 package shakkimatti.logiikka;
 
-import shakkimatti.gui.Pelilauta;
 import shakkimatti.nappulat.Nappula;
 import java.util.*;
 import javafx.scene.layout.*;
 
-public class Peli {
+public class TekstiKayttoliittyma {
 
     public Pelilauta pelilauta;
     public ArrayList<String> kirjaimet = new ArrayList<String>(Arrays.asList(new String[]{"a", "b", "c", "d", "e", "f", "g", "h"}));
     public Scanner lukija;
 
-    public Peli() {
-        this.pelilauta = new Pelilauta(new GridPane());
+    public TekstiKayttoliittyma() {
+        this.pelilauta = new Pelilauta();
         this.lukija = new Scanner(System.in);
     }
 
     public void kaynnista() {
-
+        
         System.out.println(pelilauta.toString());
 
-        int vuoro = 0;
+        Pelaaja vuoro = Pelaaja.VALKOINEN;
+        
         while (true) {
             // valkoisen siirto
-            if (vuoro % 2 == 0) {
+            if (vuoro == Pelaaja.VALKOINEN) {
                 System.out.println("valkoinen, anna lähtökoordinaatti:");
-            } else if (vuoro % 2 == 1) {
+            } else if (vuoro == Pelaaja.MUSTA) {
                 System.out.println("musta, anna lähtökoordinaatti:");
             }
             String lahto = lukija.nextLine();
@@ -34,28 +34,20 @@ public class Peli {
             int xMista = kirjaimet.indexOf(koord[0]);
             int yMista = Integer.parseInt(koord[1]) - 1;
 
-            if (validiSiirrettava(vuoro % 2, xMista, yMista)) {
-                vuoro(vuoro % 2, xMista, yMista);
+            if (pelilauta.validiSiirrettava(vuoro, xMista, yMista)) {
+                vuoro(vuoro, xMista, yMista);
             }
             System.out.println(pelilauta.toString());
 
-            vuoro++;
+            if(vuoro == Pelaaja.MUSTA) {
+                vuoro = Pelaaja.VALKOINEN;
+            } else {
+                vuoro = Pelaaja.MUSTA;
+            }
         }
     }
 
-    public boolean validiSiirrettava(int pelaaja, int xMista, int yMista) {
-        if (pelilauta.lauta[xMista][yMista] != null
-                && pelilauta.lauta[xMista][yMista].getColor() == pelaaja) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    public void vuoro(int pelaaja, int xMista, int yMista) {
-        Nappula siirrettava = pelilauta.getLauta()[xMista][yMista];
-        List<String> mahdSiirrot = siirrettava.mahdollisetSiirrot(pelilauta.getLauta());
-        List<String> mahdSyotavat = siirrettava.mahdollisetSyonnit(pelilauta.getLauta());
+    public void vuoro(Pelaaja pelaaja, int xMista, int yMista) {
 
         while (true) {
             System.out.println("anna päätekoordinaatti:");
@@ -63,9 +55,10 @@ public class Peli {
             String[] koord = paate.split("");
             int xMihin = kirjaimet.indexOf(koord[0]);
             int yMihin = Integer.parseInt(koord[1]) - 1;
-            if (mahdSiirrot.contains(xMihin + "," + yMihin) || mahdSyotavat.contains(xMihin + "," + yMihin)) {
-                pelilauta.siirto(xMista, yMista, xMihin, yMihin);
+            if (pelilauta.siirto(xMista, yMista, xMihin, yMihin)) {
                 break;
+            } else {
+                System.out.println("ei onnaa.");
             }
         }
     }

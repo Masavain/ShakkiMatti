@@ -2,10 +2,11 @@ package shakkimatti.nappulat;
 
 import java.util.ArrayList;
 import java.util.List;
+import shakkimatti.logiikka.Pelaaja;
 
 public class Lahetti extends Nappula {
 
-    public Lahetti(int x, int y, int color) {
+    public Lahetti(int x, int y, Pelaaja color) {
         super(x, y, color);
         this.merkki = "L";
     }
@@ -85,7 +86,7 @@ public class Lahetti extends Nappula {
                 if (yi == 7) {
                     break;
                 }
-                if (tilanne[i][yi] != null && tilanne[i][yi].color != this.color
+                if (tilanne[i][yi] != null && tilanne[i][yi].getPelaaja() != this.getPelaaja()
                         && !tilanne[i][yi].merkki.equals("K")) {
                     syonnit.add((i) + "," + (yi));
                 }
@@ -99,7 +100,7 @@ public class Lahetti extends Nappula {
                 if (yi == -1) {
                     break;
                 }
-                if (tilanne[i][yi] != null && tilanne[i][yi].color != this.color
+                if (tilanne[i][yi] != null && tilanne[i][yi].getPelaaja() != this.getPelaaja()
                         && !tilanne[i][yi].merkki.equals("K")) {
                     syonnit.add((i) + "," + (yi));
                 }
@@ -112,7 +113,7 @@ public class Lahetti extends Nappula {
                 if (yi == 7) {
                     break;
                 }
-                if (tilanne[i][yi] != null && tilanne[i][yi].color != this.color
+                if (tilanne[i][yi] != null && tilanne[i][yi].getPelaaja() != this.getPelaaja()
                         && !tilanne[i][yi].merkki.equals("K")) {
                     syonnit.add((i) + "," + (yi));
                 }
@@ -125,7 +126,7 @@ public class Lahetti extends Nappula {
                 if (yi == -1) {
                     break;
                 }
-                if (tilanne[i][yi] != null && tilanne[i][yi].color != this.color
+                if (tilanne[i][yi] != null && tilanne[i][yi].getPelaaja() != this.getPelaaja()
                         && !tilanne[i][yi].merkki.equals("K")) {
                     syonnit.add((i) + "," + (yi));
                 }

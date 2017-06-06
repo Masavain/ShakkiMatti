@@ -1,16 +1,19 @@
 package shakkimatti.nappulat;
+import shakkimatti.logiikka.Pelaaja;
+
 
 import java.util.*;
 
 public abstract class Nappula {
 
-    public int x, y, color;
+    public int x, y;
+    private Pelaaja pelaaja;
     public String merkki;
 
-    public Nappula(int x, int y, int color) {
+    public Nappula(int x, int y, Pelaaja pelaaja) {
         this.x = x;
         this.y = y;
-        this.color = color;
+        this.pelaaja = pelaaja;
     }
 
     public void liiku(int xMihin, int yMihin, Nappula[][] lauta) {
@@ -38,13 +41,23 @@ public abstract class Nappula {
         this.y = y;
     }
 
-    public int getColor() {
-        return color;
+    public Pelaaja getPelaaja() {
+        return pelaaja;
     }
 
-    public void setColor(int color) {
-        this.color = color;
+    public void setPelaaja(Pelaaja pelaaja) {
+        this.pelaaja = pelaaja;
     }
+
+    public void setMerkki(String merkki) {
+        this.merkki = merkki;
+    }
+
+    public String getMerkki() {
+        return merkki;
+    }
+
+    
 
     @Override
     public String toString() {

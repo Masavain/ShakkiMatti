@@ -2,10 +2,11 @@ package shakkimatti.nappulat;
 
 import java.util.ArrayList;
 import java.util.List;
+import shakkimatti.logiikka.Pelaaja;
 
 public class Torni extends Nappula {
 
-    public Torni(int x, int y, int color) {
+    public Torni(int x, int y, Pelaaja color) {
         super(x, y, color);
         this.merkki = "T";
     }
@@ -63,7 +64,7 @@ public class Torni extends Nappula {
         if (this.x < 7 && this.x >= 0) {
             for (int i = this.x + 1; i < 8; i++) {
                 if (tilanne[i][this.y] != null
-                        && tilanne[i][this.y].color != this.color
+                        && tilanne[i][this.y].getPelaaja() != getPelaaja() 
                         && !tilanne[i][this.y].merkki.equals("K")) {
                     syonnit.add(i + "," + this.y);
                     break;
@@ -74,7 +75,7 @@ public class Torni extends Nappula {
             for (int i = this.x - 1; i >= 0; i--) {
 
                 if (tilanne[i][this.y] != null
-                        && tilanne[i][this.y].color != this.color
+                        && tilanne[i][this.y].getPelaaja() != getPelaaja() 
                         && !tilanne[i][this.y].merkki.equals("K")) {
                     syonnit.add(i + "," + this.y);
                     break;
@@ -86,7 +87,7 @@ public class Torni extends Nappula {
             for (int i = this.y + 1; i < 8; i++) {
 
                 if (tilanne[this.x][i] != null
-                        && tilanne[this.x][i].color != this.color
+                        && tilanne[this.x][i].getPelaaja() != getPelaaja() 
                         && !tilanne[this.x][i].merkki.equals("K")) {
                     syonnit.add(this.x + "," + i);
                     break;
@@ -97,7 +98,7 @@ public class Torni extends Nappula {
         if (this.y <= 7 && this.y > 0) {
             for (int i = this.y - 1; i >= 0; i--) {
                 if (tilanne[this.x][i] != null
-                        && tilanne[this.x][i].color != this.color
+                        && tilanne[this.x][i].getPelaaja() != getPelaaja() 
                         && !tilanne[this.x][i].merkki.equals("K")) {
                     syonnit.add(this.x + "," + i);
                     break;

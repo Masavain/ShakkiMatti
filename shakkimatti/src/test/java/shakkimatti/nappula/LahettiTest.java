@@ -1,6 +1,6 @@
 package shakkimatti.nappula;
 
-import shakkimatti.gui.Pelilauta;
+import shakkimatti.logiikka.Pelilauta;
 import shakkimatti.nappulat.Lahetti;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -11,6 +11,7 @@ import static org.junit.Assert.*;
 import shakkimatti.nappulat.Kuningas;
 import shakkimatti.nappulat.Sotilas;
 import javafx.scene.layout.*;
+import shakkimatti.logiikka.Pelaaja;
 
 public class LahettiTest {
 
@@ -29,7 +30,7 @@ public class LahettiTest {
 
     @Before
     public void setUp() {
-        this.lauta = new Pelilauta(new GridPane());
+        this.lauta = new Pelilauta();
     }
 
     @After
@@ -38,29 +39,29 @@ public class LahettiTest {
 
     @Test
     public void eiLiikuJosEiMahdollinenSiirto() {
-        Lahetti lahetti = new Lahetti(2, 0, 0);
+        Lahetti lahetti = new Lahetti(2, 0, Pelaaja.MUSTA);
         lahetti.liiku(2, 2, lauta.getLauta());
         assertEquals(lahetti.x + "," + lahetti.y, "2,0");
     }
 
     @Test
     public void liikkuuOikeaanKoordinaattiin() {
-        Lahetti lahetti = new Lahetti(2, 0, 0);
+        Lahetti lahetti = new Lahetti(2, 0, Pelaaja.MUSTA);
         lahetti.liiku(1, 1, lauta.getLauta());
         assertEquals(lahetti.x + "," + lahetti.y, "1,1");
     }
 
     @Test
     public void eiPaaseLaudaltaPois() {
-        Lahetti lahetti = new Lahetti(2, 0, 0);
+        Lahetti lahetti = new Lahetti(2, 0, Pelaaja.MUSTA);
         lahetti.liiku(0, -2, lauta.getLauta());
         assertEquals(lahetti.x + "," + lahetti.y, "2,0");
     }
     
     @Test
     public void syotavaListalla(){
-        Lahetti lahetti = new Lahetti(2,0,0);
-        Sotilas solttu = new Sotilas(2,1,1,false);
+        Lahetti lahetti = new Lahetti(2,0,Pelaaja.MUSTA);
+        Sotilas solttu = new Sotilas(2,1,Pelaaja.VALKOINEN,false);
         lauta.asetaNappula(lahetti, 2, 0);
         lauta.asetaNappula(solttu, 3, 1);
         
@@ -69,8 +70,8 @@ public class LahettiTest {
     
     @Test
     public void eiVoiSyodaOmanVarista(){
-        Lahetti lahetti = new Lahetti(2,0,0);
-        Sotilas solttu = new Sotilas(2,1,0,false);
+        Lahetti lahetti = new Lahetti(2,0,Pelaaja.MUSTA);
+        Sotilas solttu = new Sotilas(2,1,Pelaaja.MUSTA,false);
         lauta.asetaNappula(lahetti, 2, 0);
         lauta.asetaNappula(solttu, 3, 1);
         
@@ -79,8 +80,8 @@ public class LahettiTest {
     
     @Test
     public void kuningastaEiVoiSyoda(){
-        Lahetti lahetti = new Lahetti(2,0,0);
-        Kuningas kunkku = new Kuningas(2,1,1);
+        Lahetti lahetti = new Lahetti(2,0,Pelaaja.MUSTA);
+        Kuningas kunkku = new Kuningas(2,1,Pelaaja.VALKOINEN);
         lauta.asetaNappula(lahetti, 2, 0);
         lauta.asetaNappula(kunkku, 3, 1);
         

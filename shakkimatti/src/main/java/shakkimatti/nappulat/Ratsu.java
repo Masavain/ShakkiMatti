@@ -1,10 +1,11 @@
 package shakkimatti.nappulat;
 
 import java.util.*;
+import shakkimatti.logiikka.Pelaaja;
 
 public class Ratsu extends Nappula {
 
-    public Ratsu(int x, int y, int color) {
+    public Ratsu(int x, int y, Pelaaja color) {
         super(x, y, color);
         this.merkki = "R";
     }
@@ -63,56 +64,56 @@ public class Ratsu extends Nappula {
 
         if (x + 1 < 8 && y + 2 < 8) {
             if (tilanne[x + 1][y + 2] != null
-                    && tilanne[x + 1][y + 2].color != this.color 
+                    && tilanne[x + 1][y + 2].getPelaaja() != getPelaaja()
                     && !tilanne[x + 1][y + 2].merkki.equals("K")) {
                 syonnit.add((x + 1) + "," + (y + 2));
             }
         }
         if (x + 2 < 8 && y + 1 < 8) {
             if (tilanne[x + 2][y + 1] != null
-                    && tilanne[x + 2][y + 1].color != this.color 
+                    && tilanne[x + 2][y + 1].getPelaaja() != getPelaaja()
                     && !tilanne[x + 2][y + 1].merkki.equals("K")) {
                 syonnit.add((x + 2) + "," + (y + 1));
             }
         }
         if (x - 1 >= 0 && y + 2 < 8) {
             if (tilanne[x - 1][y + 2] != null
-                    && tilanne[x - 1][y + 2].color != this.color 
+                    && tilanne[x - 1][y + 2].getPelaaja() != getPelaaja()
                     && !tilanne[x - 1][y + 2].merkki.equals("K")) {
                 syonnit.add((x - 1) + "," + (y + 2));
             }
         }
         if (x - 2 >= 0 && y + 1 < 8) {
             if (tilanne[x - 2][y + 1] != null
-                    && tilanne[x - 2][y + 1].color != this.color 
+                    && tilanne[x - 2][y + 1].getPelaaja() != getPelaaja() 
                     && !tilanne[x - 2][y + 1].merkki.equals("K")) {
                 syonnit.add((x - 2) + "," + (y + 1));
             }
         }
         if (x - 1 >= 0 && y - 2 >= 0) {
             if (tilanne[x - 1][y - 2] != null
-                    && tilanne[x - 1][y - 2].color != this.color 
+                    && tilanne[x - 1][y - 2].getPelaaja() != getPelaaja() 
                     && !tilanne[x - 1][y - 2].merkki.equals("K")) {
                 syonnit.add((x - 1) + "," + (y - 2));
             }
         }
         if (x - 2 >= 0 && y - 1 >= 0) {
             if (tilanne[x - 2][y - 1] != null
-                    && tilanne[x - 2][y - 1].color != this.color 
+                    && tilanne[x - 2][y - 1].getPelaaja() != getPelaaja() 
                     && !tilanne[x - 2][y - 1].merkki.equals("K")) {
                 syonnit.add((x - 2) + "," + (y - 1));
             }
         }
         if (x + 1 < 8 && y - 2 >= 0) {
-            if (tilanne[x + 1][y - 2] != null 
-                    && tilanne[x + 1][y - 2].color != this.color 
+            if (tilanne[x + 1][y - 2] != null
+                    && tilanne[x + 1][y - 2].getPelaaja() != getPelaaja() 
                     && !tilanne[x + 1][y - 2].merkki.equals("K")) {
                 syonnit.add((x + 1) + "," + (y - 2));
             }
         }
         if (x + 2 < 8 && y - 1 >= 0) {
-            if (tilanne[x + 2][y - 1] != null 
-                    && tilanne[x + 2][y - 1].color != this.color 
+            if (tilanne[x + 2][y - 1] != null
+                    && tilanne[x + 2][y - 1].getPelaaja() != getPelaaja() 
                     && !tilanne[x + 2][y - 1].merkki.equals("K")) {
                 syonnit.add((x + 2) + "," + (y - 1));
             }
@@ -120,6 +121,5 @@ public class Ratsu extends Nappula {
 
         return syonnit;
     }
-
 
 }
