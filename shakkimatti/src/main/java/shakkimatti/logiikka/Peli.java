@@ -5,26 +5,24 @@ import shakkimatti.nappulat.Nappula;
 import java.util.*;
 import javafx.scene.layout.*;
 
-public class Peliapu {
+public class Peli {
 
     public Pelilauta pelilauta;
     public ArrayList<String> kirjaimet = new ArrayList<String>(Arrays.asList(new String[]{"a", "b", "c", "d", "e", "f", "g", "h"}));
     public Scanner lukija;
 
-    public Peliapu() {
+    public Peli() {
         this.pelilauta = new Pelilauta(new GridPane());
         this.lukija = new Scanner(System.in);
     }
 
     public void kaynnista() {
-        pelilauta.alustus();
 
         System.out.println(pelilauta.toString());
 
         int vuoro = 0;
         while (true) {
             // valkoisen siirto
-
             if (vuoro % 2 == 0) {
                 System.out.println("valkoinen, anna lähtökoordinaatti:");
             } else if (vuoro % 2 == 1) {

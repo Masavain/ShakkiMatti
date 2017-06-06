@@ -7,13 +7,13 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import shakkimatti.logiikka.Peliapu;
+import shakkimatti.logiikka.Peli;
 import shakkimatti.gui.Pelilauta;
 import shakkimatti.nappulat.Kuningas;
 
-public class PeliapuTest {
+public class PeliTest {
     
-    public PeliapuTest() {
+    public PeliTest() {
     }
     
     @BeforeClass
@@ -34,15 +34,15 @@ public class PeliapuTest {
 
     @Test
     public void testaaValidiSiir(){
-        Peliapu apu = new Peliapu();
+        Peli peli = new Peli();
         
-        apu.pelilauta.asetaNappula(new Kuningas(0,0,0), 0, 0);
-        assertTrue(apu.validiSiirrettava(0, 0, 0));
+        peli.pelilauta.asetaNappula(new Kuningas(0,0,0), 0, 0);
+        assertTrue(peli.validiSiirrettava(0, 0, 0));
     }
     
     @Test
     public void testaaValidiSiir2(){
-        Peliapu apu = new Peliapu();
+        Peli apu = new Peli();
         
         apu.pelilauta.asetaNappula(new Kuningas(0,0,0), 0, 0);
         assertFalse(apu.validiSiirrettava(1, 0, 0));

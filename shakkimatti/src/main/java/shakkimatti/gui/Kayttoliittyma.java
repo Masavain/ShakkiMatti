@@ -1,28 +1,32 @@
 package shakkimatti.gui;
 
 import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.stage.Stage;
 import javafx.scene.*;
+import javafx.scene.input.*;
 import javafx.scene.layout.*;
-import javafx.scene.control.Control;
-import javafx.geometry.HPos;
-import javafx.geometry.VPos;
-import javafx.scene.shape.Rectangle;
 import javafx.scene.paint.Color;
-import javafx.scene.image.*;
+import javafx.scene.shape.Rectangle;
+import shakkimatti.logiikka.Peli;
+
 
 public class Kayttoliittyma extends Application {
 
-    GridPane root = new GridPane();
-    final int size = 8;
+    public GridPane root = new GridPane();
 
     @Override
     public void start(Stage primaryStage) {
+        
         Pelilauta lauta = new Pelilauta(root);
+        Peli peli = new Peli();
         lauta.alustus();
         lauta.varitaRuudukko();
         lauta.kuvatGridiin();
-        primaryStage.setScene(new Scene(lauta.getRoot(), 500, 500));
+        Scene scene = new Scene(lauta.getRoot(), 500, 500);
+        primaryStage.setTitle("SHAKKIMATTI");
+        
+        primaryStage.setScene(scene);
         primaryStage.show();
     }
 
@@ -30,4 +34,8 @@ public class Kayttoliittyma extends Application {
         launch(Kayttoliittyma.class);
     }
 
+    public void valitseNappula(){
+        
+    }
+    
 }
