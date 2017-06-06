@@ -69,24 +69,24 @@ public class Kayttoliittyma extends Application {
                         int y = GridPane.getRowIndex(stack);
                         int x = GridPane.getColumnIndex(stack);
 
-                        if (nappula != null) {
+                        if (nappula != null && lauta.getLauta()[x][y]==null) {
                             if (lauta.siirto(nappula.getX(), nappula.getY(), x, y)) {
                                 System.out.println(lauta.getLauta()[x][y] + "," + lauta.getLauta()[x][y].getPelaaja() + "liikutettu");
                                 System.out.println(lauta.toString());
                                 
                             }
                             nappula = null;
-                            kuvatGridiin();
                         } else if (lauta.getLauta()[x][y] != null && nappula == null) {
                             System.out.println(lauta.getLauta()[x][y] + "," + lauta.getLauta()[x][y].getPelaaja() + " valittu ");
                             nappula = lauta.getLauta()[x][y];
 
                         }
-
+                        
                         if (stack.getChildren().size() == 2) {
                             Rectangle ruutu = (Rectangle) stack.getChildren().get(0);
                             ruutu.setStroke(Color.RED);
                         }
+                        kuvatGridiin();
 
                     }
                 });
