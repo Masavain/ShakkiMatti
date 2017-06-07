@@ -1,4 +1,4 @@
-package shakkimatti.nappula;
+package shakkimatti.nappulat;
 
 import shakkimatti.logiikka.Pelilauta;
 import shakkimatti.nappulat.Lahetti;
@@ -41,21 +41,21 @@ public class LahettiTest {
     public void eiLiikuJosEiMahdollinenSiirto() {
         Lahetti lahetti = new Lahetti(2, 0, Pelaaja.MUSTA);
         lahetti.liiku(2, 2, lauta.getLauta());
-        assertEquals(lahetti.x + "," + lahetti.y, "2,0");
+        assertEquals(lahetti.getX() + "," + lahetti.getY(), "2,0");
     }
 
     @Test
     public void liikkuuOikeaanKoordinaattiin() {
         Lahetti lahetti = new Lahetti(2, 0, Pelaaja.MUSTA);
         lahetti.liiku(1, 1, lauta.getLauta());
-        assertEquals(lahetti.x + "," + lahetti.y, "1,1");
+        assertEquals(lahetti.getX() + "," + lahetti.getY(), "1,1");
     }
 
     @Test
     public void eiPaaseLaudaltaPois() {
         Lahetti lahetti = new Lahetti(2, 0, Pelaaja.MUSTA);
         lahetti.liiku(0, -2, lauta.getLauta());
-        assertEquals(lahetti.x + "," + lahetti.y, "2,0");
+        assertEquals(lahetti.getX() + "," + lahetti.getY(), "2,0");
     }
     
     @Test

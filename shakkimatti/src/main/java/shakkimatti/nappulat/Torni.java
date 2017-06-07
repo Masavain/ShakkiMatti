@@ -4,51 +4,64 @@ import java.util.ArrayList;
 import java.util.List;
 import shakkimatti.logiikka.Pelaaja;
 
+/**
+ * Kuvaa shakkilaudan torni-nappulaa, jatkaa abstraktia Nappula-luokkaa
+ *
+ */
 public class Torni extends Nappula {
 
     public Torni(int x, int y, Pelaaja color) {
         super(x, y, color);
-        this.merkki = "T";
+        setMerkki("T");
     }
 
+    /**
+     * tarkastaa tornin mahdolliset siirrot (suorat ylös, alas
+     * oikeaan ja vasemmalle).
+     *
+     * @param tilanne tämänhetkinen pelilaudan pelitilanne
+     * @return palauttaa listan mahdollisten siirtojen koordinaateista
+     */
     @Override
     public List<String> mahdollisetSiirrot(Nappula[][] tilanne) {
         List<String> siirrot = new ArrayList<String>();
-        if (this.x < 7 && x >= 0) {
-            for (int i = this.x + 1; i < 8; i++) {
-                if (tilanne[i][this.y] == null) {
-                    siirrot.add(i + "," + this.y);
+        int x = getX();
+        int y = getY();
+        if (x < 7 && x >= 0) {
+            for (int i = x + 1; i < 8; i++) {
+                if (tilanne[i][y] == null) {
+                    siirrot.add(i + "," + y);
                 } else {
                     break;
                 }
             }
         }
 
-        if (this.x <= 7 && this.x > 0) {
-            for (int i = this.x - 1; i >= 0; i--) {
+        if (x <= 7 && x > 0) {
+            for (int i = x - 1; i >= 0; i--) {
 
-                if (tilanne[i][this.y] == null) {
-                    siirrot.add(i + "," + this.y);
+                if (tilanne[i][y] == null) {
+                    siirrot.add(i + "," + y);
                 } else {
                     break;
                 }
             }
         }
 
-        if (this.y < 7 && this.y >= 0) {
-            for (int i = this.y + 1; i < 8; i++) {
+        if (y < 7 && y >= 0) {
+            for (int i = y + 1; i < 8; i++) {
 
-                if (tilanne[this.x][i] == null) {
-                    siirrot.add(this.x + "," + i);
+                if (tilanne[x][i] == null) {
+                    siirrot.add(x + "," + i);
                 } else {
                     break;
                 }
             }
         }
-        if (this.y > 0 && this.y <= 7) {
-            for (int i = this.y - 1; i >= 0; i--) {
-                if (tilanne[this.x][i] == null) {
-                    siirrot.add(this.x + "," + i);
+        if (y > 0 && y <= 7) {
+            for (int i = y - 1; i >= 0; i--) {
+                if (tilanne[x][i] == null) {
+                    siirrot.add(x + "," + i);
                 } else {
                     break;
                 }
@@ -58,49 +71,58 @@ public class Torni extends Nappula {
         return siirrot;
     }
 
+    /**
+     * tarkastaa tornin mahdolliset syönnit (suorat ylös, alas
+     * oikeaan ja vasemmalle).
+     *
+     * @param tilanne tämänhetkinen pelilaudan pelitilanne
+     * @return palauttaa listan mahdollisten syöntien koordinaateista
+     */
     @Override
     public List<String> mahdollisetSyonnit(Nappula[][] tilanne) {
         List<String> syonnit = new ArrayList<String>();
-        if (this.x < 7 && this.x >= 0) {
-            for (int i = this.x + 1; i < 8; i++) {
-                if (tilanne[i][this.y] != null
-                        && tilanne[i][this.y].getPelaaja() != getPelaaja() 
-                        && !tilanne[i][this.y].merkki.equals("K")) {
-                    syonnit.add(i + "," + this.y);
+        int x = getX();
+        int y = getY();
+        if (x < 7 && x >= 0) {
+            for (int i = x + 1; i < 8; i++) {
+                if (tilanne[i][y] != null
+                        && tilanne[i][y].getPelaaja() != getPelaaja()
+                        && !tilanne[i][y].getMerkki().equals("K")) {
+                    syonnit.add(i + "," + y);
                     break;
                 }
             }
         }
-        if (this.x <= 7 && this.x > 0) {
-            for (int i = this.x - 1; i >= 0; i--) {
+        if (x <= 7 && x > 0) {
+            for (int i = x - 1; i >= 0; i--) {
 
-                if (tilanne[i][this.y] != null
-                        && tilanne[i][this.y].getPelaaja() != getPelaaja() 
-                        && !tilanne[i][this.y].merkki.equals("K")) {
-                    syonnit.add(i + "," + this.y);
+                if (tilanne[i][y] != null
+                        && tilanne[i][y].getPelaaja() != getPelaaja()
+                        && !tilanne[i][y].getMerkki().equals("K")) {
+                    syonnit.add(i + "," + y);
                     break;
                 }
             }
         }
 
-        if (this.y < 7 && this.y >= 0) {
-            for (int i = this.y + 1; i < 8; i++) {
+        if (y < 7 && y >= 0) {
+            for (int i = y + 1; i < 8; i++) {
 
-                if (tilanne[this.x][i] != null
-                        && tilanne[this.x][i].getPelaaja() != getPelaaja() 
-                        && !tilanne[this.x][i].merkki.equals("K")) {
-                    syonnit.add(this.x + "," + i);
+                if (tilanne[x][i] != null
+                        && tilanne[x][i].getPelaaja() != getPelaaja()
+                        && !tilanne[x][i].getMerkki().equals("K")) {
+                    syonnit.add(x + "," + i);
                     break;
                 }
 
             }
         }
-        if (this.y <= 7 && this.y > 0) {
-            for (int i = this.y - 1; i >= 0; i--) {
-                if (tilanne[this.x][i] != null
-                        && tilanne[this.x][i].getPelaaja() != getPelaaja() 
-                        && !tilanne[this.x][i].merkki.equals("K")) {
-                    syonnit.add(this.x + "," + i);
+        if (y <= 7 && y > 0) {
+            for (int i = y - 1; i >= 0; i--) {
+                if (tilanne[x][i] != null
+                        && tilanne[x][i].getPelaaja() != getPelaaja()
+                        && !tilanne[x][i].getMerkki().equals("K")) {
+                    syonnit.add(x + "," + i);
                     break;
                 }
             }

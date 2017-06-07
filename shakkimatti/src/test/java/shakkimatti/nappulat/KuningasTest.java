@@ -1,5 +1,5 @@
 
-package shakkimatti.nappula;
+package shakkimatti.nappulat;
 
 import shakkimatti.logiikka.Pelilauta;
 import shakkimatti.nappulat.Kuningas;
@@ -42,21 +42,21 @@ public class KuningasTest {
     public void eiLiikuJosEiMahdollinenSiirto(){
         Kuningas kingi = new Kuningas(4,0,Pelaaja.MUSTA);
         kingi.liiku(8, 8, lauta.getLauta());
-        assertEquals(kingi.x+","+kingi.y, "4,0");
+        assertEquals(kingi.getX()+","+kingi.getY(), "4,0");
     }
     
     @Test
     public void liikkuuOikeaanKoordinaattiin(){
         Kuningas kingi = new Kuningas(4,0,Pelaaja.MUSTA);
         kingi.liiku(4, 1, lauta.getLauta());
-        assertEquals(kingi.x+","+kingi.y, "4,1");
+        assertEquals(kingi.getX()+","+kingi.getY(), "4,1");
     }
     
     @Test
     public void eiPaaseLaudaltaPois(){
         Kuningas kingi = new Kuningas(4,0,Pelaaja.MUSTA);
         kingi.liiku(0, -2, lauta.getLauta());
-        assertEquals(kingi.x+","+kingi.y, "4,0");
+        assertEquals(kingi.getX()+","+kingi.getY(), "4,0");
     }
     
     @Test

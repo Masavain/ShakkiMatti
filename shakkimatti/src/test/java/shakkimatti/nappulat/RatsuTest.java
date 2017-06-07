@@ -1,5 +1,5 @@
 
-package shakkimatti.nappula;
+package shakkimatti.nappulat;
 
 import shakkimatti.logiikka.Pelilauta;
 import shakkimatti.nappulat.Ratsu;
@@ -44,7 +44,7 @@ public class RatsuTest {
     public void eiLiikuJosEiMahdollinenSiirto(){
         Ratsu ratsu = new Ratsu(1,0,Pelaaja.MUSTA);
         ratsu.liiku(1, 1, lauta.getLauta());
-        assertEquals(ratsu.x+","+ratsu.y, "1,0");
+        assertEquals(ratsu.getX()+","+ratsu.getY(), "1,0");
     }
     
     
@@ -52,7 +52,7 @@ public class RatsuTest {
     public void liikkuuOikeaanKoordinaattiin1(){
         Ratsu ratsu = new Ratsu(1,0,Pelaaja.MUSTA);
         ratsu.liiku(0, 2, lauta.getLauta());
-        assertEquals(ratsu.x+","+ratsu.y, "0,2");
+        assertEquals(ratsu.getX()+","+ratsu.getY(), "0,2");
     }
     
     @Test
@@ -109,7 +109,7 @@ public class RatsuTest {
     public void eiPaaseLaudaltaPois(){
         Ratsu ratsu = new Ratsu(1,0,Pelaaja.MUSTA);
         ratsu.liiku(0, -2, lauta.getLauta());
-        assertEquals(ratsu.x+","+ratsu.y, "1,0");
+        assertEquals(ratsu.getX()+","+ratsu.getY(), "1,0");
     }
     
     @Test

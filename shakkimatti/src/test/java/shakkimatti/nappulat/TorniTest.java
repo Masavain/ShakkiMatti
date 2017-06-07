@@ -1,4 +1,4 @@
-package shakkimatti.nappula;
+package shakkimatti.nappulat;
 
 import java.util.Arrays;
 import java.util.List;
@@ -43,35 +43,35 @@ public class TorniTest {
     public void eiLiikuJosEiMahdollinenSiirto() {
         Torni torni = new Torni(0, 0, Pelaaja.MUSTA);
         torni.liiku(1, 1, lauta.getLauta());
-        assertEquals(torni.x + "," + torni.y, "0,0");
+        assertEquals(torni.getX() + "," + torni.getY(), "0,0");
     }
 
     @Test
     public void liikkuuOikeaanKoordinaattiin() {
         Torni torni = new Torni(0, 0, Pelaaja.MUSTA);
         torni.liiku(0, 2, lauta.getLauta());
-        assertEquals(torni.x + "," + torni.y, "0,2");
+        assertEquals(torni.getX() + "," + torni.getY(), "0,2");
     }
 
     @Test
     public void liikuAlas() {
         Torni torni = new Torni(0, 7, Pelaaja.MUSTA);
         torni.liiku(0, 0, lauta.getLauta());
-        assertEquals(torni.x + "," + torni.y, "0,0");
+        assertEquals(torni.getX() + "," + torni.getY(), "0,0");
     }
 
     @Test
     public void liikuOik() {
         Torni torni = new Torni(0, 0, Pelaaja.MUSTA);
         torni.liiku(7, 0, lauta.getLauta());
-        assertEquals(torni.x + "," + torni.y, "7,0");
+        assertEquals(torni.getX() + "," + torni.getY(), "7,0");
     }
 
     @Test
     public void liikuVas() {
         Torni torni = new Torni(7, 0, Pelaaja.MUSTA);
         torni.liiku(0, 0, lauta.getLauta());
-        assertEquals(torni.x + "," + torni.y, "0,0");
+        assertEquals(torni.getX() + "," + torni.getY(), "0,0");
     }
 
     @Test
@@ -98,21 +98,21 @@ public class TorniTest {
     public void eiPaaseLaudaltaPois() {
         Torni torni = new Torni(0, 0, Pelaaja.MUSTA);
         torni.liiku(0, -2, lauta.getLauta());
-        assertEquals(torni.x + "," + torni.y, "0,0");
+        assertEquals(torni.getX() + "," + torni.getY(), "0,0");
     }
 
     @Test
     public void ulkopuolella() {
         Torni torni = new Torni(10, 10, Pelaaja.MUSTA);
         torni.liiku(0, 10, lauta.getLauta());
-        assertEquals(torni.x + "," + torni.y, "10,10");
+        assertEquals(torni.getX() + "," + torni.getY(), "10,10");
     }
 
     @Test
     public void ulkopuolella2() {
         Torni torni = new Torni(-10, -10, Pelaaja.MUSTA);
         torni.liiku(0, -10, lauta.getLauta());
-        assertEquals(torni.x + "," + torni.y, "-10,-10");
+        assertEquals(torni.getX() + "," + torni.getY(), "-10,-10");
     }
 
     @Test

@@ -1,14 +1,18 @@
 package shakkimatti.nappulat;
-import shakkimatti.logiikka.Pelaaja;
 
+import shakkimatti.logiikka.Pelaaja;
 
 import java.util.*;
 
+/**
+ * Abstrakti luokka jota eri nappulatyypit täydentävät
+ *
+ */
 public abstract class Nappula {
 
-    public int x, y;
+    private int x, y;
     private Pelaaja pelaaja;
-    public String merkki;
+    private String merkki;
 
     public Nappula(int x, int y, Pelaaja pelaaja) {
         this.x = x;
@@ -16,6 +20,14 @@ public abstract class Nappula {
         this.pelaaja = pelaaja;
     }
 
+    /**
+     * Metodi muuttaa nappulan x- ja y-koordinaatteja, jos haluttu koordinaatti
+     * on nappulan mahdollinen siirto tai syönti
+     *
+     * @param xMihin x-koordinaatti johon nappulaa yritetään siirtää
+     * @param yMihin y-koordinaatti johon nappulaa yritetään siirtää
+     * @param lauta tämänhetkinen pelilaudan pelitilanne
+     */
     public void liiku(int xMihin, int yMihin, Nappula[][] lauta) {
         List<String> mahdSiirrot = this.mahdollisetSiirrot(lauta);
         List<String> mahdSyonnit = this.mahdollisetSyonnit(lauta);
@@ -57,15 +69,23 @@ public abstract class Nappula {
         return merkki;
     }
 
-    
-
     @Override
     public String toString() {
         return merkki;
     }
 
+    /**
+     *
+     * @param tilanne tämänhetkinen pelilaudan pelitilanne
+     * @return palauttaa listan mahdollisten siirtojen koordinaateista
+     */
     public abstract List<String> mahdollisetSiirrot(Nappula[][] tilanne);
 
+    /**
+     *
+     * @param tilanne tämänhetkinen pelilaudan pelitilanne
+     * @return palauttaa listan mahdollisten syöntien koordinaateista
+     */
     public abstract List<String> mahdollisetSyonnit(Nappula[][] tilanne);
 
 }

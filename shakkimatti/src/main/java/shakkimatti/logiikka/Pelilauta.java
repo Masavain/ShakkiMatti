@@ -1,18 +1,26 @@
 package shakkimatti.logiikka;
 
 import shakkimatti.nappulat.*;
-import shakkimatti.logiikka.Pelaaja;
 
+/**
+ * luokka kuvastaa shakkilautaa (8x8 ruudukko)
+ *
+ */
 public class Pelilauta {
 
     private Nappula[][] lauta;
+    private final int size = 8;
 
     public Pelilauta() {
         this.lauta = new Nappula[8][8];
     }
 
+    /**
+     * alustaa normaalin shakkipelin alun. Asettaa siis pelinappulat oikeille
+     * aloituspaikoilleen.
+     */
     public void alustus() {
-        for (int i = 0; i < 8; i++) {
+        for (int i = 0; i < size; i++) {
             this.lauta[i][6] = new Sotilas(i, 6, Pelaaja.VALKOINEN, false);
             this.lauta[i][1] = new Sotilas(i, 1, Pelaaja.MUSTA, false);
         }
@@ -36,8 +44,8 @@ public class Pelilauta {
 
     public String toString() {
         String palautus = "";
-        for (int i = 0; i < 8; i++) {
-            for (int j = 0; j < 8; j++) {
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
                 if (this.lauta[j][i] != null) {
                     palautus += this.lauta[j][i];
                 } else {
@@ -49,6 +57,16 @@ public class Pelilauta {
         return palautus;
     }
 
+    /**
+     * siirtää pelinappulaa koordinaatista (xMista,yMista) koordinaattiin
+     * (xMihin,yMihin), jos siirto on mahdollinen.
+     *
+     * @param xMista lähtökoordinaatin x-arvo
+     * @param yMista lähtökoordinaatin y-arvo
+     * @param xMihin päätekoordinaatin x-arvo
+     * @param yMihin päätekoordinaatin y-arvo
+     * @return palauttaa true jos siirto oli mahdollinen, false jos ei
+     */
     public boolean siirto(int xMista, int yMista, int xMihin, int yMihin) {
         Nappula n = this.lauta[xMista][yMista];
         if (n.mahdollisetSiirrot(lauta).contains(xMihin + "," + yMihin) || n.mahdollisetSyonnit(lauta).contains(xMihin + "," + yMihin)) {
@@ -61,6 +79,17 @@ public class Pelilauta {
         return false;
     }
 
+    /**
+     * tarkistaa onko käyttäjän valitseman koordinaatin nappula siirrettävä, eli
+     * onko koordinaatissa nappulaa ollenkaan ja onko nappula tämänhetkisen
+     * pelaajan oma
+     *
+     * @param pelaaja pelaajan väri
+     * @param xMista valitun nappulan x-koordinaatti
+     * @param yMista valitun nappulan y-koordinaatti
+     * @return palauttaa true jos valittu nappula ei ole null ja on pelaajan
+     * oma, false jos ei
+     */
     public boolean validiSiirrettava(Pelaaja pelaaja, int xMista, int yMista) {
         if (this.lauta[xMista][yMista] != null
                 && this.lauta[xMista][yMista].getPelaaja() == pelaaja) {
@@ -74,6 +103,13 @@ public class Pelilauta {
         return lauta;
     }
 
+    /**
+     * asettaa laudalle nappulan n koordinaattiin (x,y)
+     *
+     * @param n nappula
+     * @param x x-koordinaatti
+     * @param y y-koordinaatti
+     */
     public void asetaNappula(Nappula n, int x, int y) {
         this.lauta[x][y] = n;
     }

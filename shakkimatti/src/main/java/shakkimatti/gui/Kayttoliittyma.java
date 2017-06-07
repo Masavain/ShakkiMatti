@@ -1,8 +1,6 @@
 package shakkimatti.gui;
 
 import shakkimatti.logiikka.Pelilauta;
-import java.util.ArrayList;
-import java.util.List;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.stage.Stage;
@@ -69,11 +67,11 @@ public class Kayttoliittyma extends Application {
                         int y = GridPane.getRowIndex(stack);
                         int x = GridPane.getColumnIndex(stack);
 
-                        if (nappula != null && lauta.getLauta()[x][y]==null) {
+                        if (nappula != null && lauta.getLauta()[x][y] == null) {
                             if (lauta.siirto(nappula.getX(), nappula.getY(), x, y)) {
                                 System.out.println(lauta.getLauta()[x][y] + "," + lauta.getLauta()[x][y].getPelaaja() + "liikutettu");
                                 System.out.println(lauta.toString());
-                                
+
                             }
                             nappula = null;
                         } else if (lauta.getLauta()[x][y] != null && nappula == null) {
@@ -81,7 +79,7 @@ public class Kayttoliittyma extends Application {
                             nappula = lauta.getLauta()[x][y];
 
                         }
-                        
+
                         if (stack.getChildren().size() == 2) {
                             Rectangle ruutu = (Rectangle) stack.getChildren().get(0);
                             ruutu.setStroke(Color.RED);
@@ -118,22 +116,22 @@ public class Kayttoliittyma extends Application {
                     } else {
                         tiedosto += "musta";
                     }
-                    if (lauta.getLauta()[j][i].merkki.equals("S")) {
+                    if (lauta.getLauta()[j][i].getMerkki().equals("S")) {
                         tiedosto += "Sotilas";
                     }
-                    if (lauta.getLauta()[j][i].merkki.equals("T")) {
+                    if (lauta.getLauta()[j][i].getMerkki().equals("T")) {
                         tiedosto += "Torni";
                     }
-                    if (lauta.getLauta()[j][i].merkki.equals("R")) {
+                    if (lauta.getLauta()[j][i].getMerkki().equals("R")) {
                         tiedosto += "Ratsu";
                     }
-                    if (lauta.getLauta()[j][i].merkki.equals("L")) {
+                    if (lauta.getLauta()[j][i].getMerkki().equals("L")) {
                         tiedosto += "Lahetti";
                     }
-                    if (lauta.getLauta()[j][i].merkki.equals("K")) {
+                    if (lauta.getLauta()[j][i].getMerkki().equals("K")) {
                         tiedosto += "Kunkku";
                     }
-                    if (lauta.getLauta()[j][i].merkki.equals("Q")) {
+                    if (lauta.getLauta()[j][i].getMerkki().equals("Q")) {
                         tiedosto += "Kuningatar";
                     }
                     tiedosto += ".png";

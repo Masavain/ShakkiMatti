@@ -1,5 +1,5 @@
 
-package shakkimatti.nappula;
+package shakkimatti.nappulat;
 
 import shakkimatti.logiikka.Pelilauta;
 import shakkimatti.nappulat.Kuningatar;
@@ -42,21 +42,21 @@ public class KuningatarTest {
     public void eiLiikuJosEiMahdollinenSiirto(){
         Kuningatar kuningatar = new Kuningatar(3,0,Pelaaja.MUSTA);
         kuningatar.liiku(8, 8, lauta.getLauta());
-        assertEquals(kuningatar.x+","+kuningatar.y, "3,0");
+        assertEquals(kuningatar.getX()+","+kuningatar.getY(), "3,0");
     }
     
     @Test
     public void liikkuuOikeaanKoordinaattiin(){
         Kuningatar kuningatar = new Kuningatar(3,0,Pelaaja.MUSTA);
         kuningatar.liiku(3, 5, lauta.getLauta());
-        assertEquals(kuningatar.x+","+kuningatar.y, "3,5");
+        assertEquals(kuningatar.getX()+","+kuningatar.getY(), "3,5");
     }
     
     @Test
     public void eiPaaseLaudaltaPois(){
         Kuningatar kuningatar = new Kuningatar(3,0,Pelaaja.MUSTA);
         kuningatar.liiku(0, -2, lauta.getLauta());
-        assertEquals(kuningatar.x+","+kuningatar.y, "3,0");
+        assertEquals(kuningatar.getX()+","+kuningatar.getY(), "3,0");
     }
     
     @Test

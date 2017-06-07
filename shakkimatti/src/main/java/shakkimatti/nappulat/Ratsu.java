@@ -3,17 +3,28 @@ package shakkimatti.nappulat;
 import java.util.*;
 import shakkimatti.logiikka.Pelaaja;
 
+/**
+ * Kuvaa shakkilaudan ratsu-nappulaa, jatkaa abstraktia Nappula-luokkaa
+ * 
+ */
 public class Ratsu extends Nappula {
 
     public Ratsu(int x, int y, Pelaaja color) {
         super(x, y, color);
-        this.merkki = "R";
+        setMerkki("R");
     }
 
+    /**
+     * tarkastaa ratsun mahdolliset siirrot (1 yhteen suuntaan, 2 toiseen)
+     *
+     * @param tilanne tämänhetkinen pelilaudan pelitilanne
+     * @return palauttaa listan mahdollisten siirtojen koordinaateista
+     */
     @Override
     public List<String> mahdollisetSiirrot(Nappula[][] tilanne) {
         List<String> siirrot = new ArrayList<String>();
-
+        int x = getX();
+        int y = getY();
         if (x + 1 < 8 && y + 2 < 8) {
             if (tilanne[x + 1][y + 2] == null) {
                 siirrot.add((x + 1) + "," + (y + 2));
@@ -57,68 +68,74 @@ public class Ratsu extends Nappula {
 
         return siirrot;
     }
-
+    
+    /**
+     * tarkastaa ratsun mahdolliset syönnit (1 yhteen suuntaan, 2 toiseen)
+     *
+     * @param tilanne tämänhetkinen pelilaudan pelitilanne
+     * @return palauttaa listan mahdollisten syöntien koordinaateista
+     */
     @Override
     public List<String> mahdollisetSyonnit(Nappula[][] tilanne) {
         List<String> syonnit = new ArrayList<String>();
-
+        int x = getX();
+        int y = getY();
         if (x + 1 < 8 && y + 2 < 8) {
             if (tilanne[x + 1][y + 2] != null
                     && tilanne[x + 1][y + 2].getPelaaja() != getPelaaja()
-                    && !tilanne[x + 1][y + 2].merkki.equals("K")) {
+                    && !tilanne[x + 1][y + 2].getMerkki().equals("K")) {
                 syonnit.add((x + 1) + "," + (y + 2));
             }
         }
         if (x + 2 < 8 && y + 1 < 8) {
             if (tilanne[x + 2][y + 1] != null
                     && tilanne[x + 2][y + 1].getPelaaja() != getPelaaja()
-                    && !tilanne[x + 2][y + 1].merkki.equals("K")) {
+                    && !tilanne[x + 2][y + 1].getMerkki().equals("K")) {
                 syonnit.add((x + 2) + "," + (y + 1));
             }
         }
         if (x - 1 >= 0 && y + 2 < 8) {
             if (tilanne[x - 1][y + 2] != null
                     && tilanne[x - 1][y + 2].getPelaaja() != getPelaaja()
-                    && !tilanne[x - 1][y + 2].merkki.equals("K")) {
+                    && !tilanne[x - 1][y + 2].getMerkki().equals("K")) {
                 syonnit.add((x - 1) + "," + (y + 2));
             }
         }
         if (x - 2 >= 0 && y + 1 < 8) {
             if (tilanne[x - 2][y + 1] != null
-                    && tilanne[x - 2][y + 1].getPelaaja() != getPelaaja() 
-                    && !tilanne[x - 2][y + 1].merkki.equals("K")) {
+                    && tilanne[x - 2][y + 1].getPelaaja() != getPelaaja()
+                    && !tilanne[x - 2][y + 1].getMerkki().equals("K")) {
                 syonnit.add((x - 2) + "," + (y + 1));
             }
         }
         if (x - 1 >= 0 && y - 2 >= 0) {
             if (tilanne[x - 1][y - 2] != null
-                    && tilanne[x - 1][y - 2].getPelaaja() != getPelaaja() 
-                    && !tilanne[x - 1][y - 2].merkki.equals("K")) {
+                    && tilanne[x - 1][y - 2].getPelaaja() != getPelaaja()
+                    && !tilanne[x - 1][y - 2].getMerkki().equals("K")) {
                 syonnit.add((x - 1) + "," + (y - 2));
             }
         }
         if (x - 2 >= 0 && y - 1 >= 0) {
             if (tilanne[x - 2][y - 1] != null
-                    && tilanne[x - 2][y - 1].getPelaaja() != getPelaaja() 
-                    && !tilanne[x - 2][y - 1].merkki.equals("K")) {
+                    && tilanne[x - 2][y - 1].getPelaaja() != getPelaaja()
+                    && !tilanne[x - 2][y - 1].getMerkki().equals("K")) {
                 syonnit.add((x - 2) + "," + (y - 1));
             }
         }
         if (x + 1 < 8 && y - 2 >= 0) {
             if (tilanne[x + 1][y - 2] != null
-                    && tilanne[x + 1][y - 2].getPelaaja() != getPelaaja() 
-                    && !tilanne[x + 1][y - 2].merkki.equals("K")) {
+                    && tilanne[x + 1][y - 2].getPelaaja() != getPelaaja()
+                    && !tilanne[x + 1][y - 2].getMerkki().equals("K")) {
                 syonnit.add((x + 1) + "," + (y - 2));
             }
         }
         if (x + 2 < 8 && y - 1 >= 0) {
             if (tilanne[x + 2][y - 1] != null
-                    && tilanne[x + 2][y - 1].getPelaaja() != getPelaaja() 
-                    && !tilanne[x + 2][y - 1].merkki.equals("K")) {
+                    && tilanne[x + 2][y - 1].getPelaaja() != getPelaaja()
+                    && !tilanne[x + 2][y - 1].getMerkki().equals("K")) {
                 syonnit.add((x + 2) + "," + (y - 1));
             }
         }
-
         return syonnit;
     }
 

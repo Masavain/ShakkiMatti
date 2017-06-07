@@ -3,16 +3,29 @@ package shakkimatti.nappulat;
 import java.util.*;
 import shakkimatti.logiikka.Pelaaja;
 
+/**
+ * Kuvaa shakkilaudan kuningatar-nappulaa, jatkaa abstraktia Nappula-luokkaa
+ *
+ */
 public class Kuningatar extends Nappula {
 
     public Kuningatar(int x, int y, Pelaaja color) {
         super(x, y, color);
-        this.merkki = "Q";
+        setMerkki("Q");
     }
 
+    /**
+     * tarkastaa kuningattaren mahdolliset siirrot (suorat viistoihin ja
+     * ylös/alas/ oikealle/vasemmalle)
+     *
+     * @param tilanne tämänhetkinen pelilaudan pelitilanne
+     * @return palauttaa listan mahdollisten siirtojen koordinaateista
+     */
     @Override
     public List<String> mahdollisetSiirrot(Nappula[][] tilanne) {
         List<String> siirrot = new ArrayList<String>();
+        int x = getX();
+        int y = getY();
         if (x < 8) {
             for (int i = x + 1; i < 8; i++) {
                 if (tilanne[i][y] == null) {
@@ -34,7 +47,6 @@ public class Kuningatar extends Nappula {
         }
         if (y < 8) {
             for (int i = y + 1; i < 8; i++) {
-
                 if (tilanne[x][i] == null) {
                     siirrot.add(x + "," + i);
                 } else {
@@ -110,17 +122,25 @@ public class Kuningatar extends Nappula {
         return siirrot;
     }
 
+    /**
+     * tarkastaa kuningattaren mahdolliset syönnit (suorat viistoihin ja
+     * ylös/alas/ oikealle/vasemmalle)
+     *
+     * @param tilanne tämänhetkinen pelilaudan pelitilanne
+     * @return palauttaa listan mahdollisten syöntien koordinaateista
+     */
     @Override
     public List<String> mahdollisetSyonnit(Nappula[][] tilanne) {
         List<String> syonnit = new ArrayList<String>();
+        int x = getX();
+        int y = getY();
         if (x < 8) {
             int yi = y + 1;
             for (int i = x + 1; i < 8; i++) {
-
                 if (yi == 7) {
                     break;
                 }
-                if (tilanne[i][yi] != null && tilanne[i][yi].getPelaaja() != getPelaaja() && !tilanne[i][yi].merkki.equals("K")) {
+                if (checkSyotava(i, yi, tilanne)) {
                     syonnit.add((i) + "," + (yi));
                 }
                 yi++;
@@ -132,7 +152,7 @@ public class Kuningatar extends Nappula {
                 if (yi == -1) {
                     break;
                 }
-                if (tilanne[i][yi] != null && tilanne[i][yi].getPelaaja() != getPelaaja() && !tilanne[i][yi].merkki.equals("K")) {
+                if (checkSyotava(i, yi, tilanne)) {
                     syonnit.add((i) + "," + (yi));
                 }
                 yi--;
@@ -144,7 +164,7 @@ public class Kuningatar extends Nappula {
                 if (yi == 7) {
                     break;
                 }
-                if (tilanne[i][yi] != null && tilanne[i][yi].getPelaaja() != getPelaaja() && !tilanne[i][yi].merkki.equals("K")) {
+                if (checkSyotava(i, yi, tilanne)) {
                     syonnit.add((i) + "," + (yi));
                 }
                 yi++;
@@ -156,44 +176,51 @@ public class Kuningatar extends Nappula {
                 if (yi == -1) {
                     break;
                 }
-                if (tilanne[i][yi] != null && tilanne[i][yi].getPelaaja() != getPelaaja() && !tilanne[i][yi].merkki.equals("K")) {
+                if (checkSyotava(i, yi, tilanne)) {
                     syonnit.add((i) + "," + (yi));
                 }
                 yi--;
             }
         }
-        if (this.x < 8) {
-            for (int i = this.x + 1; i < 8; i++) {
-                if (tilanne[i][this.y] != null && tilanne[i][this.y].getPelaaja() != getPelaaja() && !tilanne[i][this.y].merkki.equals("K")) {
-                    syonnit.add(i + "," + this.y);
+        if (x < 8) {
+            for (int i = x + 1; i < 8; i++) {
+                if (checkSyotava(i, y, tilanne)) {
+                    syonnit.add(i + "," + y);
                     break;
                 }
             }
         }
-        if (this.x > 0) {
-            for (int i = this.x - 1; i >= 0; i--) {
-                if (tilanne[i][this.y] != null && tilanne[i][this.y].getPelaaja() != getPelaaja() && !tilanne[i][this.y].merkki.equals("K")) {
-                    syonnit.add(i + "," + this.y);
+        if (x > 0) {
+            for (int i = x - 1; i >= 0; i--) {
+                if (checkSyotava(i, y, tilanne)) {
+                    syonnit.add(i + "," + y);
                     break;
                 }
             }
         }
-        if (this.y < 8) {
-            for (int i = this.y + 1; i < 8; i++) {
-                if (tilanne[this.x][i] != null && tilanne[this.x][i].getPelaaja() != getPelaaja() && !tilanne[this.x][i].merkki.equals("K")) {
-                    syonnit.add(this.x + "," + i);
+        if (y < 8) {
+            for (int i = y + 1; i < 8; i++) {
+                if (checkSyotava(x, i, tilanne)) {
+                    syonnit.add(x + "," + i);
                     break;
                 }
             }
         }
-        if (this.y > 0) {
-            for (int i = this.y - 1; i >= 0; i--) {
-                if (tilanne[this.x][i] != null && tilanne[this.x][i].getPelaaja() != getPelaaja() && !tilanne[this.x][i].merkki.equals("K")) {
-                    syonnit.add(this.x + "," + i);
+        if (y > 0) {
+            for (int i = y - 1; i >= 0; i--) {
+                if (checkSyotava(x, i, tilanne)) {
+                    syonnit.add(x + "," + i);
                     break;
                 }
             }
         }
         return syonnit;
+    }
+
+    public boolean checkSyotava(int x, int y, Nappula[][] tilanne) {
+        if (tilanne[x][y] != null && tilanne[x][y].getPelaaja() != getPelaaja() && !tilanne[x][y].getMerkki().equals("K")) {
+            return true;
+        }
+        return false;
     }
 }

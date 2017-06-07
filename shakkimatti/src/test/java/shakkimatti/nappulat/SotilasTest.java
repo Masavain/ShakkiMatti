@@ -1,4 +1,4 @@
-package shakkimatti.nappula;
+package shakkimatti.nappulat;
 
 import shakkimatti.logiikka.Pelilauta;
 import shakkimatti.nappulat.Sotilas;
@@ -50,7 +50,7 @@ public class SotilasTest {
         // testaa, että liikutettu on liikkumisen jälkeen true
         Sotilas sotilas = new Sotilas(0, 1, Pelaaja.MUSTA, false);
         sotilas.liiku(0, 2, lauta.getLauta());
-        assertEquals(sotilas.x + "," + sotilas.y, "0,2");
+        assertEquals(sotilas.getX() + "," + sotilas.getY(), "0,2");
     }
 
     @Test
@@ -82,21 +82,21 @@ public class SotilasTest {
     public void eiVoiLiikkuaSivulleMusta() {
         Sotilas sotilas = new Sotilas(0, 1, Pelaaja.MUSTA, false);
         sotilas.liiku(1, 1, lauta.getLauta());
-        assertEquals(0, sotilas.x);
+        assertEquals(0, sotilas.getX());
     }
 
     @Test
     public void eiVoiLiikkuaSivullePoisLaudaltaMusta() {
         Sotilas sotilas = new Sotilas(0, 1, Pelaaja.MUSTA, false);
         sotilas.liiku(-1, 1, lauta.getLauta());
-        assertEquals(0, sotilas.x);
+        assertEquals(0, sotilas.getX());
     }
 
     @Test
     public void liikkuuOikeaanKoordinaattiinValk() {
         Sotilas sotilas = new Sotilas(7, 6, Pelaaja.VALKOINEN, false);
         sotilas.liiku(7, 5, lauta.getLauta());
-        assertEquals(sotilas.x + "," + sotilas.y, "7,5");
+        assertEquals(sotilas.getX() + "," + sotilas.getY(), "7,5");
     }
 
     @Test
@@ -128,14 +128,14 @@ public class SotilasTest {
     public void eiVoiLiikkuaSivulleValk() {
         Sotilas sotilas = new Sotilas(0, 7, Pelaaja.VALKOINEN, false);
         sotilas.liiku(1, 1, lauta.getLauta());
-        assertEquals(0, sotilas.x);
+        assertEquals(0, sotilas.getX());
     }
 
     @Test
     public void eiVoiLiikkuaSivullePoisLaudaltaValk() {
         Sotilas sotilas = new Sotilas(0, 7, Pelaaja.VALKOINEN, false);
         sotilas.liiku(-1, 7, lauta.getLauta());
-        assertEquals(0, sotilas.x);
+        assertEquals(0, sotilas.getX());
     }
 
     @Test

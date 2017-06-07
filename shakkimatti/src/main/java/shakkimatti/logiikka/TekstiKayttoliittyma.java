@@ -16,11 +16,11 @@ public class TekstiKayttoliittyma {
     }
 
     public void kaynnista() {
-        
+
         System.out.println(pelilauta.toString());
 
         Pelaaja vuoro = Pelaaja.VALKOINEN;
-        
+
         while (true) {
             // valkoisen siirto
             if (vuoro == Pelaaja.VALKOINEN) {
@@ -39,7 +39,7 @@ public class TekstiKayttoliittyma {
             }
             System.out.println(pelilauta.toString());
 
-            if(vuoro == Pelaaja.MUSTA) {
+            if (vuoro == Pelaaja.MUSTA) {
                 vuoro = Pelaaja.VALKOINEN;
             } else {
                 vuoro = Pelaaja.MUSTA;
