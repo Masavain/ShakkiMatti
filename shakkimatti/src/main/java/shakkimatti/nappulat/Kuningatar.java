@@ -26,6 +26,7 @@ public class Kuningatar extends Nappula {
         List<String> siirrot = new ArrayList<String>();
         int x = getX();
         int y = getY();
+
         if (x < 8) {
             for (int i = x + 1; i < 8; i++) {
                 if (tilanne[i][y] == null) {
@@ -37,7 +38,6 @@ public class Kuningatar extends Nappula {
         }
         if (x > 0) {
             for (int i = x - 1; i >= 0; i--) {
-
                 if (tilanne[i][y] == null) {
                     siirrot.add(i + "," + y);
                 } else {

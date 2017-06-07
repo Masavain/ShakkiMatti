@@ -77,7 +77,7 @@ public class Kayttoliittyma extends Application {
                         } else if (lauta.getLauta()[x][y] != null && nappula == null) {
                             System.out.println(lauta.getLauta()[x][y] + "," + lauta.getLauta()[x][y].getPelaaja() + " valittu ");
                             nappula = lauta.getLauta()[x][y];
-
+                            nappula.mahdollisetSiirrot(lauta.getLauta());
                         }
 
                         if (stack.getChildren().size() == 2) {
