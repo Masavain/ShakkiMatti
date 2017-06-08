@@ -25,7 +25,7 @@ under the License.
     <language>en-us</language>
     <copyright>&#169;2017</copyright>
     <item>
-      <title>File: 10,
+      <title>File: 12,
              Errors: 0,
              Warnings: 0,
              Infos: 0
@@ -44,20 +44,6 @@ under the License.
             </tr>
           </thead>
           <tbody>
-                          <tr>
-                <td>
-                  <a href="${project.url}/checkstyle.html#shakkimatti.Main.java">shakkimatti/Main.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
                           <tr>
                 <td>
                   <a href="${project.url}/checkstyle.html#shakkimatti.nappulat.Nappula.java">shakkimatti/nappulat/Nappula.java</a>
@@ -130,7 +116,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="${project.url}/checkstyle.html#shakkimatti.logiikka.Peliapu.java">shakkimatti/logiikka/Peliapu.java</a>
+                  <a href="${project.url}/checkstyle.html#shakkimatti.gui.Kayttoliittyma.java">shakkimatti/gui/Kayttoliittyma.java</a>
                 </td>
                 <td>
                   0
@@ -145,6 +131,34 @@ under the License.
                           <tr>
                 <td>
                   <a href="${project.url}/checkstyle.html#shakkimatti.nappulat.Lahetti.java">shakkimatti/nappulat/Lahetti.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#shakkimatti.gui.TekstiKayttoliittyma.java">shakkimatti/gui/TekstiKayttoliittyma.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#shakkimatti.logiikka.Paalogiikka.java">shakkimatti/logiikka/Paalogiikka.java</a>
                 </td>
                 <td>
                   0
@@ -173,6 +187,20 @@ under the License.
                           <tr>
                 <td>
                   <a href="${project.url}/checkstyle.html#shakkimatti.nappulat.Sotilas.java">shakkimatti/nappulat/Sotilas.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#shakkimatti.logiikka.Pelaaja.java">shakkimatti/logiikka/Pelaaja.java</a>
                 </td>
                 <td>
                   0

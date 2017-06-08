@@ -65,7 +65,7 @@ public class LahettiTest {
         lauta.asetaNappula(lahetti, 2, 0);
         lauta.asetaNappula(solttu, 3, 1);
         
-        assertTrue(lahetti.mahdollisetSyonnit(lauta.getLauta()).contains("3,1"));
+        assertTrue(lahetti.mahdollisetSiirrot(lauta.getLauta()).contains("3,1"));
     }
     
     @Test
@@ -75,16 +75,7 @@ public class LahettiTest {
         lauta.asetaNappula(lahetti, 2, 0);
         lauta.asetaNappula(solttu, 3, 1);
         
-        assertFalse(lahetti.mahdollisetSyonnit(lauta.getLauta()).contains("3,1"));
+        assertFalse(lahetti.mahdollisetSiirrot(lauta.getLauta()).contains("3,1"));
     }
     
-    @Test
-    public void kuningastaEiVoiSyoda(){
-        Lahetti lahetti = new Lahetti(2,0,Pelaaja.MUSTA);
-        Kuningas kunkku = new Kuningas(2,1,Pelaaja.VALKOINEN);
-        lauta.asetaNappula(lahetti, 2, 0);
-        lauta.asetaNappula(kunkku, 3, 1);
-        
-        assertFalse(lahetti.mahdollisetSyonnit(lauta.getLauta()).contains("3,1"));
-    }
 }

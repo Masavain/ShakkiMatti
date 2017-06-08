@@ -12,20 +12,21 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.StrokeType;
+import shakkimatti.logiikka.Paalogiikka;
 import shakkimatti.logiikka.Pelaaja;
 import shakkimatti.nappulat.Nappula;
 
 public class Kayttoliittyma extends Application {
 
     private GridPane root = new GridPane();
-    private Pelilauta lauta;
     private Nappula nappula;
+    private Paalogiikka peli = new Paalogiikka();
 
     @Override
     public void start(Stage primaryStage) {
         nappula = null;
-        lauta = new Pelilauta();
-        lauta.alustus();
+        
+        Paalogiikka peli = new Paalogiikka();
         varitaRuudukko();
         kuvatGridiin();
         Scene scene = new Scene(root, 500, 500);
@@ -67,17 +68,17 @@ public class Kayttoliittyma extends Application {
                         int y = GridPane.getRowIndex(stack);
                         int x = GridPane.getColumnIndex(stack);
 
-                        if (nappula != null && lauta.getLauta()[x][y] == null) {
-                            if (lauta.siirto(nappula.getX(), nappula.getY(), x, y)) {
-                                System.out.println(lauta.getLauta()[x][y] + "," + lauta.getLauta()[x][y].getPelaaja() + "liikutettu");
-                                System.out.println(lauta.toString());
+                        if (nappula != null && peli.getPelilauta().getLauta()[x][y] == null) {
+                            if (peli.getPelilauta().siirto(nappula.getX(), nappula.getY(), x, y)) {
+                                System.out.println(peli.getPelilauta().getLauta()[x][y] + "," + peli.getPelilauta().getLauta()[x][y].getPelaaja() + "liikutettu");
+                                System.out.println(peli.getPelilauta().toString());
 
                             }
                             nappula = null;
-                        } else if (lauta.getLauta()[x][y] != null && nappula == null) {
-                            System.out.println(lauta.getLauta()[x][y] + "," + lauta.getLauta()[x][y].getPelaaja() + " valittu ");
-                            nappula = lauta.getLauta()[x][y];
-                            nappula.mahdollisetSiirrot(lauta.getLauta());
+                        } else if (peli.getPelilauta().getLauta()[x][y] != null && nappula == null) {
+                            System.out.println(peli.getPelilauta().getLauta()[x][y] + "," + peli.getPelilauta().getLauta()[x][y].getPelaaja() + " valittu ");
+                            nappula = peli.getPelilauta().getLauta()[x][y];
+                            nappula.mahdollisetSiirrot(peli.getPelilauta().getLauta());
                         }
 
                         if (stack.getChildren().size() == 2) {
@@ -109,29 +110,29 @@ public class Kayttoliittyma extends Application {
 
                 StackPane stack = etsiStack(j, i);
 
-                if (lauta.getLauta()[j][i] != null) {
+                if (peli.getPelilauta().getLauta()[j][i] != null) {
                     String tiedosto = "";
-                    if (lauta.getLauta()[j][i].getPelaaja() == Pelaaja.VALKOINEN) {
+                    if (peli.getPelilauta().getLauta()[j][i].getPelaaja() == Pelaaja.VALKOINEN) {
                         tiedosto += "valko";
                     } else {
                         tiedosto += "musta";
                     }
-                    if (lauta.getLauta()[j][i].getMerkki().equals("S")) {
+                    if (peli.getPelilauta().getLauta()[j][i].getMerkki().equals("S")) {
                         tiedosto += "Sotilas";
                     }
-                    if (lauta.getLauta()[j][i].getMerkki().equals("T")) {
+                    if (peli.getPelilauta().getLauta()[j][i].getMerkki().equals("T")) {
                         tiedosto += "Torni";
                     }
-                    if (lauta.getLauta()[j][i].getMerkki().equals("R")) {
+                    if (peli.getPelilauta().getLauta()[j][i].getMerkki().equals("R")) {
                         tiedosto += "Ratsu";
                     }
-                    if (lauta.getLauta()[j][i].getMerkki().equals("L")) {
+                    if (peli.getPelilauta().getLauta()[j][i].getMerkki().equals("L")) {
                         tiedosto += "Lahetti";
                     }
-                    if (lauta.getLauta()[j][i].getMerkki().equals("K")) {
+                    if (peli.getPelilauta().getLauta()[j][i].getMerkki().equals("K")) {
                         tiedosto += "Kunkku";
                     }
-                    if (lauta.getLauta()[j][i].getMerkki().equals("Q")) {
+                    if (peli.getPelilauta().getLauta()[j][i].getMerkki().equals("Q")) {
                         tiedosto += "Kuningatar";
                     }
                     tiedosto += ".png";
@@ -139,7 +140,7 @@ public class Kayttoliittyma extends Application {
                     ImageView iv = new ImageView(new Image(tiedosto));
                     stack.getChildren().add(iv);
 
-                } else if (lauta.getLauta()[j][i] == null) {
+                } else if (peli.getPelilauta().getLauta()[j][i] == null) {
                     if (stack.getChildren().size() > 1) {
                         ImageView iv = (ImageView) stack.getChildren().get(1);
                         stack.getChildren().remove(iv);

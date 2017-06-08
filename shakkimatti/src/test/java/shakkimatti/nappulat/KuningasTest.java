@@ -2,13 +2,11 @@
 package shakkimatti.nappulat;
 
 import shakkimatti.logiikka.Pelilauta;
-import shakkimatti.nappulat.Kuningas;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import javafx.scene.layout.*;
 
 import static org.junit.Assert.*;
 import shakkimatti.logiikka.Pelaaja;
@@ -66,7 +64,27 @@ public class KuningasTest {
         lauta.asetaNappula(kingi, 4, 0);
         lauta.asetaNappula(solttu, 4, 1);
         
-        assertTrue(kingi.mahdollisetSyonnit(lauta.getLauta()).contains("4,1"));
+        assertTrue(kingi.mahdollisetSiirrot(lauta.getLauta()).contains("4,1"));
+    }
+    
+    @Test
+    public void syotavaListalla2(){
+        Kuningas kingi = new Kuningas(4,0,Pelaaja.MUSTA);
+        Sotilas solttu = new Sotilas(3,1,Pelaaja.VALKOINEN,false);
+        lauta.asetaNappula(kingi, 4, 0);
+        lauta.asetaNappula(solttu, 3, 1);
+        
+        assertTrue(kingi.mahdollisetSiirrot(lauta.getLauta()).contains("3,1"));
+    }
+    
+    @Test
+    public void syotavaListalla3(){
+        Kuningas kingi = new Kuningas(4,0,Pelaaja.MUSTA);
+        Sotilas solttu = new Sotilas(3,1,Pelaaja.VALKOINEN,false);
+        lauta.asetaNappula(kingi, 4, 0);
+        lauta.asetaNappula(solttu, 3, 0);
+        
+        assertTrue(kingi.mahdollisetSiirrot(lauta.getLauta()).contains("3,0"));
     }
     
     @Test
@@ -76,16 +94,7 @@ public class KuningasTest {
         lauta.asetaNappula(kingi, 4, 0);
         lauta.asetaNappula(solttu, 4, 1);
         
-        assertFalse(kingi.mahdollisetSyonnit(lauta.getLauta()).contains("4,1"));
+        assertFalse(kingi.mahdollisetSiirrot(lauta.getLauta()).contains("4,1"));
     }
     
-    @Test
-    public void kuningastaEiVoiSyoda(){
-        Kuningas kingi = new Kuningas(4,0,Pelaaja.MUSTA);
-        Kuningas kunkku = new Kuningas(4,1,Pelaaja.VALKOINEN);
-        lauta.asetaNappula(kingi, 4, 0);
-        lauta.asetaNappula(kunkku, 4, 1);
-        
-        assertFalse(kingi.mahdollisetSyonnit(lauta.getLauta()).contains("4,1"));
-    }
 }

@@ -1,8 +1,10 @@
-package shakkimatti.logiikka;
+package shakkimatti.gui;
 
 import shakkimatti.nappulat.Nappula;
 import java.util.*;
 import javafx.scene.layout.*;
+import shakkimatti.logiikka.Pelaaja;
+import shakkimatti.logiikka.Pelilauta;
 
 public class TekstiKayttoliittyma {
 
@@ -16,7 +18,7 @@ public class TekstiKayttoliittyma {
     }
 
     public void kaynnista() {
-
+        
         System.out.println(pelilauta.toString());
 
         Pelaaja vuoro = Pelaaja.VALKOINEN;

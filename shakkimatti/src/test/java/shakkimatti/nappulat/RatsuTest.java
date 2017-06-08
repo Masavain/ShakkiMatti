@@ -89,21 +89,9 @@ public class RatsuTest {
         List<String> oikearivi = Arrays.asList(koordit);
         
                 
-        assertEquals(ratsu.mahdollisetSyonnit(lauta.getLauta()), oikearivi);
+        assertEquals(ratsu.mahdollisetSiirrot(lauta.getLauta()), oikearivi);
     }
     
-    @Test
-    public void mahdSyonnit2(){
-        Ratsu ratsu = new Ratsu(4,4,Pelaaja.MUSTA);
-        lauta.asetaNappula(ratsu, 4, 4);
-        
-        
-        String[] koordit  = new String[]{};
-        List<String> oikearivi = Arrays.asList(koordit);
-        
-                
-        assertEquals(ratsu.mahdollisetSyonnit(lauta.getLauta()), oikearivi);
-    }
     
     @Test
     public void eiPaaseLaudaltaPois(){
@@ -119,7 +107,7 @@ public class RatsuTest {
         lauta.asetaNappula(ratsu, 1, 0);
         lauta.asetaNappula(solttu, 3, 1);
         
-        assertTrue(ratsu.mahdollisetSyonnit(lauta.getLauta()).contains("3,1"));
+        assertTrue(ratsu.mahdollisetSiirrot(lauta.getLauta()).contains("3,1"));
     }
     
     @Test
@@ -129,16 +117,7 @@ public class RatsuTest {
         lauta.asetaNappula(ratsu, 1, 0);
         lauta.asetaNappula(solttu, 3, 1);
         
-        assertFalse(ratsu.mahdollisetSyonnit(lauta.getLauta()).contains("3,1"));
+        assertFalse(ratsu.mahdollisetSiirrot(lauta.getLauta()).contains("3,1"));
     }
     
-    @Test
-    public void kuningastaEiVoiSyoda(){
-        Ratsu ratsu = new Ratsu(1,0,Pelaaja.MUSTA);
-        Kuningas kunkku = new Kuningas(3,1,Pelaaja.VALKOINEN);
-        lauta.asetaNappula(ratsu, 1, 0);
-        lauta.asetaNappula(kunkku, 3, 1);
-        
-        assertFalse(ratsu.mahdollisetSyonnit(lauta.getLauta()).contains("3,1"));
-    }
 }

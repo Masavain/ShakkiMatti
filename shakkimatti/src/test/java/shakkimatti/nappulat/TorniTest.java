@@ -90,7 +90,7 @@ public class TorniTest {
         String[] koordit = new String[]{"6,5", "4,5", "5,6", "5,4"};
         List<String> oikearivi = Arrays.asList(koordit);
 
-        assertEquals(torni.mahdollisetSyonnit(lauta.getLauta()), oikearivi);
+        assertEquals(torni.mahdollisetSiirrot(lauta.getLauta()), oikearivi);
 
     }
 
@@ -122,7 +122,7 @@ public class TorniTest {
         lauta.asetaNappula(torni, 1, 0);
         lauta.asetaNappula(solttu, 3, 0);
 
-        assertTrue(torni.mahdollisetSyonnit(lauta.getLauta()).contains("3,0"));
+        assertTrue(torni.mahdollisetSiirrot(lauta.getLauta()).contains("3,0"));
     }
 
     @Test
@@ -132,16 +132,7 @@ public class TorniTest {
         lauta.asetaNappula(torni, 1, 0);
         lauta.asetaNappula(solttu, 3, 0);
 
-        assertFalse(torni.mahdollisetSyonnit(lauta.getLauta()).contains("3,0"));
+        assertFalse(torni.mahdollisetSiirrot(lauta.getLauta()).contains("3,0"));
     }
 
-    @Test
-    public void kuningastaEiVoiSyoda() {
-        Torni torni = new Torni(1, 0, Pelaaja.MUSTA);
-        Kuningas kunkku = new Kuningas(3, 0, Pelaaja.VALKOINEN);
-        lauta.asetaNappula(torni, 1, 0);
-        lauta.asetaNappula(kunkku, 3, 0);
-
-        assertFalse(torni.mahdollisetSyonnit(lauta.getLauta()).contains("3,0"));
-    }
 }

@@ -13,8 +13,21 @@ public class Paalogiikka {
 
     public Paalogiikka() {
         this.pelilauta = new Pelilauta();
+        pelilauta.alustus();
         this.vuoro = 1;
     }
+    
+    
 
 //    pelin voitto?!
+
+    public Pelilauta getPelilauta() {
+        return pelilauta;
+    }
+
+
+    public int getVuoro() {
+        return vuoro;
+    }
+
 }

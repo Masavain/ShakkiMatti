@@ -16,8 +16,8 @@ public class Torni extends Nappula {
     }
 
     /**
-     * tarkastaa tornin mahdolliset siirrot (suorat ylös, alas
-     * oikeaan ja vasemmalle).
+     * tarkastaa tornin mahdolliset siirrot (suorat ylös, alas oikeaan ja
+     * vasemmalle).
      *
      * @param tilanne tämänhetkinen pelilaudan pelitilanne
      * @return palauttaa listan mahdollisten siirtojen koordinaateista
@@ -31,7 +31,8 @@ public class Torni extends Nappula {
             for (int i = x + 1; i < 8; i++) {
                 if (tilanne[i][y] == null) {
                     siirrot.add(i + "," + y);
-                } else {
+                } else if (checkSyotava(i, y, tilanne)) {
+                    siirrot.add(i + "," + y);
                     break;
                 }
             }
@@ -42,7 +43,8 @@ public class Torni extends Nappula {
 
                 if (tilanne[i][y] == null) {
                     siirrot.add(i + "," + y);
-                } else {
+                } else if (checkSyotava(i, y, tilanne)) {
+                    siirrot.add(i + "," + y);
                     break;
                 }
             }
@@ -53,7 +55,8 @@ public class Torni extends Nappula {
 
                 if (tilanne[x][i] == null) {
                     siirrot.add(x + "," + i);
-                } else {
+                } else if (checkSyotava(x, i, tilanne)) {
+                    siirrot.add(x + "," + i);
                     break;
                 }
             }
@@ -62,7 +65,8 @@ public class Torni extends Nappula {
             for (int i = y - 1; i >= 0; i--) {
                 if (tilanne[x][i] == null) {
                     siirrot.add(x + "," + i);
-                } else {
+                } else if (checkSyotava(x, i, tilanne)) {
+                    siirrot.add(x + "," + i);
                     break;
                 }
             }
@@ -70,65 +74,4 @@ public class Torni extends Nappula {
 
         return siirrot;
     }
-
-    /**
-     * tarkastaa tornin mahdolliset syönnit (suorat ylös, alas
-     * oikeaan ja vasemmalle).
-     *
-     * @param tilanne tämänhetkinen pelilaudan pelitilanne
-     * @return palauttaa listan mahdollisten syöntien koordinaateista
-     */
-    @Override
-    public List<String> mahdollisetSyonnit(Nappula[][] tilanne) {
-        List<String> syonnit = new ArrayList<String>();
-        int x = getX();
-        int y = getY();
-        if (x < 7 && x >= 0) {
-            for (int i = x + 1; i < 8; i++) {
-                if (tilanne[i][y] != null
-                        && tilanne[i][y].getPelaaja() != getPelaaja()
-                        && !tilanne[i][y].getMerkki().equals("K")) {
-                    syonnit.add(i + "," + y);
-                    break;
-                }
-            }
-        }
-        if (x <= 7 && x > 0) {
-            for (int i = x - 1; i >= 0; i--) {
-
-                if (tilanne[i][y] != null
-                        && tilanne[i][y].getPelaaja() != getPelaaja()
-                        && !tilanne[i][y].getMerkki().equals("K")) {
-                    syonnit.add(i + "," + y);
-                    break;
-                }
-            }
-        }
-
-        if (y < 7 && y >= 0) {
-            for (int i = y + 1; i < 8; i++) {
-
-                if (tilanne[x][i] != null
-                        && tilanne[x][i].getPelaaja() != getPelaaja()
-                        && !tilanne[x][i].getMerkki().equals("K")) {
-                    syonnit.add(x + "," + i);
-                    break;
-                }
-
-            }
-        }
-        if (y <= 7 && y > 0) {
-            for (int i = y - 1; i >= 0; i--) {
-                if (tilanne[x][i] != null
-                        && tilanne[x][i].getPelaaja() != getPelaaja()
-                        && !tilanne[x][i].getMerkki().equals("K")) {
-                    syonnit.add(x + "," + i);
-                    break;
-                }
-            }
-        }
-
-        return syonnit;
-    }
-
 }

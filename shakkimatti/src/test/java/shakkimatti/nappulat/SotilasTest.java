@@ -145,7 +145,7 @@ public class SotilasTest {
         lauta.asetaNappula(musta, 0, 0);
         lauta.asetaNappula(valkoinen, 1, 1);
 
-        assertTrue(musta.mahdollisetSyonnit(lauta.getLauta()).contains("1,1"));
+        assertTrue(musta.mahdollisetSiirrot(lauta.getLauta()).contains("1,1"));
     }
 
     @Test
@@ -154,7 +154,7 @@ public class SotilasTest {
         Sotilas valkoinen = new Sotilas(5, 7, Pelaaja.VALKOINEN, false);
         lauta.asetaNappula(musta, 6, 6);
         lauta.asetaNappula(valkoinen, 5, 7);
-        assertTrue(musta.mahdollisetSyonnit(lauta.getLauta()).contains("5,7"));
+        assertTrue(musta.mahdollisetSiirrot(lauta.getLauta()).contains("5,7"));
     }
 
     @Test
@@ -164,7 +164,7 @@ public class SotilasTest {
         lauta.asetaNappula(musta, 0, 0);
         lauta.asetaNappula(valkoinen, 1, 1);
 
-        assertTrue(valkoinen.mahdollisetSyonnit(lauta.getLauta()).contains("0,0"));
+        assertTrue(valkoinen.mahdollisetSiirrot(lauta.getLauta()).contains("0,0"));
     }
 
     @Test
@@ -174,7 +174,7 @@ public class SotilasTest {
         lauta.asetaNappula(mustas, 2, 0);
         lauta.asetaNappula(valkoinen, 1, 1);
 
-        assertTrue(valkoinen.mahdollisetSyonnit(lauta.getLauta()).contains("2,0"));
+        assertTrue(valkoinen.mahdollisetSiirrot(lauta.getLauta()).contains("2,0"));
     }
     @Test
     public void eiVoiSyodaOmanVaristaMusta() {
@@ -183,7 +183,7 @@ public class SotilasTest {
         lauta.asetaNappula(eka, 0, 0);
         lauta.asetaNappula(toka, 1, 1);
 
-        assertFalse(eka.mahdollisetSyonnit(lauta.getLauta()).contains("1,1"));
+        assertFalse(eka.mahdollisetSiirrot(lauta.getLauta()).contains("1,1"));
     }
 
     @Test
@@ -193,7 +193,7 @@ public class SotilasTest {
         lauta.asetaNappula(eka, 0, 0);
         lauta.asetaNappula(toka, 1, 1);
 
-        assertFalse(toka.mahdollisetSyonnit(lauta.getLauta()).contains("0,0"));
+        assertFalse(toka.mahdollisetSiirrot(lauta.getLauta()).contains("0,0"));
     }
 
 }

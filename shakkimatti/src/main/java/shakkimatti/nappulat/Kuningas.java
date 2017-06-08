@@ -16,8 +16,9 @@ public class Kuningas extends Nappula {
     }
 
     /**
-     *  tarkastaa kuninkaan mahdolliset siirrot (ylä-/alaviistot sekä ylös, alas
-     *  oikea ja vasen).
+     * tarkastaa kuninkaan mahdolliset siirrot (ylä-/alaviistot sekä ylös, alas
+     * oikea ja vasen).
+     *
      * @param tilanne tämänhetkinen pelilaudan pelitilanne
      * @return palauttaa listan mahdollisten siirtojen koordinaateista
      */
@@ -29,20 +30,28 @@ public class Kuningas extends Nappula {
         if (getY() > 0) {
             if (tilanne[x][y - 1] == null) {
                 siirrot.add(x + "," + (y - 1));
+            } else if (checkSyotava(x, y - 1, tilanne)) {
+                siirrot.add(x + "," + (y - 1));
             }
         }
         if (getY() < 8) {
             if (tilanne[x][y + 1] == null) {
+                siirrot.add(x + "," + (y + 1));
+            } else if (checkSyotava(x, y + 1, tilanne)) {
                 siirrot.add(x + "," + (y + 1));
             }
         }
         if (x < 8) {
             if (tilanne[x + 1][y] == null) {
                 siirrot.add((x + 1) + "," + y);
+            } else if (checkSyotava(x + 1, y, tilanne)) {
+                siirrot.add((x + 1) + "," + y);
             }
         }
         if (x > 0) {
             if (tilanne[x - 1][y] == null) {
+                siirrot.add((x - 1) + "," + y);
+            } else if (checkSyotava(x - 1, y, tilanne)) {
                 siirrot.add((x - 1) + "," + y);
             }
         }
@@ -50,95 +59,31 @@ public class Kuningas extends Nappula {
         if (x > 0 && y > 0) {
             if (tilanne[x - 1][y - 1] == null) {
                 siirrot.add((x - 1) + "," + (y - 1));
+            } else if (checkSyotava(x - 1, y - 1, tilanne)) {
+                siirrot.add((x - 1) + "," + (y - 1));
             }
         }
         if (x > 0 && y < 8) {
             if (tilanne[x - 1][y + 1] == null) {
+                siirrot.add((x - 1) + "," + (y + 1));
+            } else if (checkSyotava(x - 1, y + 1, tilanne)) {
                 siirrot.add((x - 1) + "," + (y + 1));
             }
         }
         if (x < 8 && y < 8) {
             if (tilanne[x + 1][y + 1] == null) {
                 siirrot.add((x + 1) + "," + (y + 1));
+            } else if (checkSyotava(x + 1, y + 1, tilanne)) {
+                siirrot.add((x + 1) + "," + (y + 1));
             }
         }
         if (x < 8 && y > 0) {
             if (tilanne[x + 1][y - 1] == null) {
                 siirrot.add((x + 1) + "," + (y - 1));
+            } else if (checkSyotava(x + 1, y - 1, tilanne)) {
+                siirrot.add((x + 1) + "," + (y - 1));
             }
         }
         return siirrot;
     }
-
-    /**
-     *  tarkastaa kuninkaan mahdolliset syönnit (ylä-/alaviistot sekä ylös, alas
-     *  oikea ja vasen).
-     * @param tilanne tämänhetkinen pelilaudan pelitilanne
-     * @return palauttaa listan mahdollisten syöntien koordinaateista
-     */
-    @Override
-    public List<String> mahdollisetSyonnit(Nappula[][] tilanne) {
-        List<String> syonnit = new ArrayList<String>();
-        int x = getX();
-        int y = getY();
-        if (y > 0) {
-            if (tilanne[x][y - 1] != null
-                    && tilanne[x][y - 1].getPelaaja() != getPelaaja()
-                    && !tilanne[x][y - 1].getMerkki().equals("K")) {
-                syonnit.add(x + "," + (y - 1));
-            }
-        }
-        if (y < 8) {
-            if (tilanne[x][y + 1] != null
-                    && tilanne[x][y + 1].getPelaaja() != getPelaaja()
-                    && !tilanne[x][y + 1].getMerkki().equals("K")) {
-                syonnit.add(x + "," + (y + 1));
-            }
-        }
-        if (x < 8) {
-            if (tilanne[x + 1][y] != null
-                    && tilanne[x + 1][y].getPelaaja() != getPelaaja()
-                    && !tilanne[x + 1][y].getMerkki().equals("K")) {
-                syonnit.add((x + 1) + "," + y);
-            }
-        }
-        if (x > 0) {
-            if (tilanne[x - 1][y] != null
-                    && tilanne[x - 1][y].getPelaaja() != getPelaaja()
-                    && !tilanne[x - 1][y].getMerkki().equals("K")) {
-                syonnit.add((x - 1) + "," + y);
-            }
-        }
-
-        if (x > 0 && y > 0) {
-            if (tilanne[x - 1][y - 1] != null
-                    && tilanne[x - 1][y - 1].getPelaaja() != getPelaaja()
-                    && !tilanne[x - 1][y - 1].getMerkki().equals("K")) {
-                syonnit.add((x - 1) + "," + (y - 1));
-            }
-        }
-        if (x > 0 && y < 8) {
-            if (tilanne[x - 1][y + 1] != null
-                    && tilanne[x - 1][y + 1].getPelaaja() != getPelaaja()
-                    && !tilanne[x - 1][y + 1].getMerkki().equals("K")) {
-                syonnit.add((x - 1) + "," + (y + 1));
-            }
-        }
-        if (x < 8 && y < 8) {
-            if (tilanne[x + 1][y + 1] != null
-                    && tilanne[x + 1][y + 1].getPelaaja() != getPelaaja()
-                    && !tilanne[x + 1][y + 1].getMerkki().equals("K")) {
-                syonnit.add((x + 1) + "," + (y + 1));
-            }
-        }
-        if (x < 8 && y > 0) {
-            if (tilanne[x + 1][y - 1] != null
-                    && tilanne[x + 1][y - 1].getPelaaja() != getPelaaja()
-                    && !tilanne[x + 1][y - 1].getMerkki().equals("K")) {
-                syonnit.add((x + 1) + "," + (y - 1));
-            }
-        }
-        return syonnit;
-    }
-
 }

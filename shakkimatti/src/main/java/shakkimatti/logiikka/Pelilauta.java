@@ -69,9 +69,11 @@ public class Pelilauta {
      */
     public boolean siirto(int xMista, int yMista, int xMihin, int yMihin) {
         Nappula n = this.lauta[xMista][yMista];
-        if (n.mahdollisetSiirrot(lauta).contains(xMihin + "," + yMihin) || n.mahdollisetSyonnit(lauta).contains(xMihin + "," + yMihin)) {
+        if (n.mahdollisetSiirrot(lauta).contains(xMihin + "," + yMihin)) {
+            if (this.lauta[xMihin][yMihin] != null && this.lauta[xMihin][yMihin].getMerkki().equals("K")) {
+                return false;
+            }
             n.liiku(xMihin, yMihin, getLauta());
-            System.out.println("liikutettu");
             this.lauta[xMista][yMista] = null;
             this.lauta[xMihin][yMihin] = n;
             return true;

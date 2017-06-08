@@ -30,8 +30,7 @@ public abstract class Nappula {
      */
     public void liiku(int xMihin, int yMihin, Nappula[][] lauta) {
         List<String> mahdSiirrot = this.mahdollisetSiirrot(lauta);
-        List<String> mahdSyonnit = this.mahdollisetSyonnit(lauta);
-        if (mahdSiirrot.contains(xMihin + "," + yMihin) || mahdSyonnit.contains(xMihin + "," + yMihin)) {
+        if (mahdSiirrot.contains(xMihin + "," + yMihin)) {
             setX(xMihin);
             setY(yMihin);
         }
@@ -77,15 +76,23 @@ public abstract class Nappula {
     /**
      *
      * @param tilanne tämänhetkinen pelilaudan pelitilanne
-     * @return palauttaa listan mahdollisten siirtojen koordinaateista
+     * @return palauttaa listan mahdollisten siirtojen ja syötävien nappuloiden
+     * koordinaateista
      */
     public abstract List<String> mahdollisetSiirrot(Nappula[][] tilanne);
 
     /**
-     *
-     * @param tilanne tämänhetkinen pelilaudan pelitilanne
-     * @return palauttaa listan mahdollisten syöntien koordinaateista
+     * 
+     * @param x x-koordinaatti
+     * @param y y-koordinaatti
+     * @param tilanne pelilaudan tämänhetkinen pelitilanne
+     * @return palauttaa true jos parametrina saadussa koordinaatissa on 
+     * vastapuolen nappula, muuten false
      */
-    public abstract List<String> mahdollisetSyonnit(Nappula[][] tilanne);
-
+    public boolean checkSyotava(int x, int y, Nappula[][] tilanne) {
+        if (tilanne[x][y] != null && tilanne[x][y].getPelaaja() != getPelaaja()) {
+            return true;
+        }
+        return false;
+    }
 }

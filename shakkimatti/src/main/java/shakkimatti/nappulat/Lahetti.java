@@ -6,7 +6,7 @@ import shakkimatti.logiikka.Pelaaja;
 
 /**
  * Kuvaa shakkilaudan lähetti-nappulaa, jatkaa abstraktia Nappula-luokkaa
- * 
+ *
  */
 public class Lahetti extends Nappula {
 
@@ -33,10 +33,11 @@ public class Lahetti extends Nappula {
                 if (yi == 7) {
                     break;
                 }
-                if (tilanne[i][yi] != null) {
-                    break;
-                } else {
+                if (tilanne[i][yi] == null) {
                     siirrot.add((i) + "," + (yi));
+                } else if (checkSyotava(i, yi, tilanne)) {
+                    siirrot.add((i) + "," + (yi));
+                    break;
                 }
                 yi++;
             }
@@ -48,10 +49,12 @@ public class Lahetti extends Nappula {
                 if (yi == -1) {
                     break;
                 }
-                if (tilanne[i][yi] != null) {
-                    break;
-                } else {
+                if (tilanne[i][yi] == null) {
                     siirrot.add((i) + "," + (yi));
+                    break;
+                } else if (checkSyotava(i, yi, tilanne)) {
+                    siirrot.add((i) + "," + (yi));
+                    break;
                 }
                 yi--;
             }
@@ -62,10 +65,11 @@ public class Lahetti extends Nappula {
                 if (yi == 7) {
                     break;
                 }
-                if (tilanne[i][yi] != null) {
-                    break;
-                } else {
+                if (tilanne[i][yi] == null) {
                     siirrot.add((i) + "," + (yi));
+                } else if (checkSyotava(i, yi, tilanne)) {
+                    siirrot.add((i) + "," + (yi));
+                    break;
                 }
                 yi++;
             }
@@ -77,83 +81,16 @@ public class Lahetti extends Nappula {
                     break;
                 }
                 if (tilanne[i][yi] != null) {
-                    break;
-                } else {
                     siirrot.add((i) + "," + (yi));
+                } else if (checkSyotava(i, yi, tilanne)) {
+                    siirrot.add((i) + "," + (yi));
+                    break;
                 }
                 yi--;
             }
         }
 
         return siirrot;
-    }
-
-    /**
-     * tarkastaa lähetin mahdolliset syönnit (suorat viistoihin)
-     *
-     * @param tilanne tämänhetkinen pelilaudan pelitilanne
-     * @return palauttaa listan mahdollisten syöntien koordinaateista
-     */
-    @Override
-    public List<String> mahdollisetSyonnit(Nappula[][] tilanne) {
-        List<String> syonnit = new ArrayList<String>();
-        int x = getX();
-        int y = getY();
-        if (x < 8) {
-            int yi = y + 1;
-            for (int i = x + 1; i < 8; i++) {
-
-                if (yi == 7) {
-                    break;
-                }
-                if (tilanne[i][yi] != null && tilanne[i][yi].getPelaaja() != this.getPelaaja()
-                        && !tilanne[i][yi].getMerkki().equals("K")) {
-                    syonnit.add((i) + "," + (yi));
-                }
-                yi++;
-            }
-        }
-
-        if (x < 8) {
-            int yi = y - 1;
-            for (int i = x + 1; i < 8; i++) {
-                if (yi == -1) {
-                    break;
-                }
-                if (tilanne[i][yi] != null && tilanne[i][yi].getPelaaja() != this.getPelaaja()
-                        && !tilanne[i][yi].getMerkki().equals("K")) {
-                    syonnit.add((i) + "," + (yi));
-                }
-                yi--;
-            }
-        }
-        if (x > 0) {
-            int yi = y + 1;
-            for (int i = x - 1; i >= 0; i--) {
-                if (yi == 7) {
-                    break;
-                }
-                if (tilanne[i][yi] != null && tilanne[i][yi].getPelaaja() != this.getPelaaja()
-                        && !tilanne[i][yi].getMerkki().equals("K")) {
-                    syonnit.add((i) + "," + (yi));
-                }
-                yi++;
-            }
-        }
-        if (x > 0) {
-            int yi = y - 1;
-            for (int i = x - 1; i >= 0; i--) {
-                if (yi == -1) {
-                    break;
-                }
-                if (tilanne[i][yi] != null && tilanne[i][yi].getPelaaja() != this.getPelaaja()
-                        && !tilanne[i][yi].getMerkki().equals("K")) {
-                    syonnit.add((i) + "," + (yi));
-                }
-                yi--;
-            }
-        }
-        return syonnit;
     }
 
 }

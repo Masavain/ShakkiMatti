@@ -66,7 +66,7 @@ public class KuningatarTest {
         lauta.asetaNappula(kuningatar, 4, 0);
         lauta.asetaNappula(solttu, 4, 1);
         
-        assertTrue(kuningatar.mahdollisetSyonnit(lauta.getLauta()).contains("4,1"));
+        assertTrue(kuningatar.mahdollisetSiirrot(lauta.getLauta()).contains("4,1"));
     }
     
     @Test
@@ -76,16 +76,7 @@ public class KuningatarTest {
         lauta.asetaNappula(kuningatar, 4, 0);
         lauta.asetaNappula(solttu, 4, 1);
         
-        assertFalse(kuningatar.mahdollisetSyonnit(lauta.getLauta()).contains("4,1"));
+        assertFalse(kuningatar.mahdollisetSiirrot(lauta.getLauta()).contains("4,1"));
     }
     
-    @Test
-    public void kuningastaEiVoiSyoda(){
-        Kuningatar kuningatar = new Kuningatar(4,0,Pelaaja.MUSTA);
-        Kuningas kunkku = new Kuningas(4,1,Pelaaja.VALKOINEN);
-        lauta.asetaNappula(kuningatar, 4, 0);
-        lauta.asetaNappula(kunkku, 4, 1);
-        
-        assertFalse(kuningatar.mahdollisetSyonnit(lauta.getLauta()).contains("4,1"));
-    }
 }
