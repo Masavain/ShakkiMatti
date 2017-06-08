@@ -9,6 +9,7 @@ Päivä | Tunnit | Kuvaus
 25.05.2017 | 2h | deadline2 (pit/checkstyle/luokkakaavio)
 31.05.2017 | 4h | pelilogiikan jatkoa (deadline 3)
 04.06.2017 | 5h | graafisen käyttöliittymän aloittelu
-05.06.2017 | 2h | graafisen käyttöliittymän jatkoa
-05.06.2017 | 6h | graafisen käyttöliittymän jatkoa
+05.06.2017 | 8h | graafisen käyttöliittymän jatkoa
+07.06.2017 | 2h | luokkien refaktorointia ja javadoc aloittelu
+08.06.2017 | 1h | junit line coverage >80% ja mutation coverage >60%, dokumentoinnin päivittely (deadline 4)
 ... | ... | ...
