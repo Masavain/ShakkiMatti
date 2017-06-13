@@ -19,29 +19,32 @@ public class Paalogiikka {
         pelilauta.alustus();
         this.pelaaja = Pelaaja.VALKOINEN;
     }
+
     
-    /**
-     * peli -metodi käynnistää pelin logiikan
-     * vuoron päätteeksi vaihdetaan pelaajaa
-     * while -looppia suoritetaan, kunnes peli päättyy, eli jommankumman pelaajan
-     * kuningas on shakkimatissa.
-     */
     public void peli() {
         while (!checkShakkiMatti(pelaaja)) {
 
-            if (pelaaja == Pelaaja.VALKOINEN) {
+            
+        }
+    }
+    
+    /**
+     * vaihtaa pelaajaa valkoisesta mustaan tai mustasta valkoiseen
+     */
+    public void vaihdaVuoroa(){
+        if (pelaaja == Pelaaja.VALKOINEN) {
                 pelaaja = Pelaaja.MUSTA;
             } else {
                 pelaaja = Pelaaja.VALKOINEN;
             }
-        }
     }
 
     /**
-     * 
+     *
      * @param pelaaja
-     * @return palauttaa false jos parametrina saadun pelaajan kuninkaalla on mahdollisia siirtoja, true
-     * jos ei. Truen palautus tarkoittaa siis ShakkiMattia, eli pelin päätöstä.
+     * @return palauttaa false jos parametrina saadun pelaajan kuninkaalla on
+     * mahdollisia siirtoja, true jos ei. Truen palautus tarkoittaa siis
+     * ShakkiMattia, eli pelin päätöstä.
      */
     public boolean checkShakkiMatti(Pelaaja pelaaja) {
         for (int i = 0; i < 8; i++) {
@@ -64,8 +67,11 @@ public class Paalogiikka {
     }
 
     /**
-     * Tarkastaa, onko parametrina saatujen arvojen mukainen koordinattii uhattuna vastapuolen pelaajan puolelta.
-     * Käytetaään tarkastamaan onko kuningas shakissa tai onko kuninkaalla mahdollisuutta liikkua johonkin ruutuun.
+     * Tarkastaa, onko parametrina saatujen arvojen mukainen koordinattii
+     * uhattuna vastapuolen pelaajan puolelta. Käytetaään tarkastamaan onko
+     * kuningas shakissa tai onko kuninkaalla mahdollisuutta liikkua johonkin
+     * ruutuun.
+     *
      * @param pelaaja tämänhetkinen pelaaja
      * @param x tarkastettavan koordinaatin x-arvo.
      * @param y tarkastettavan koordinaatin y-arvo.

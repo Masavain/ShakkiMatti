@@ -16,7 +16,7 @@ public class Pelilauta {
     }
 
     /**
-     * alustaa normaalin shakkipelin alun. Asettaa siis pelinappulat oikeille
+     * alustaa normaalin shakkipelin alun. Asettaa pelinappulat oikeille
      * aloituspaikoilleen.
      */
     public void alustus() {

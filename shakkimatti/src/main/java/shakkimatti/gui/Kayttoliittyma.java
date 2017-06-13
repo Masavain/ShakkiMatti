@@ -3,12 +3,14 @@ package shakkimatti.gui;
 import java.util.*;
 import javafx.application.Application;
 import javafx.event.EventHandler;
+import javafx.application.Platform;
 import javafx.stage.Stage;
 import javafx.scene.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.*;
 import javafx.scene.layout.*;
+import javafx.scene.control.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.StrokeType;
@@ -18,7 +20,8 @@ import shakkimatti.nappulat.Nappula;
 
 public class Kayttoliittyma extends Application {
 
-    private GridPane root = new GridPane();
+    private BorderPane root = new BorderPane();
+    private GridPane ruudukko = new GridPane();
     private Nappula nappula;
     private Paalogiikka peli = new Paalogiikka();
     private ArrayList<Rectangle> keltaiset = new ArrayList();
@@ -27,13 +30,35 @@ public class Kayttoliittyma extends Application {
     public void start(Stage primaryStage) {
         nappula = null;
 
+        MenuBar menuBar = new MenuBar();
+        menuBar.prefWidthProperty().bind(primaryStage.widthProperty());
+        root.setTop(menuBar);
+
+        Menu valikko = new Menu("Valikko");
+        MenuItem lopetusValikko = new MenuItem("Lopeta");
+        MenuItem uusiPeliValikko = new MenuItem("Uusi Peli");
+        uusiPeliValikko.setOnAction(actionEvent -> this.peli = new Paalogiikka());
+        lopetusValikko.setOnAction(actionEvent -> Platform.exit());
+
+        valikko.getItems().add(uusiPeliValikko);
+        valikko.getItems().add(lopetusValikko);
+
+        
+        menuBar.getMenus().addAll(valikko);
+
+        ruudukko.prefHeightProperty().bind(primaryStage.heightProperty());
+        ruudukko.prefWidthProperty().bind(primaryStage.widthProperty());
+
+        root.setCenter(ruudukko);
         Paalogiikka peli = new Paalogiikka();
         varitaRuudukko();
         kuvatGridiin();
-        Scene scene = new Scene(root, 500, 500);
+        Scene scene = new Scene(root, 550, 550);
         primaryStage.setTitle("SHAKKIMATTI");
         primaryStage.setScene(scene);
         primaryStage.show();
+        peli.peli();
+
     }
 
     public static void main(String[] args) {
@@ -75,13 +100,14 @@ public class Kayttoliittyma extends Application {
                                 System.out.println(peli.getPelilauta().toString());
                                 kuvatGridiin();
                                 keltaisetTakaisin();
+                                peli.vaihdaVuoroa();
                             }
                             nappula = null;
-                        } else if (peli.getPelilauta().getLauta()[x][y] != null && nappula == null) {
+                        } else if (peli.getPelilauta().validiSiirrettava(peli.getPelaaja(), x, y) && nappula == null) {
                             System.out.println(peli.getPelilauta().getLauta()[x][y] + "," + peli.getPelilauta().getLauta()[x][y].getPelaaja() + " valittu ");
                             nappula = peli.getPelilauta().getLauta()[x][y];
                             varitaKeltaiseksi();
-                            
+
                         }
 
                         if (stack.getChildren().size() == 2) {
@@ -100,9 +126,9 @@ public class Kayttoliittyma extends Application {
                     }
                 });
 
-                root.add(stack, col, row);
-                ruutu.widthProperty().bind(root.widthProperty().divide(8));
-                ruutu.heightProperty().bind(root.heightProperty().divide(8));
+                ruudukko.add(stack, col, row);
+                ruutu.widthProperty().bind(ruudukko.widthProperty().divide(8));
+                ruutu.heightProperty().bind(ruudukko.heightProperty().divide(8));
             }
         }
     }
@@ -119,7 +145,7 @@ public class Kayttoliittyma extends Application {
             ruutu.setStroke(Color.YELLOW);
         }
     }
-    
+
     public void keltaisetTakaisin() {
         for (Rectangle ruutu : keltaiset) {
             ruutu.setStroke(Color.TRANSPARENT);
@@ -174,7 +200,7 @@ public class Kayttoliittyma extends Application {
     }
 
     public StackPane etsiStack(int i, int j) {
-        for (Node node : root.getChildren()) {
+        for (Node node : ruudukko.getChildren()) {
             if (GridPane.getColumnIndex(node) == i && GridPane.getRowIndex(node) == j) {
                 return (StackPane) node;
             }
