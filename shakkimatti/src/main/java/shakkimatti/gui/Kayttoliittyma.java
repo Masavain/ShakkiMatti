@@ -1,6 +1,6 @@
 package shakkimatti.gui;
 
-import shakkimatti.logiikka.Pelilauta;
+import java.util.*;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.stage.Stage;
@@ -21,11 +21,12 @@ public class Kayttoliittyma extends Application {
     private GridPane root = new GridPane();
     private Nappula nappula;
     private Paalogiikka peli = new Paalogiikka();
+    private ArrayList<Rectangle> keltaiset = new ArrayList();
 
     @Override
     public void start(Stage primaryStage) {
         nappula = null;
-        
+
         Paalogiikka peli = new Paalogiikka();
         varitaRuudukko();
         kuvatGridiin();
@@ -68,17 +69,19 @@ public class Kayttoliittyma extends Application {
                         int y = GridPane.getRowIndex(stack);
                         int x = GridPane.getColumnIndex(stack);
 
-                        if (nappula != null && peli.getPelilauta().getLauta()[x][y] == null) {
+                        if (nappula != null) {
                             if (peli.getPelilauta().siirto(nappula.getX(), nappula.getY(), x, y)) {
                                 System.out.println(peli.getPelilauta().getLauta()[x][y] + "," + peli.getPelilauta().getLauta()[x][y].getPelaaja() + "liikutettu");
                                 System.out.println(peli.getPelilauta().toString());
-
+                                kuvatGridiin();
+                                keltaisetTakaisin();
                             }
                             nappula = null;
                         } else if (peli.getPelilauta().getLauta()[x][y] != null && nappula == null) {
                             System.out.println(peli.getPelilauta().getLauta()[x][y] + "," + peli.getPelilauta().getLauta()[x][y].getPelaaja() + " valittu ");
                             nappula = peli.getPelilauta().getLauta()[x][y];
-                            nappula.mahdollisetSiirrot(peli.getPelilauta().getLauta());
+                            varitaKeltaiseksi();
+                            
                         }
 
                         if (stack.getChildren().size() == 2) {
@@ -101,6 +104,25 @@ public class Kayttoliittyma extends Application {
                 ruutu.widthProperty().bind(root.widthProperty().divide(8));
                 ruutu.heightProperty().bind(root.heightProperty().divide(8));
             }
+        }
+    }
+
+    public void varitaKeltaiseksi() {
+        List<String> mahdSiirrot = nappula.mahdollisetSiirrot(peli.getPelilauta().getLauta());
+        for (String koordi : mahdSiirrot) {
+            String[] temp = koordi.split("");
+            int mahdX = Integer.parseInt(temp[0]);
+            int mahdY = Integer.parseInt(temp[2]);
+            StackPane stack = etsiStack(mahdX, mahdY);
+            Rectangle ruutu = (Rectangle) stack.getChildren().get(0);
+            keltaiset.add(ruutu);
+            ruutu.setStroke(Color.YELLOW);
+        }
+    }
+    
+    public void keltaisetTakaisin() {
+        for (Rectangle ruutu : keltaiset) {
+            ruutu.setStroke(Color.TRANSPARENT);
         }
     }
 

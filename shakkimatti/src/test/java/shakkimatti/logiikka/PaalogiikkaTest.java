@@ -11,6 +11,8 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import shakkimatti.nappulat.Kuningas;
+import shakkimatti.nappulat.Torni;
 
 /**
  *
@@ -54,8 +56,54 @@ public class PaalogiikkaTest {
     }
 
     @Test
-    public void testaaVuoro() {
-        int ans = 1;
-        assertEquals(ans, peli.getVuoro());
+    public void testaaPelaaja() {
+        Pelaaja ans = Pelaaja.VALKOINEN;
+        assertEquals(ans, peli.getPelaaja());
+    }
+
+    @Test
+    public void testaaShakki() {
+        peli.setPelilauta(new Pelilauta());
+        Pelilauta lauta = peli.getPelilauta();
+        lauta.asetaNappula(new Kuningas(3, 3, Pelaaja.VALKOINEN), 3, 3);
+        lauta.asetaNappula(new Torni(3, 5, Pelaaja.MUSTA), 3, 5);
+
+        assertTrue(peli.checkUhka(Pelaaja.VALKOINEN, 3, 3));
+    }
+
+    @Test
+    public void testaaShakki2() {
+        peli.setPelilauta(new Pelilauta());
+        Pelilauta lauta = peli.getPelilauta();
+        lauta.asetaNappula(new Kuningas(3, 3, Pelaaja.VALKOINEN), 3, 3);
+        lauta.asetaNappula(new Torni(5, 5, Pelaaja.MUSTA), 5, 5);
+
+        assertFalse(peli.checkUhka(Pelaaja.VALKOINEN, 3, 3));
+    }
+
+    @Test
+    public void testaaShakkiMatti() {
+        peli.setPelilauta(new Pelilauta());
+        Pelilauta lauta = peli.getPelilauta();
+        Kuningas kunkku = new Kuningas(4, 7, Pelaaja.VALKOINEN);
+        Kuningas kunkku2 = new Kuningas(4, 5, Pelaaja.MUSTA);
+        Torni torni = new Torni(0, 7, Pelaaja.MUSTA);
+        lauta.asetaNappula(kunkku, 4, 7);
+        lauta.asetaNappula(kunkku2, 4, 5);
+        lauta.asetaNappula(torni, 0, 7);
+
+        assertTrue(peli.checkShakkiMatti(Pelaaja.VALKOINEN));
+    }
+    
+    @Test
+    public void testaaShakkiMatti2() {
+        peli.setPelilauta(new Pelilauta());
+        Pelilauta lauta = peli.getPelilauta();
+        Kuningas kunkku = new Kuningas(4, 7, Pelaaja.VALKOINEN);
+        Torni torni = new Torni(0, 7, Pelaaja.MUSTA);
+        lauta.asetaNappula(kunkku, 4, 7);
+        lauta.asetaNappula(torni, 0, 7);
+
+        assertFalse(peli.checkShakkiMatti(Pelaaja.VALKOINEN));
     }
 }

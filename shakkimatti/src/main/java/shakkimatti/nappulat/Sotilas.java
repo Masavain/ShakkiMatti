@@ -32,15 +32,19 @@ public class Sotilas extends Nappula {
         int y = getY();
         if (this.getPelaaja() == Pelaaja.MUSTA) {
             if (y < 7) {
-                siirrot.add(x + "," + (y + 1));
-                if (!this.liikutettu) {
+                if (tilanne[x][y + 1] == null) {
+                    siirrot.add(x + "," + (y + 1));
+                }
+                if (y < 6 && !this.liikutettu && tilanne[x][y + 2] == null) {
                     siirrot.add(x + "," + (y + 2));
                 }
             }
         } else if (this.getPelaaja() == Pelaaja.VALKOINEN) {
             if (y > 0) {
-                siirrot.add(x + "," + (y - 1));
-                if (!this.liikutettu) {
+                if (tilanne[x][y - 1] == null) {
+                    siirrot.add(x + "," + (y - 1));
+                }
+                if (y > 1 && !this.liikutettu && tilanne[x][y - 2] == null) {
                     siirrot.add(x + "," + (y - 2));
                 }
             }

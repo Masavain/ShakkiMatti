@@ -34,6 +34,8 @@ public class Torni extends Nappula {
                 } else if (checkSyotava(i, y, tilanne)) {
                     siirrot.add(i + "," + y);
                     break;
+                } else if (tilanne[i][y] != null) {
+                    break;
                 }
             }
         }
@@ -45,6 +47,8 @@ public class Torni extends Nappula {
                     siirrot.add(i + "," + y);
                 } else if (checkSyotava(i, y, tilanne)) {
                     siirrot.add(i + "," + y);
+                    break;
+                } else if (tilanne[i][y] != null) {
                     break;
                 }
             }
@@ -58,6 +62,8 @@ public class Torni extends Nappula {
                 } else if (checkSyotava(x, i, tilanne)) {
                     siirrot.add(x + "," + i);
                     break;
+                } else if (tilanne[x][i] != null) {
+                    break;
                 }
             }
         }
@@ -67,6 +73,8 @@ public class Torni extends Nappula {
                     siirrot.add(x + "," + i);
                 } else if (checkSyotava(x, i, tilanne)) {
                     siirrot.add(x + "," + i);
+                    break;
+                } else if (tilanne[x][i] != null) {
                     break;
                 }
             }
