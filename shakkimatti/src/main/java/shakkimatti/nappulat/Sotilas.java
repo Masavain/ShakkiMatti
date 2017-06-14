@@ -85,9 +85,11 @@ public class Sotilas extends Nappula {
     @Override
     public void liiku(int xMihin, int yMihin, Nappula[][] lauta) {
         List<String> mahdSiirrot = this.mahdollisetSiirrot(lauta);
-        setX(xMihin);
-        setY(yMihin);
-        liikutettu = true;
+        if (mahdSiirrot.contains(xMihin + "," + yMihin)) {
+            setX(xMihin);
+            setY(yMihin);
+            liikutettu = true;
+        }
     }
 
 }

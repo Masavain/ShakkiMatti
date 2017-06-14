@@ -61,6 +61,25 @@ public class TorniTest {
     }
 
     @Test
+    public void liikkumisia() {
+        Torni torni = new Torni(4, 4, Pelaaja.MUSTA);
+        Sotilas solttu = new Sotilas(3, 4, Pelaaja.MUSTA, false);
+        Sotilas solttu3 = new Sotilas(4, 5, Pelaaja.MUSTA, false);
+        Sotilas solttu4 = new Sotilas(4, 3, Pelaaja.MUSTA, false);
+        Sotilas solttu6 = new Sotilas(5, 4, Pelaaja.MUSTA, false);
+        lauta.asetaNappula(torni, 4, 4);
+        lauta.asetaNappula(solttu, 3, 4);
+        lauta.asetaNappula(solttu3, 4, 5);
+        lauta.asetaNappula(solttu4, 4, 3);
+        lauta.asetaNappula(solttu6, 5, 4);
+
+        assertFalse(torni.mahdollisetSiirrot(lauta.getLauta()).contains("3,4"));
+        assertFalse(torni.mahdollisetSiirrot(lauta.getLauta()).contains("4,5"));
+        assertFalse(torni.mahdollisetSiirrot(lauta.getLauta()).contains("4,3"));
+        assertFalse(torni.mahdollisetSiirrot(lauta.getLauta()).contains("5,4"));
+    }
+
+    @Test
     public void liikuOik() {
         Torni torni = new Torni(0, 0, Pelaaja.MUSTA);
         torni.liiku(7, 0, lauta.getLauta());

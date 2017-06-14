@@ -76,7 +76,7 @@ public class Pelilauta {
             n.liiku(xMihin, yMihin, getLauta());
             this.lauta[xMista][yMista] = null;
             this.lauta[xMihin][yMihin] = n;
-            
+
             return true;
         }
         return false;

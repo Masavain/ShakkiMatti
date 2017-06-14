@@ -35,10 +35,9 @@ public class Kayttoliittyma extends Application {
     @Override
     public void start(Stage primaryStage) {
         Timeline timeline = new Timeline(new KeyFrame(
-                Duration.seconds(1),
-                ae -> timeSeconds++), new KeyFrame(
-                        Duration.seconds(1),
-                        ae -> timerLabel.setText((" Aika: " + timeSeconds.toString())))
+            Duration.seconds(1),
+            ae -> timeSeconds++), new KeyFrame(Duration.seconds(1),
+                ae -> timerLabel.setText((" Aika: " + timeSeconds.toString())))
         );
         timeline.setCycleCount(Animation.INDEFINITE);
         timeline.play();

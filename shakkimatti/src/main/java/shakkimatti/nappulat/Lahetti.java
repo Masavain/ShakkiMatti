@@ -26,11 +26,11 @@ public class Lahetti extends Nappula {
         List<String> siirrot = new ArrayList<String>();
         int x = getX();
         int y = getY();
-        if (x < 7) {
+        if (x < 7 && x >= 0) {
             int yi = y + 1;
             for (int i = x + 1; i < 8; i++) {
 
-                if (yi > 7) {
+                if (yi > 7 || yi <= 0) {
                     break;
                 }
                 if (tilanne[i][yi] == null) {
@@ -45,15 +45,14 @@ public class Lahetti extends Nappula {
             }
         }
 
-        if (x < 7) {
+        if (x < 7 && x >= 0) {
             int yi = y - 1;
             for (int i = x + 1; i < 8; i++) {
-                if (yi < 0) {
+                if (yi < 0 || yi >= 7) {
                     break;
                 }
                 if (tilanne[i][yi] == null) {
                     siirrot.add((i) + "," + (yi));
-                    break;
                 } else if (checkSyotava(i, yi, tilanne)) {
                     siirrot.add((i) + "," + (yi));
                     break;
@@ -63,10 +62,10 @@ public class Lahetti extends Nappula {
                 yi--;
             }
         }
-        if (x > 0) {
+        if (x > 0 && x <= 7) {
             int yi = y + 1;
             for (int i = x - 1; i >= 0; i--) {
-                if (yi > 7) {
+                if (yi > 7 || yi <= 0) {
                     break;
                 }
                 if (tilanne[i][yi] == null) {
@@ -80,13 +79,13 @@ public class Lahetti extends Nappula {
                 yi++;
             }
         }
-        if (x > 0) {
+        if (x > 0 && x <= 7) {
             int yi = y - 1;
             for (int i = x - 1; i >= 0; i--) {
-                if (yi < 0) {
+                if (yi < 0 || yi >= 7) {
                     break;
                 }
-                if (tilanne[i][yi] != null) {
+                if (tilanne[i][yi] == null) {
                     siirrot.add((i) + "," + (yi));
                 } else if (checkSyotava(i, yi, tilanne)) {
                     siirrot.add((i) + "," + (yi));

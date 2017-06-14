@@ -106,4 +106,38 @@ public class PaalogiikkaTest {
 
         assertFalse(peli.checkShakkiMatti(Pelaaja.VALKOINEN));
     }
+    
+    @Test
+    public void testaaVuoronVaihto() {
+        assertEquals(peli.getPelaaja(), Pelaaja.VALKOINEN);
+    }
+    
+    @Test
+    public void testaaVuoronVaihto2() {
+        peli.vaihdaVuoroa();
+        assertEquals(peli.getPelaaja(), Pelaaja.MUSTA);
+    }
+    
+    @Test
+    public void testaaVuoronVaihto3() {
+        peli.vaihdaVuoroa();
+        peli.vaihdaVuoroa();
+        assertEquals(peli.getPelaaja(), Pelaaja.VALKOINEN);
+    }
+    
+    @Test
+    public void testaaVuoro() {
+        Pelilauta lauta = peli.getPelilauta();
+        assertTrue(peli.vuoro(6,6,6,5));
+    }
+    
+    @Test
+    public void testaaVuoro2() {
+        peli.setPelilauta(new Pelilauta());
+        Pelilauta lauta = peli.getPelilauta();
+        Kuningas kunkku = new Kuningas(4, 7, Pelaaja.VALKOINEN);
+        lauta.asetaNappula(kunkku, 4, 7);
+        
+        assertFalse(peli.vuoro(4,7,1,1));
+    }
 }

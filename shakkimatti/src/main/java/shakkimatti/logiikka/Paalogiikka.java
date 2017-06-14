@@ -23,6 +23,7 @@ public class Paalogiikka {
     public boolean vuoro(int xMista, int yMista, int xMihin, int yMihin) {
         if (pelilauta.validiSiirrettava(pelaaja, xMista, yMista)) {
             if (pelilauta.siirto(xMista, yMista, xMihin, yMihin)) {
+                
                 vaihdaVuoroa();
                 return true;
             }
