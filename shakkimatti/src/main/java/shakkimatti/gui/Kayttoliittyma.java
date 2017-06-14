@@ -17,6 +17,9 @@ import javafx.scene.shape.StrokeType;
 import shakkimatti.logiikka.Paalogiikka;
 import shakkimatti.logiikka.Pelaaja;
 import shakkimatti.nappulat.Nappula;
+import javafx.animation.Timeline;
+import javafx.animation.*;
+import javafx.util.Duration;
 
 public class Kayttoliittyma extends Application {
 
@@ -25,25 +28,37 @@ public class Kayttoliittyma extends Application {
     private Nappula nappula;
     private Paalogiikka peli = new Paalogiikka();
     private ArrayList<Rectangle> keltaiset = new ArrayList();
+    private Timeline timeline;
+    private Label timerLabel = new Label();
+    private Integer timeSeconds = 0;
 
     @Override
     public void start(Stage primaryStage) {
-        nappula = null;
+        Timeline timeline = new Timeline(new KeyFrame(
+                Duration.seconds(1),
+                ae -> timeSeconds++), new KeyFrame(
+                        Duration.seconds(1),
+                        ae -> timerLabel.setText((" Aika: " + timeSeconds.toString())))
+        );
+        timeline.setCycleCount(Animation.INDEFINITE);
+        timeline.play();
 
+        timerLabel.prefWidthProperty().bind(primaryStage.widthProperty());
+        root.setBottom(timerLabel);
+
+        nappula = null;
         MenuBar menuBar = new MenuBar();
         menuBar.prefWidthProperty().bind(primaryStage.widthProperty());
-        root.setTop(menuBar);
-
         Menu valikko = new Menu("Valikko");
         MenuItem lopetusValikko = new MenuItem("Lopeta");
         MenuItem uusiPeliValikko = new MenuItem("Uusi Peli");
+        root.setTop(menuBar);
         uusiPeliValikko.setOnAction(actionEvent -> this.peli = new Paalogiikka());
         lopetusValikko.setOnAction(actionEvent -> Platform.exit());
 
         valikko.getItems().add(uusiPeliValikko);
         valikko.getItems().add(lopetusValikko);
 
-        
         menuBar.getMenus().addAll(valikko);
 
         ruudukko.prefHeightProperty().bind(primaryStage.heightProperty());
@@ -57,7 +72,6 @@ public class Kayttoliittyma extends Application {
         primaryStage.setTitle("SHAKKIMATTI");
         primaryStage.setScene(scene);
         primaryStage.show();
-        peli.peli();
 
     }
 
@@ -95,19 +109,22 @@ public class Kayttoliittyma extends Application {
                         int x = GridPane.getColumnIndex(stack);
 
                         if (nappula != null) {
-                            if (peli.getPelilauta().siirto(nappula.getX(), nappula.getY(), x, y)) {
+                            if (peli.vuoro(nappula.getX(), nappula.getY(), x, y)) {
                                 System.out.println(peli.getPelilauta().getLauta()[x][y] + "," + peli.getPelilauta().getLauta()[x][y].getPelaaja() + "liikutettu");
                                 System.out.println(peli.getPelilauta().toString());
                                 kuvatGridiin();
                                 keltaisetTakaisin();
-                                peli.vaihdaVuoroa();
+                                nappula = null;
+                            } else {
+                                nappula = null;
+                                keltaisetTakaisin();
                             }
-                            nappula = null;
+
                         } else if (peli.getPelilauta().validiSiirrettava(peli.getPelaaja(), x, y) && nappula == null) {
                             System.out.println(peli.getPelilauta().getLauta()[x][y] + "," + peli.getPelilauta().getLauta()[x][y].getPelaaja() + " valittu ");
                             nappula = peli.getPelilauta().getLauta()[x][y];
                             varitaKeltaiseksi();
-
+                            kuvatGridiin();
                         }
 
                         if (stack.getChildren().size() == 2) {

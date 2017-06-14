@@ -20,23 +20,25 @@ public class Paalogiikka {
         this.pelaaja = Pelaaja.VALKOINEN;
     }
 
-    
-    public void peli() {
-        while (!checkShakkiMatti(pelaaja)) {
-
-            
+    public boolean vuoro(int xMista, int yMista, int xMihin, int yMihin) {
+        if (pelilauta.validiSiirrettava(pelaaja, xMista, yMista)) {
+            if (pelilauta.siirto(xMista, yMista, xMihin, yMihin)) {
+                vaihdaVuoroa();
+                return true;
+            }
         }
+        return false;
     }
-    
+
     /**
      * vaihtaa pelaajaa valkoisesta mustaan tai mustasta valkoiseen
      */
-    public void vaihdaVuoroa(){
+    public void vaihdaVuoroa() {
         if (pelaaja == Pelaaja.VALKOINEN) {
-                pelaaja = Pelaaja.MUSTA;
-            } else {
-                pelaaja = Pelaaja.VALKOINEN;
-            }
+            pelaaja = Pelaaja.MUSTA;
+        } else {
+            pelaaja = Pelaaja.VALKOINEN;
+        }
     }
 
     /**
