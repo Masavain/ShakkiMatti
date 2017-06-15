@@ -68,7 +68,7 @@ public class PaalogiikkaTest {
         lauta.asetaNappula(new Kuningas(3, 3, Pelaaja.VALKOINEN), 3, 3);
         lauta.asetaNappula(new Torni(3, 5, Pelaaja.MUSTA), 3, 5);
 
-        assertTrue(peli.checkUhka(Pelaaja.VALKOINEN, 3, 3));
+        assertTrue(peli.checkShakki());
     }
 
     @Test
@@ -78,35 +78,10 @@ public class PaalogiikkaTest {
         lauta.asetaNappula(new Kuningas(3, 3, Pelaaja.VALKOINEN), 3, 3);
         lauta.asetaNappula(new Torni(5, 5, Pelaaja.MUSTA), 5, 5);
 
-        assertFalse(peli.checkUhka(Pelaaja.VALKOINEN, 3, 3));
+        assertFalse(peli.checkShakki());
     }
 
-    @Test
-    public void testaaShakkiMatti() {
-        peli.setPelilauta(new Pelilauta());
-        Pelilauta lauta = peli.getPelilauta();
-        Kuningas kunkku = new Kuningas(4, 7, Pelaaja.VALKOINEN);
-        Kuningas kunkku2 = new Kuningas(4, 5, Pelaaja.MUSTA);
-        Torni torni = new Torni(0, 7, Pelaaja.MUSTA);
-        lauta.asetaNappula(kunkku, 4, 7);
-        lauta.asetaNappula(kunkku2, 4, 5);
-        lauta.asetaNappula(torni, 0, 7);
 
-        assertTrue(peli.checkShakkiMatti(Pelaaja.VALKOINEN));
-    }
-    
-    @Test
-    public void testaaShakkiMatti2() {
-        peli.setPelilauta(new Pelilauta());
-        Pelilauta lauta = peli.getPelilauta();
-        Kuningas kunkku = new Kuningas(4, 7, Pelaaja.VALKOINEN);
-        Torni torni = new Torni(0, 7, Pelaaja.MUSTA);
-        lauta.asetaNappula(kunkku, 4, 7);
-        lauta.asetaNappula(torni, 0, 7);
-
-        assertFalse(peli.checkShakkiMatti(Pelaaja.VALKOINEN));
-    }
-    
     @Test
     public void testaaVuoronVaihto() {
         assertEquals(peli.getPelaaja(), Pelaaja.VALKOINEN);

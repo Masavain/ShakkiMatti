@@ -54,6 +54,8 @@
                 <configuration>
                     <configLocation>checkstyle.xml</configLocation>
                 </configuration>
+                
+                
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -68,6 +70,7 @@
             
         </plugins>
     </build>
+    
     
     
 </project>

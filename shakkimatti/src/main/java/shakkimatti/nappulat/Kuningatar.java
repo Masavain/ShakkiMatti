@@ -4,24 +4,22 @@ import java.util.*;
 import shakkimatti.logiikka.Pelaaja;
 
 /**
- * Kuvaa shakkilaudan kuningatar-nappulaa, jatkaa abstraktia Nappula-luokkaa
+ * Kuvaa shakkilaudan kuningatar-nappulaa, jatkaa abstraktia Nappula-luokkaa.
  *
  */
 public class Kuningatar extends Nappula {
 
+    /**
+     * konstruktori, luo uuden kuningattaren.
+     * @param x x-koordinaatti
+     * @param y y-koordinaatti
+     * @param color pelaaja, jolle nappula kuuluu
+     */
     public Kuningatar(int x, int y, Pelaaja color) {
         super(x, y, color);
         setMerkki("Q");
     }
 
-    /**
-     * tarkastaa kuningattaren mahdolliset siirrot (suorat viistoihin ja
-     * ylös/alas/ oikealle/vasemmalle), yhdistää tarkastukset tornin ja lähetin
-     * vastaavista metodeista
-     *
-     * @param tilanne tämänhetkinen pelilaudan pelitilanne
-     * @return palauttaa listan mahdollisten siirtojen koordinaateista
-     */
     @Override
     public List<String> mahdollisetSiirrot(Nappula[][] tilanne) {
         List<String> siirrot = new ArrayList<String>();

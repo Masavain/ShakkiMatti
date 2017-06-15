@@ -4,27 +4,27 @@ import java.util.*;
 import shakkimatti.logiikka.Pelaaja;
 
 /**
- * Kuvaa shakkilaudan sotilas-nappulaa, jatkaa abstraktia Nappula-luokkaa
+ * Kuvaa shakkilaudan sotilas-nappulaa, jatkaa abstraktia Nappula-luokkaa.
  *
  */
 public class Sotilas extends Nappula {
 
     public boolean liikutettu;
 
+    /**
+     * konstruktori, luo uuden kuninkaan.
+     * @param x x-koordinaatti
+     * @param y y-koordinaatti
+     * @param color pelaaja, jolle nappula kuuluu
+     * @param liikutettu kuvastaa sitä, onko sotilasta liikutettu vai ei, aluksi
+     * yleensä false;
+     */
     public Sotilas(int x, int y, Pelaaja color, boolean liikutettu) {
         super(x, y, color);
         setMerkki("S");
         this.liikutettu = liikutettu;
     }
 
-    /**
-     * tarkastaa sotilaan mahdolliset siirrot (yhden ylös/alas riippuen väristä,
-     * tai jos sotilasta ei olla vielä liikutettu, niin yksi tai kaksi
-     * ylös/alas).
-     *
-     * @param tilanne tämänhetkinen pelilaudan pelitilanne
-     * @return palauttaa listan mahdollisten siirtojen koordinaateista
-     */
     @Override
     public List<String> mahdollisetSiirrot(Nappula[][] tilanne) {
         List<String> siirrot = new ArrayList<String>();

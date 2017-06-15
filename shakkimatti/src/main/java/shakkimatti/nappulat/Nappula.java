@@ -5,8 +5,7 @@ import shakkimatti.logiikka.Pelaaja;
 import java.util.*;
 
 /**
- * Abstrakti luokka jota eri nappulatyypit täydentävät
- *
+ * Abstrakti luokka jota eri nappulatyypit täydentävät.
  */
 public abstract class Nappula {
 
@@ -14,6 +13,12 @@ public abstract class Nappula {
     private Pelaaja pelaaja;
     private String merkki;
 
+    /**
+     * konstruktori, luo uuden nappulan.
+     * @param x x-koordinaatti
+     * @param y y-koordinaatti
+     * @param pelaaja pelaaja, jolle nappula kuuluu
+     */
     public Nappula(int x, int y, Pelaaja pelaaja) {
         this.x = x;
         this.y = y;
@@ -22,7 +27,7 @@ public abstract class Nappula {
 
     /**
      * Metodi muuttaa nappulan x- ja y-koordinaatteja, jos haluttu koordinaatti
-     * on nappulan mahdollinen siirto tai syönti
+     * on nappulan mahdollinen siirto tai syönti.
      *
      * @param xMihin x-koordinaatti johon nappulaa yritetään siirtää
      * @param yMihin y-koordinaatti johon nappulaa yritetään siirtää
@@ -74,7 +79,7 @@ public abstract class Nappula {
     }
 
     /**
-     *
+     * tarkastaa nappulan mahdolliset siirrot.
      * @param tilanne tämänhetkinen pelilaudan pelitilanne
      * @return palauttaa listan mahdollisten siirtojen ja syötävien nappuloiden
      * koordinaateista
@@ -82,7 +87,7 @@ public abstract class Nappula {
     public abstract List<String> mahdollisetSiirrot(Nappula[][] tilanne);
 
     /**
-     * 
+     * tarkastaa onko parametrina saadussa koordinaatissa vastapelaajan nappula.
      * @param x x-koordinaatti
      * @param y y-koordinaatti
      * @param tilanne pelilaudan tämänhetkinen pelitilanne

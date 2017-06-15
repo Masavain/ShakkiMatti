@@ -5,23 +5,22 @@ import java.util.List;
 import shakkimatti.logiikka.Pelaaja;
 
 /**
- * Kuvaa shakkilaudan torni-nappulaa, jatkaa abstraktia Nappula-luokkaa
+ * Kuvaa shakkilaudan torni-nappulaa, jatkaa abstraktia Nappula-luokkaa.
  *
  */
 public class Torni extends Nappula {
 
+    /**
+     * konstruktori, luo uuden tornin.
+     * @param x x-koordinaatti
+     * @param y y-koordinaatti
+     * @param color pelaaja, jolle nappula kuuluu
+     */
     public Torni(int x, int y, Pelaaja color) {
         super(x, y, color);
         setMerkki("T");
     }
 
-    /**
-     * tarkastaa tornin mahdolliset siirrot (suorat ylös, alas oikeaan ja
-     * vasemmalle).
-     *
-     * @param tilanne tämänhetkinen pelilaudan pelitilanne
-     * @return palauttaa listan mahdollisten siirtojen koordinaateista
-     */
     @Override
     public List<String> mahdollisetSiirrot(Nappula[][] tilanne) {
         List<String> siirrot = new ArrayList<String>();
@@ -56,7 +55,6 @@ public class Torni extends Nappula {
 
         if (y < 7 && y >= 0) {
             for (int i = y + 1; i < 8; i++) {
-
                 if (tilanne[x][i] == null) {
                     siirrot.add(x + "," + i);
                 } else if (checkSyotava(x, i, tilanne)) {

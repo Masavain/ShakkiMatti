@@ -6,21 +6,21 @@ import javafx.event.EventHandler;
 import javafx.application.Platform;
 import javafx.stage.Stage;
 import javafx.scene.*;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
+import javafx.scene.image.*;
 import javafx.scene.input.*;
 import javafx.scene.layout.*;
 import javafx.scene.control.*;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
-import javafx.scene.shape.StrokeType;
-import shakkimatti.logiikka.Paalogiikka;
-import shakkimatti.logiikka.Pelaaja;
+import javafx.scene.shape.*;
+import shakkimatti.logiikka.*;
 import shakkimatti.nappulat.Nappula;
-import javafx.animation.Timeline;
 import javafx.animation.*;
-import javafx.util.Duration;
+import javafx.util.*;
 
+/**
+ * Shakkipelin graaffinen käyttöliittymäluokka, esittää sekä laudan, nappulat,
+ * pelivalikon ja kellon että toimii pelaajan ja logiikan välisenä alustana.
+ */
 public class Kayttoliittyma extends Application {
 
     private BorderPane root = new BorderPane();
@@ -28,22 +28,32 @@ public class Kayttoliittyma extends Application {
     private Nappula nappula;
     private Paalogiikka peli = new Paalogiikka();
     private ArrayList<Rectangle> keltaiset = new ArrayList();
+    private Rectangle punainen = null;
     private Timeline timeline;
     private Label timerLabel = new Label();
+    private Label shakkiLabel = new Label();
     private Integer timeSeconds = 0;
 
+    /**
+     * käynnistää pelin ja kellon.
+     *
+     * @param primaryStage
+     */
     @Override
     public void start(Stage primaryStage) {
         Timeline timeline = new Timeline(new KeyFrame(
-            Duration.seconds(1),
-            ae -> timeSeconds++), new KeyFrame(Duration.seconds(1),
-                ae -> timerLabel.setText((" Aika: " + timeSeconds.toString())))
+                Duration.seconds(1), ae -> timeSeconds++), new KeyFrame(Duration.seconds(1),
+                    ae -> timerLabel.setText((" Aika: " + timeSeconds.toString())))
         );
         timeline.setCycleCount(Animation.INDEFINITE);
         timeline.play();
-
         timerLabel.prefWidthProperty().bind(primaryStage.widthProperty());
-        root.setBottom(timerLabel);
+        shakkiLabel.prefWidthProperty().bind(primaryStage.widthProperty());
+
+        GridPane komponenttiryhma = new GridPane();
+        komponenttiryhma.add(timerLabel, 0, 0);
+        komponenttiryhma.add(shakkiLabel, 1, 0);
+        root.setBottom(komponenttiryhma);
 
         nappula = null;
         MenuBar menuBar = new MenuBar();
@@ -74,13 +84,18 @@ public class Kayttoliittyma extends Application {
 
     }
 
+    /**
+     * main-metodi, käynnistää ohjelman.
+     * @param args args.
+     */
     public static void main(String[] args) {
         launch(Kayttoliittyma.class);
     }
 
-//    public void valitseNappula(){
-//        
-//    }
+    /**
+     * värittää shakkilaudan ruudut (tässä tapauksessa beigeksi ja pinkiksi).
+     * kutsuu myös logiikkaa ruutua hiirellä klikatessa.
+     */
     public void varitaRuudukko() {
         for (int row = 0; row < 8; row++) {
             for (int col = 0; col < 8; col++) {
@@ -106,28 +121,34 @@ public class Kayttoliittyma extends Application {
                     public void handle(MouseEvent event) {
                         int y = GridPane.getRowIndex(stack);
                         int x = GridPane.getColumnIndex(stack);
-
                         if (nappula != null) {
                             if (peli.vuoro(nappula.getX(), nappula.getY(), x, y)) {
+                                if (peli.checkShakki()) {
+                                    shakkiLabel.setTextFill(Color.RED);
+                                    shakkiLabel.setText(peli.getPelaaja() + " on shakissa");
+                                } else {
+                                    shakkiLabel.setText("");
+                                }
                                 System.out.println(peli.getPelilauta().getLauta()[x][y] + "," + peli.getPelilauta().getLauta()[x][y].getPelaaja() + "liikutettu");
                                 System.out.println(peli.getPelilauta().toString());
-                                kuvatGridiin();
                                 keltaisetTakaisin();
+                                punainen.setStroke(Color.TRANSPARENT);
                                 nappula = null;
                             } else {
                                 nappula = null;
                                 keltaisetTakaisin();
+
                             }
 
                         } else if (peli.getPelilauta().validiSiirrettava(peli.getPelaaja(), x, y) && nappula == null) {
                             System.out.println(peli.getPelilauta().getLauta()[x][y] + "," + peli.getPelilauta().getLauta()[x][y].getPelaaja() + " valittu ");
                             nappula = peli.getPelilauta().getLauta()[x][y];
                             varitaKeltaiseksi();
-                            kuvatGridiin();
                         }
 
                         if (stack.getChildren().size() == 2) {
                             Rectangle ruutu = (Rectangle) stack.getChildren().get(0);
+                            punainen = ruutu;
                             ruutu.setStroke(Color.RED);
                         }
                         kuvatGridiin();
@@ -149,6 +170,11 @@ public class Kayttoliittyma extends Application {
         }
     }
 
+    /**
+     * värittää valitun nappulan mahdollisia siirtoja vastaavien ruutujen reunat
+     * keltaisiksi. Indikoidakseen siis pelaajalle, että ruutuihin on
+     * mahdollista siirtää nappula.
+     */
     public void varitaKeltaiseksi() {
         List<String> mahdSiirrot = nappula.mahdollisetSiirrot(peli.getPelilauta().getLauta());
         for (String koordi : mahdSiirrot) {
@@ -162,12 +188,19 @@ public class Kayttoliittyma extends Application {
         }
     }
 
+    /**
+     * värjää keltaisten ruutujen reunat takaisin transparenteiksi.
+     */
     public void keltaisetTakaisin() {
         for (Rectangle ruutu : keltaiset) {
             ruutu.setStroke(Color.TRANSPARENT);
         }
     }
 
+    /**
+     * asettaa shakkilaudalle oikeat kuva oikeiden nappuloiden paikoille laudan
+     * kunkin pelitilanteen perusteella.
+     */
     public void kuvatGridiin() {
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
@@ -183,38 +216,41 @@ public class Kayttoliittyma extends Application {
                     }
                     if (peli.getPelilauta().getLauta()[j][i].getMerkki().equals("S")) {
                         tiedosto += "Sotilas";
-                    }
-                    if (peli.getPelilauta().getLauta()[j][i].getMerkki().equals("T")) {
+                    } else if (peli.getPelilauta().getLauta()[j][i].getMerkki().equals("T")) {
                         tiedosto += "Torni";
-                    }
-                    if (peli.getPelilauta().getLauta()[j][i].getMerkki().equals("R")) {
+                    } else if (peli.getPelilauta().getLauta()[j][i].getMerkki().equals("R")) {
                         tiedosto += "Ratsu";
-                    }
-                    if (peli.getPelilauta().getLauta()[j][i].getMerkki().equals("L")) {
+                    } else if (peli.getPelilauta().getLauta()[j][i].getMerkki().equals("L")) {
                         tiedosto += "Lahetti";
-                    }
-                    if (peli.getPelilauta().getLauta()[j][i].getMerkki().equals("K")) {
+                    } else if (peli.getPelilauta().getLauta()[j][i].getMerkki().equals("K")) {
                         tiedosto += "Kunkku";
-                    }
-                    if (peli.getPelilauta().getLauta()[j][i].getMerkki().equals("Q")) {
+                    } else if (peli.getPelilauta().getLauta()[j][i].getMerkki().equals("Q")) {
                         tiedosto += "Kuningatar";
                     }
                     tiedosto += ".png";
 
-                    ImageView iv = new ImageView(new Image(tiedosto));
-                    stack.getChildren().add(iv);
-
-                } else if (peli.getPelilauta().getLauta()[j][i] == null) {
                     if (stack.getChildren().size() > 1) {
                         ImageView iv = (ImageView) stack.getChildren().get(1);
                         stack.getChildren().remove(iv);
                     }
+                    ImageView iv = new ImageView(new Image(tiedosto));
+                    stack.getChildren().add(iv);
+                } else if (peli.getPelilauta().getLauta()[j][i] == null && stack.getChildren().size() > 1) {
+                    ImageView iv = (ImageView) stack.getChildren().get(1);
+                    stack.getChildren().remove(iv);
                 }
 
             }
         }
     }
 
+    /**
+     * etsii ruudukosta oikean ruudun parametreina saaduilla koordinaateilla.
+     *
+     * @param i etsittävän ruudun x-koordinaatti
+     * @param j etsittävän ruudun y-koordinaatti
+     * @return palauttaa oikean ruudun jos se löytyi.
+     */
     public StackPane etsiStack(int i, int j) {
         for (Node node : ruudukko.getChildren()) {
             if (GridPane.getColumnIndex(node) == i && GridPane.getRowIndex(node) == j) {

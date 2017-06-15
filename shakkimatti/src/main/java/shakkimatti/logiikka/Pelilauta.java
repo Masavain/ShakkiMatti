@@ -3,7 +3,7 @@ package shakkimatti.logiikka;
 import shakkimatti.nappulat.*;
 
 /**
- * luokka kuvastaa shakkilautaa (8x8 ruudukko)
+ * luokka kuvastaa shakkilautaa (8x8 ruudukko).
  *
  */
 public class Pelilauta {
@@ -11,6 +11,9 @@ public class Pelilauta {
     private Nappula[][] lauta;
     private final int size = 8;
 
+    /**
+     * Konstruktori, luo uuden taulukon nappuloille.
+     */
     public Pelilauta() {
         this.lauta = new Nappula[8][8];
     }
@@ -42,6 +45,10 @@ public class Pelilauta {
         this.lauta[5][0] = new Lahetti(5, 0, Pelaaja.MUSTA);
     }
 
+    /**
+     * Metodi toString palauttaa laudan merkkijonoesityksenä.
+     * @return merkkijonoesitys laudasta
+     */
     public String toString() {
         String palautus = "";
         for (int i = 0; i < size; i++) {
@@ -85,7 +92,7 @@ public class Pelilauta {
     /**
      * tarkistaa onko käyttäjän valitseman koordinaatin nappula siirrettävä, eli
      * onko koordinaatissa nappulaa ollenkaan ja onko nappula tämänhetkisen
-     * pelaajan oma
+     * pelaajan oma.
      *
      * @param pelaaja pelaajan väri
      * @param xMista valitun nappulan x-koordinaatti
@@ -107,7 +114,7 @@ public class Pelilauta {
     }
 
     /**
-     * asettaa laudalle nappulan n koordinaattiin (x,y)
+     * Asettaa laudalle nappulan n koordinaattiin (x,y).
      *
      * @param n nappula
      * @param x x-koordinaatti

@@ -5,22 +5,22 @@ import java.util.List;
 import shakkimatti.logiikka.Pelaaja;
 
 /**
- * Kuvaa shakkilaudan lähetti-nappulaa, jatkaa abstraktia Nappula-luokkaa
+ * Kuvaa shakkilaudan lähetti-nappulaa, jatkaa abstraktia Nappula-luokkaa.
  *
  */
 public class Lahetti extends Nappula {
 
+    /**
+     * konstruktori, luo uuden lähetin.
+     * @param x x-koordinaatti
+     * @param y y-koordinaatti
+     * @param color pelaaja, jolle nappula kuuluu
+     */
     public Lahetti(int x, int y, Pelaaja color) {
         super(x, y, color);
         setMerkki("L");
     }
 
-    /**
-     * tarkastaa lähetin mahdolliset siirrot (suorat viistoihin)
-     *
-     * @param tilanne tämänhetkinen pelilaudan pelitilanne
-     * @return palauttaa listan mahdollisten siirtojen koordinaateista
-     */
     @Override
     public List<String> mahdollisetSiirrot(Nappula[][] tilanne) {
         List<String> siirrot = new ArrayList<String>();

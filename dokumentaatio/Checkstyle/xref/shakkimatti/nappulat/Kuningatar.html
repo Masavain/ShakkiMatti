@@ -12,36 +12,34 @@
 <a class="jxr_linenumber" name="L4" href="#L4">4</a>   <strong class="jxr_keyword">import</strong> shakkimatti.logiikka.Pelaaja;
 <a class="jxr_linenumber" name="L5" href="#L5">5</a>   
 <a class="jxr_linenumber" name="L6" href="#L6">6</a>   <em class="jxr_javadoccomment">/**</em>
-<a class="jxr_linenumber" name="L7" href="#L7">7</a>   <em class="jxr_javadoccomment"> * Kuvaa shakkilaudan kuningatar-nappulaa, jatkaa abstraktia Nappula-luokkaa</em>
+<a class="jxr_linenumber" name="L7" href="#L7">7</a>   <em class="jxr_javadoccomment"> * Kuvaa shakkilaudan kuningatar-nappulaa, jatkaa abstraktia Nappula-luokkaa.</em>
 <a class="jxr_linenumber" name="L8" href="#L8">8</a>   <em class="jxr_javadoccomment"> *</em>
 <a class="jxr_linenumber" name="L9" href="#L9">9</a>   <em class="jxr_javadoccomment"> */</em>
 <a class="jxr_linenumber" name="L10" href="#L10">10</a>  <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">class</strong> <a href="../../shakkimatti/nappulat/Kuningatar.html">Kuningatar</a> <strong class="jxr_keyword">extends</strong> <a href="../../shakkimatti/nappulat/Nappula.html">Nappula</a> {
 <a class="jxr_linenumber" name="L11" href="#L11">11</a>  
-<a class="jxr_linenumber" name="L12" href="#L12">12</a>      <strong class="jxr_keyword">public</strong> <a href="../../shakkimatti/nappulat/Kuningatar.html">Kuningatar</a>(<strong class="jxr_keyword">int</strong> x, <strong class="jxr_keyword">int</strong> y, <a href="../../shakkimatti/logiikka/Pelaaja.html">Pelaaja</a> color) {
-<a class="jxr_linenumber" name="L13" href="#L13">13</a>          <strong class="jxr_keyword">super</strong>(x, y, color);
-<a class="jxr_linenumber" name="L14" href="#L14">14</a>          setMerkki(<span class="jxr_string">"Q"</span>);
-<a class="jxr_linenumber" name="L15" href="#L15">15</a>      }
-<a class="jxr_linenumber" name="L16" href="#L16">16</a>  
-<a class="jxr_linenumber" name="L17" href="#L17">17</a>      <em class="jxr_javadoccomment">/**</em>
-<a class="jxr_linenumber" name="L18" href="#L18">18</a>  <em class="jxr_javadoccomment">     * tarkastaa kuningattaren mahdolliset siirrot (suorat viistoihin ja</em>
-<a class="jxr_linenumber" name="L19" href="#L19">19</a>  <em class="jxr_javadoccomment">     * ylös/alas/ oikealle/vasemmalle), yhdistää tarkastukset tornin ja lähetin</em>
-<a class="jxr_linenumber" name="L20" href="#L20">20</a>  <em class="jxr_javadoccomment">     * vastaavista metodeista</em>
-<a class="jxr_linenumber" name="L21" href="#L21">21</a>  <em class="jxr_javadoccomment">     *</em>
-<a class="jxr_linenumber" name="L22" href="#L22">22</a>  <em class="jxr_javadoccomment">     * @param tilanne tämänhetkinen pelilaudan pelitilanne</em>
-<a class="jxr_linenumber" name="L23" href="#L23">23</a>  <em class="jxr_javadoccomment">     * @return palauttaa listan mahdollisten siirtojen koordinaateista</em>
-<a class="jxr_linenumber" name="L24" href="#L24">24</a>  <em class="jxr_javadoccomment">     */</em>
-<a class="jxr_linenumber" name="L25" href="#L25">25</a>      @Override
-<a class="jxr_linenumber" name="L26" href="#L26">26</a>      <strong class="jxr_keyword">public</strong> List&lt;String&gt; mahdollisetSiirrot(<a href="../../shakkimatti/nappulat/Nappula.html">Nappula</a>[][] tilanne) {
-<a class="jxr_linenumber" name="L27" href="#L27">27</a>          List&lt;String&gt; siirrot = <strong class="jxr_keyword">new</strong> ArrayList&lt;String&gt;();
-<a class="jxr_linenumber" name="L28" href="#L28">28</a>          <strong class="jxr_keyword">int</strong> x = getX();
-<a class="jxr_linenumber" name="L29" href="#L29">29</a>          <strong class="jxr_keyword">int</strong> y = getY();
-<a class="jxr_linenumber" name="L30" href="#L30">30</a>          <a href="../../shakkimatti/nappulat/Lahetti.html">Lahetti</a> tempL = <strong class="jxr_keyword">new</strong> <a href="../../shakkimatti/nappulat/Lahetti.html">Lahetti</a>(x, y, getPelaaja());
-<a class="jxr_linenumber" name="L31" href="#L31">31</a>          <a href="../../shakkimatti/nappulat/Torni.html">Torni</a> tempT = <strong class="jxr_keyword">new</strong> <a href="../../shakkimatti/nappulat/Torni.html">Torni</a>(x, y, getPelaaja());
-<a class="jxr_linenumber" name="L32" href="#L32">32</a>          siirrot.addAll(tempL.mahdollisetSiirrot(tilanne));
-<a class="jxr_linenumber" name="L33" href="#L33">33</a>          siirrot.addAll(tempT.mahdollisetSiirrot(tilanne));
-<a class="jxr_linenumber" name="L34" href="#L34">34</a>          <strong class="jxr_keyword">return</strong> siirrot;
-<a class="jxr_linenumber" name="L35" href="#L35">35</a>      }
-<a class="jxr_linenumber" name="L36" href="#L36">36</a>  }
+<a class="jxr_linenumber" name="L12" href="#L12">12</a>      <em class="jxr_javadoccomment">/**</em>
+<a class="jxr_linenumber" name="L13" href="#L13">13</a>  <em class="jxr_javadoccomment">     * konstruktori, luo uuden kuningattaren.</em>
+<a class="jxr_linenumber" name="L14" href="#L14">14</a>  <em class="jxr_javadoccomment">     * @param x x-koordinaatti</em>
+<a class="jxr_linenumber" name="L15" href="#L15">15</a>  <em class="jxr_javadoccomment">     * @param y y-koordinaatti</em>
+<a class="jxr_linenumber" name="L16" href="#L16">16</a>  <em class="jxr_javadoccomment">     * @param color pelaaja, jolle nappula kuuluu</em>
+<a class="jxr_linenumber" name="L17" href="#L17">17</a>  <em class="jxr_javadoccomment">     */</em>
+<a class="jxr_linenumber" name="L18" href="#L18">18</a>      <strong class="jxr_keyword">public</strong> <a href="../../shakkimatti/nappulat/Kuningatar.html">Kuningatar</a>(<strong class="jxr_keyword">int</strong> x, <strong class="jxr_keyword">int</strong> y, <a href="../../shakkimatti/logiikka/Pelaaja.html">Pelaaja</a> color) {
+<a class="jxr_linenumber" name="L19" href="#L19">19</a>          <strong class="jxr_keyword">super</strong>(x, y, color);
+<a class="jxr_linenumber" name="L20" href="#L20">20</a>          setMerkki(<span class="jxr_string">"Q"</span>);
+<a class="jxr_linenumber" name="L21" href="#L21">21</a>      }
+<a class="jxr_linenumber" name="L22" href="#L22">22</a>  
+<a class="jxr_linenumber" name="L23" href="#L23">23</a>      @Override
+<a class="jxr_linenumber" name="L24" href="#L24">24</a>      <strong class="jxr_keyword">public</strong> List&lt;String&gt; mahdollisetSiirrot(<a href="../../shakkimatti/nappulat/Nappula.html">Nappula</a>[][] tilanne) {
+<a class="jxr_linenumber" name="L25" href="#L25">25</a>          List&lt;String&gt; siirrot = <strong class="jxr_keyword">new</strong> ArrayList&lt;String&gt;();
+<a class="jxr_linenumber" name="L26" href="#L26">26</a>          <strong class="jxr_keyword">int</strong> x = getX();
+<a class="jxr_linenumber" name="L27" href="#L27">27</a>          <strong class="jxr_keyword">int</strong> y = getY();
+<a class="jxr_linenumber" name="L28" href="#L28">28</a>          <a href="../../shakkimatti/nappulat/Lahetti.html">Lahetti</a> tempL = <strong class="jxr_keyword">new</strong> <a href="../../shakkimatti/nappulat/Lahetti.html">Lahetti</a>(x, y, getPelaaja());
+<a class="jxr_linenumber" name="L29" href="#L29">29</a>          <a href="../../shakkimatti/nappulat/Torni.html">Torni</a> tempT = <strong class="jxr_keyword">new</strong> <a href="../../shakkimatti/nappulat/Torni.html">Torni</a>(x, y, getPelaaja());
+<a class="jxr_linenumber" name="L30" href="#L30">30</a>          siirrot.addAll(tempL.mahdollisetSiirrot(tilanne));
+<a class="jxr_linenumber" name="L31" href="#L31">31</a>          siirrot.addAll(tempT.mahdollisetSiirrot(tilanne));
+<a class="jxr_linenumber" name="L32" href="#L32">32</a>          <strong class="jxr_keyword">return</strong> siirrot;
+<a class="jxr_linenumber" name="L33" href="#L33">33</a>      }
+<a class="jxr_linenumber" name="L34" href="#L34">34</a>  }
 </pre>
 <hr/>
 <div id="footer">Copyright &#169; 2017. All rights reserved.</div>

@@ -14,16 +14,30 @@ public class Paalogiikka {
     private Pelilauta pelilauta;
     private Pelaaja pelaaja;
 
+    /**
+     * Konstruktori, luo uuden pelilaudan ja alustaa sen sekä asettaa valkoisen
+     * pelaajan ensimmäiseksi vuoroon.
+     */
     public Paalogiikka() {
         this.pelilauta = new Pelilauta();
         pelilauta.alustus();
         this.pelaaja = Pelaaja.VALKOINEN;
+
     }
 
+    /**
+     * kuvaa pelaajan vuoroa shakissa. Vuorossa tehdään siirto ja sen jälkeen
+     * vaihdetaan vuoroa toiselle pelaajalle.
+     *
+     * @param xMista pelaajan valitseman nappulan x-koordinaatti
+     * @param yMista pelaajan valitseman nappulan y-koordinaatti
+     * @param xMihin pelaajan valitseman siirron x-koordinaatti
+     * @param yMihin pelaajan valitseman siirron x-koordinaatti
+     * @return true jos vuoro suoritettiin onnistuneesti, muuten false
+     */
     public boolean vuoro(int xMista, int yMista, int xMihin, int yMihin) {
         if (pelilauta.validiSiirrettava(pelaaja, xMista, yMista)) {
             if (pelilauta.siirto(xMista, yMista, xMihin, yMihin)) {
-                
                 vaihdaVuoroa();
                 return true;
             }
@@ -32,7 +46,7 @@ public class Paalogiikka {
     }
 
     /**
-     * vaihtaa pelaajaa valkoisesta mustaan tai mustasta valkoiseen
+     * Vaihtaa pelaajaa valkoisesta mustaan tai mustasta valkoiseen.
      */
     public void vaihdaVuoroa() {
         if (pelaaja == Pelaaja.VALKOINEN) {
@@ -40,58 +54,6 @@ public class Paalogiikka {
         } else {
             pelaaja = Pelaaja.VALKOINEN;
         }
-    }
-
-    /**
-     *
-     * @param pelaaja
-     * @return palauttaa false jos parametrina saadun pelaajan kuninkaalla on
-     * mahdollisia siirtoja, true jos ei. Truen palautus tarkoittaa siis
-     * ShakkiMattia, eli pelin päätöstä.
-     */
-    public boolean checkShakkiMatti(Pelaaja pelaaja) {
-        for (int i = 0; i < 8; i++) {
-            for (int j = 0; j < 8; j++) {
-                if (pelilauta.getLauta()[j][i] != null && pelilauta.getLauta()[j][i].getMerkki().equals("K") && pelilauta.getLauta()[j][i].getPelaaja() == pelaaja) {
-                    Kuningas kunkku = (Kuningas) pelilauta.getLauta()[j][i];
-                    List<String> kuninkaanSiirrot = kunkku.mahdollisetSiirrot(pelilauta.getLauta());
-                    pelilauta.getLauta()[j][i] = null;
-                    for (String siirto : kuninkaanSiirrot) {
-                        String[] koord = siirto.split("");
-                        if (!checkUhka(pelaaja, Integer.parseInt(koord[0]), Integer.parseInt(koord[2]))) {
-                            return false;
-                        }
-                    }
-                    pelilauta.getLauta()[j][i] = kunkku;
-                }
-            }
-        }
-        return true;
-    }
-
-    /**
-     * Tarkastaa, onko parametrina saatujen arvojen mukainen koordinattii
-     * uhattuna vastapuolen pelaajan puolelta. Käytetaään tarkastamaan onko
-     * kuningas shakissa tai onko kuninkaalla mahdollisuutta liikkua johonkin
-     * ruutuun.
-     *
-     * @param pelaaja tämänhetkinen pelaaja
-     * @param x tarkastettavan koordinaatin x-arvo.
-     * @param y tarkastettavan koordinaatin y-arvo.
-     * @return palauttaa true jos koordinaattia uhataan, false jos ei.
-     */
-    public boolean checkUhka(Pelaaja pelaaja, int x, int y) {
-        for (int i = 0; i < 8; i++) {
-            for (int j = 0; j < 8; j++) {
-                if (pelilauta.getLauta()[j][i] != null && pelilauta.getLauta()[j][i].getPelaaja() != pelaaja) {
-                    Nappula uhkaaja = pelilauta.getLauta()[j][i];
-                    if (uhkaaja.mahdollisetSiirrot(pelilauta.getLauta()).contains(x + "," + y)) {
-                        return true;
-                    }
-                }
-            }
-        }
-        return false;
     }
 
     public Pelilauta getPelilauta() {
@@ -106,4 +68,42 @@ public class Paalogiikka {
         this.pelilauta = pelilauta;
     }
 
+    /**
+     * Etsii laudalta kuninkaan koordinaatit.
+     * @return palauttaa löydetyn kuninkaan, tai null.
+     */
+    public Kuningas getKunkku() {
+        Kuningas kunkku = null;
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 8; j++) {
+                if (pelilauta.getLauta()[j][i] != null && pelilauta.getLauta()[j][i].getMerkki().equals("K") && pelilauta.getLauta()[j][i].getPelaaja() == pelaaja) {
+                    kunkku = (Kuningas) pelilauta.getLauta()[j][i];
+                }
+            }
+        }
+        return kunkku;
+    }
+
+    /**
+     * tarkastaa onko kuningas shakissa, eli onko vastapelaajalla mahdollista
+     * syödä kuningas.
+     * @return palauttaa true jos kuningas uhattuna, false muuten;
+     */
+    public boolean checkShakki() {
+        Kuningas kunkku = getKunkku();
+        int x = kunkku.getX();
+        int y = kunkku.getY();
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 8; j++) {
+                if (pelilauta.getLauta()[j][i] != null && pelilauta.getLauta()[j][i].getPelaaja() != pelaaja) {
+                    Nappula uhkaaja = pelilauta.getLauta()[j][i];
+                    if (uhkaaja.mahdollisetSiirrot(pelilauta.getLauta()).contains(x + "," + y)) {
+                        return true;
+                    }
+
+                }
+            }
+        }
+        return false;
+    }
 }
