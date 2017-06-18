@@ -13,6 +13,7 @@ public class Sotilas extends Nappula {
 
     /**
      * konstruktori, luo uuden kuninkaan.
+     *
      * @param x x-koordinaatti
      * @param y y-koordinaatti
      * @param color pelaaja, jolle nappula kuuluu
@@ -31,48 +32,11 @@ public class Sotilas extends Nappula {
         int x = getX();
         int y = getY();
         if (this.getPelaaja() == Pelaaja.MUSTA) {
-            if (y < 7) {
-                if (tilanne[x][y + 1] == null) {
-                    siirrot.add(x + "," + (y + 1));
-                }
-                if (y < 6 && !this.liikutettu && tilanne[x][y + 2] == null) {
-                    siirrot.add(x + "," + (y + 2));
-                }
-            }
+            siirrot.addAll(mustanMahdSiir(tilanne, x, y));
+            siirrot.addAll(mustanMahdSyonnit(tilanne, x, y));
         } else if (this.getPelaaja() == Pelaaja.VALKOINEN) {
-            if (y > 0) {
-                if (tilanne[x][y - 1] == null) {
-                    siirrot.add(x + "," + (y - 1));
-                }
-                if (y > 1 && !this.liikutettu && tilanne[x][y - 2] == null) {
-                    siirrot.add(x + "," + (y - 2));
-                }
-            }
-        }
-
-        if (getPelaaja() == Pelaaja.MUSTA) {
-            if (x < 7 && y < 7) {
-                if (checkSyotava(x + 1, y + 1, tilanne)) {
-                    siirrot.add((x + 1) + "," + (y + 1));
-                }
-            }
-            if (x > 0 && y < 7) {
-                if (checkSyotava(x - 1, y + 1, tilanne)) {
-                    siirrot.add((x - 1) + "," + (y + 1));
-                }
-            }
-        }
-        if (this.getPelaaja() == Pelaaja.VALKOINEN) {
-            if (x < 7 && y > 0) {
-                if (checkSyotava(x + 1, y - 1, tilanne)) {
-                    siirrot.add((x + 1) + "," + (y - 1));
-                }
-            }
-            if (x > 0 && y > 0) {
-                if (checkSyotava(x - 1, y - 1, tilanne)) {
-                    siirrot.add((x - 1) + "," + (y - 1));
-                }
-            }
+            siirrot.addAll(valkoisenMahdSiir(tilanne, x, y));
+            siirrot.addAll(valkoisenMahdSyonnit(tilanne, x, y));
         }
         return siirrot;
     }
@@ -92,4 +56,91 @@ public class Sotilas extends Nappula {
         }
     }
 
+    /**
+     * apumetodi mahdollisetSiirrot -metodille. tarkastaa mustan sotilaan
+     * liikkumisen
+     * @param tilanne pelilaudan tilanne
+     * @param x sotilaan x-koordinaatti
+     * @param y sotilaan y-koordinaatti
+     * @return palauttaa mahdollisten siirtojen koordinaatit
+     */
+    public List<String> mustanMahdSiir(Nappula[][] tilanne, int x, int y) {
+        ArrayList<String> palautus = new ArrayList();
+        if (y < 7) {
+            if (tilanne[x][y + 1] == null) {
+                palautus.add(x + "," + (y + 1));
+            }
+            if (y < 6 && !this.liikutettu && tilanne[x][y + 2] == null) {
+                palautus.add(x + "," + (y + 2));
+            }
+        }
+        return palautus;
+    }
+
+    /**
+     * apumetodi mahdollisetSiirrot -metodille. tarkastaa valkoisen sotilaan
+     * liikkumisen
+     * @param tilanne pelilaudan tilanne
+     * @param x sotilaan x-koordinaatti
+     * @param y sotilaan y-koordinaatti
+     * @return palauttaa mahdollisten siirtojen koordinaatit
+     */
+    public List<String> valkoisenMahdSiir(Nappula[][] tilanne, int x, int y) {
+        ArrayList<String> palautus = new ArrayList();
+        if (y > 0) {
+            if (tilanne[x][y - 1] == null) {
+                palautus.add(x + "," + (y - 1));
+            }
+            if (y > 1 && !this.liikutettu && tilanne[x][y - 2] == null) {
+                palautus.add(x + "," + (y - 2));
+            }
+        }
+        return palautus;
+    }
+
+    /**
+     * apumetodi mahdollisetSiirrot -metodille. tarkastaa mustan sotilaan
+     * syömisen yläviistoon
+     * @param tilanne pelilaudan tilanne
+     * @param x sotilaan x-koordinaatti
+     * @param y sotilaan y-koordinaatti
+     * @return palauttaa mahdollisten siirtojen koordinaatit
+     */
+    public List<String> mustanMahdSyonnit(Nappula[][] tilanne, int x, int y) {
+        ArrayList<String> palautus = new ArrayList();
+        if (x < 7 && y < 7) {
+            if (checkSyotava(x + 1, y + 1, tilanne)) {
+                palautus.add((x + 1) + "," + (y + 1));
+            }
+        }
+        if (x > 0 && y < 7) {
+            if (checkSyotava(x - 1, y + 1, tilanne)) {
+                palautus.add((x - 1) + "," + (y + 1));
+            }
+        }
+        return palautus;
+    }
+
+    /**
+     * apumetodi mahdollisetSiirrot -metodille. tarkastaa valkoisen sotilaan
+     * syömisen yläviistoon
+     * @param tilanne pelilaudan tilanne
+     * @param x sotilaan x-koordinaatti
+     * @param y sotilaan y-koordinaatti
+     * @return palauttaa mahdollisten siirtojen koordinaatit
+     */
+    public List<String> valkoisenMahdSyonnit(Nappula[][] tilanne, int x, int y) {
+        ArrayList<String> palautus = new ArrayList();
+        if (x < 7 && y > 0) {
+            if (checkSyotava(x + 1, y - 1, tilanne)) {
+                palautus.add((x + 1) + "," + (y - 1));
+            }
+        }
+        if (x > 0 && y > 0) {
+            if (checkSyotava(x - 1, y - 1, tilanne)) {
+                palautus.add((x - 1) + "," + (y - 1));
+            }
+        }
+        return palautus;
+    }
 }

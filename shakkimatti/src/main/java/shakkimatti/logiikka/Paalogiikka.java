@@ -1,7 +1,6 @@
 package shakkimatti.logiikka;
 
 import shakkimatti.nappulat.*;
-import java.util.*;
 
 /**
  * päälogiikkaluokka shakkipelin vuorojen kontrollointiin sekä pelin
