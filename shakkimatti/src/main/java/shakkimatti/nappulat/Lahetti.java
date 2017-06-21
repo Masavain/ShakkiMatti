@@ -28,17 +28,16 @@ public class Lahetti extends Nappula {
         int x = getX();
         int y = getY();
         if (x < 7 && x >= 0) {
-            siirrot.addAll(alaOikea(tilanne, x, y));
+            siirrot.addAll(siirrotAlaOikeaan(tilanne, x, y));
         }
-
         if (x < 7 && x >= 0) {
-            siirrot.addAll(ylaOikea(tilanne, x, y));
+            siirrot.addAll(siirrotYlaOikeaan(tilanne, x, y));
         }
         if (x > 0 && x <= 7) {
-            siirrot.addAll(alaVasen(tilanne, x, y));
+            siirrot.addAll(siirrotAlaVasempaan(tilanne, x, y));
         }
         if (x > 0 && x <= 7) {
-            siirrot.addAll(ylaVasen(tilanne, x, y));
+            siirrot.addAll(siirrotYlaVasempaan(tilanne, x, y));
         }
         return siirrot;
     }
@@ -52,7 +51,7 @@ public class Lahetti extends Nappula {
      * @param y lähetin y-koordinaatti
      * @return palauttaa mahdollisten siirtojen koordinaatit
      */
-    public List<String> ylaOikea(Nappula[][] tilanne, int x, int y) {
+    public List<String> siirrotYlaOikeaan(Nappula[][] tilanne, int x, int y) {
         ArrayList<String> palautus = new ArrayList();
         int yi = y - 1;
         for (int i = x + 1; i < 8; i++) {
@@ -81,7 +80,7 @@ public class Lahetti extends Nappula {
      * @param y lähetin y-koordinaatti
      * @return palauttaa mahdollisten siirtojen koordinaatit
      */
-    public List<String> ylaVasen(Nappula[][] tilanne, int x, int y) {
+    public List<String> siirrotYlaVasempaan(Nappula[][] tilanne, int x, int y) {
         ArrayList<String> palautus = new ArrayList();
         int yi = y - 1;
         for (int i = x - 1; i >= 0; i--) {
@@ -110,7 +109,7 @@ public class Lahetti extends Nappula {
      * @param y lähetin y-koordinaatti
      * @return palauttaa mahdollisten siirtojen koordinaatit
      */
-    public List<String> alaOikea(Nappula[][] tilanne, int x, int y) {
+    public List<String> siirrotAlaOikeaan(Nappula[][] tilanne, int x, int y) {
         ArrayList<String> palautus = new ArrayList();
         int yi = y + 1;
         for (int i = x + 1; i < 8; i++) {
@@ -140,7 +139,7 @@ public class Lahetti extends Nappula {
      * @param y lähetin y-koordinaatti
      * @return palauttaa mahdollisten siirtojen koordinaatit
      */
-    public List<String> alaVasen(Nappula[][] tilanne, int x, int y) {
+    public List<String> siirrotAlaVasempaan(Nappula[][] tilanne, int x, int y) {
         ArrayList<String> palautus = new ArrayList();
         int yi = y + 1;
         for (int i = x - 1; i >= 0; i--) {

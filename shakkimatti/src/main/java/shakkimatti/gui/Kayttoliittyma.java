@@ -15,7 +15,10 @@ import javafx.scene.shape.*;
 import shakkimatti.logiikka.*;
 import shakkimatti.nappulat.Nappula;
 import javafx.animation.*;
+import javafx.event.EventType;
 import javafx.util.*;
+import javafx.event.ActionEvent;
+import shakkimatti.nappulat.*;
 
 /**
  * Shakkipelin graaffinen käyttöliittymäluokka, esittää sekä laudan, nappulat,
@@ -26,7 +29,7 @@ public class Kayttoliittyma extends Application {
     private BorderPane root = new BorderPane();
     private GridPane ruudukko = new GridPane();
     private Nappula nappula;
-    private Paalogiikka peli = new Paalogiikka();
+    public Paalogiikka peli = new Paalogiikka();
     private ArrayList<Rectangle> keltaiset = new ArrayList();
     private Rectangle punainen = null;
     private Timeline timeline;
@@ -61,7 +64,10 @@ public class Kayttoliittyma extends Application {
         MenuItem lopetusValikko = new MenuItem("Lopeta");
         MenuItem uusiPeliValikko = new MenuItem("Uusi Peli");
         root.setTop(menuBar);
-        uusiPeliValikko.setOnAction(actionEvent -> this.peli = new Paalogiikka());
+        uusiPeliValikko.setOnAction((ActionEvent t) -> {
+            peli = new Paalogiikka();
+            kuvatGridiin();
+        });
         lopetusValikko.setOnAction(actionEvent -> Platform.exit());
 
         valikko.getItems().add(uusiPeliValikko);
@@ -133,24 +139,32 @@ public class Kayttoliittyma extends Application {
                                 System.out.println(peli.getPelilauta().toString());
                                 keltaisetTakaisin();
                                 punainen.setStroke(Color.TRANSPARENT);
+                                if (nappula.getMerkki().equals("S")
+                                        && nappula.getPelaaja() == Pelaaja.MUSTA && y == 7) {
+                                    peli.getPelilauta().asetaNappula(new Kuningatar(x, y, nappula.getPelaaja()), x, y);
+                                } else if (nappula.getMerkki().equals("S")
+                                        && nappula.getPelaaja() == Pelaaja.VALKOINEN && y == 0) {
+                                    peli.getPelilauta().asetaNappula(new Kuningatar(x, y, nappula.getPelaaja()), x, y);
+                                }
                                 nappula = null;
+
                             } else {
                                 nappula = null;
                                 keltaisetTakaisin();
-
+                                punainen.setStroke(Color.TRANSPARENT);
                             }
 
                         } else if (peli.getPelilauta().validiSiirrettava(peli.getPelaaja(), x, y) && nappula == null) {
                             System.out.println(peli.getPelilauta().getLauta()[x][y] + "," + peli.getPelilauta().getLauta()[x][y].getPelaaja() + " valittu ");
                             nappula = peli.getPelilauta().getLauta()[x][y];
                             varitaKeltaiseksi();
+                            if (stack.getChildren().size() == 2) {
+                                Rectangle ruutu = (Rectangle) stack.getChildren().get(0);
+                                punainen = ruutu;
+                                punainen.setStroke(Color.RED);
+                            }
                         }
 
-                        if (stack.getChildren().size() == 2) {
-                            Rectangle ruutu = (Rectangle) stack.getChildren().get(0);
-                            punainen = ruutu;
-                            ruutu.setStroke(Color.RED);
-                        }
                         kuvatGridiin();
 
                     }

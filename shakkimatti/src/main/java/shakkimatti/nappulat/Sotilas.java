@@ -32,11 +32,11 @@ public class Sotilas extends Nappula {
         int x = getX();
         int y = getY();
         if (this.getPelaaja() == Pelaaja.MUSTA) {
-            siirrot.addAll(mustanMahdSiir(tilanne, x, y));
-            siirrot.addAll(mustanMahdSyonnit(tilanne, x, y));
+            siirrot.addAll(mustanMahdollisetSiirrot(tilanne, x, y));
+            siirrot.addAll(mustanMahdollisetSyonnit(tilanne, x, y));
         } else if (this.getPelaaja() == Pelaaja.VALKOINEN) {
-            siirrot.addAll(valkoisenMahdSiir(tilanne, x, y));
-            siirrot.addAll(valkoisenMahdSyonnit(tilanne, x, y));
+            siirrot.addAll(valkoisenMahdollisetSiirrot(tilanne, x, y));
+            siirrot.addAll(valkoisenMahdollisetSyonnit(tilanne, x, y));
         }
         return siirrot;
     }
@@ -64,13 +64,13 @@ public class Sotilas extends Nappula {
      * @param y sotilaan y-koordinaatti
      * @return palauttaa mahdollisten siirtojen koordinaatit
      */
-    public List<String> mustanMahdSiir(Nappula[][] tilanne, int x, int y) {
+    public List<String> mustanMahdollisetSiirrot(Nappula[][] tilanne, int x, int y) {
         ArrayList<String> palautus = new ArrayList();
         if (y < 7) {
             if (tilanne[x][y + 1] == null) {
                 palautus.add(x + "," + (y + 1));
             }
-            if (y < 6 && !this.liikutettu && tilanne[x][y + 2] == null) {
+            if (y < 6 && !this.liikutettu && tilanne[x][y + 2] == null && tilanne[x][y + 1] == null){
                 palautus.add(x + "," + (y + 2));
             }
         }
@@ -85,13 +85,13 @@ public class Sotilas extends Nappula {
      * @param y sotilaan y-koordinaatti
      * @return palauttaa mahdollisten siirtojen koordinaatit
      */
-    public List<String> valkoisenMahdSiir(Nappula[][] tilanne, int x, int y) {
+    public List<String> valkoisenMahdollisetSiirrot(Nappula[][] tilanne, int x, int y) {
         ArrayList<String> palautus = new ArrayList();
         if (y > 0) {
             if (tilanne[x][y - 1] == null) {
                 palautus.add(x + "," + (y - 1));
             }
-            if (y > 1 && !this.liikutettu && tilanne[x][y - 2] == null) {
+            if (y > 1 && !this.liikutettu && tilanne[x][y - 2] == null && tilanne[x][y - 1] == null) {
                 palautus.add(x + "," + (y - 2));
             }
         }
@@ -106,7 +106,7 @@ public class Sotilas extends Nappula {
      * @param y sotilaan y-koordinaatti
      * @return palauttaa mahdollisten siirtojen koordinaatit
      */
-    public List<String> mustanMahdSyonnit(Nappula[][] tilanne, int x, int y) {
+    public List<String> mustanMahdollisetSyonnit(Nappula[][] tilanne, int x, int y) {
         ArrayList<String> palautus = new ArrayList();
         if (x < 7 && y < 7) {
             if (checkSyotava(x + 1, y + 1, tilanne)) {
@@ -129,7 +129,7 @@ public class Sotilas extends Nappula {
      * @param y sotilaan y-koordinaatti
      * @return palauttaa mahdollisten siirtojen koordinaatit
      */
-    public List<String> valkoisenMahdSyonnit(Nappula[][] tilanne, int x, int y) {
+    public List<String> valkoisenMahdollisetSyonnit(Nappula[][] tilanne, int x, int y) {
         ArrayList<String> palautus = new ArrayList();
         if (x < 7 && y > 0) {
             if (checkSyotava(x + 1, y - 1, tilanne)) {

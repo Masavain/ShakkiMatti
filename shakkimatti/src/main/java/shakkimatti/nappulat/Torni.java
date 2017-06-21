@@ -28,16 +28,16 @@ public class Torni extends Nappula {
         int x = getX();
         int y = getY();
         if (x < 7 && x >= 0) {
-            siirrot.addAll(oikea(tilanne, x, y));
+            siirrot.addAll(siirrotOikeaan(tilanne, x, y));
         }
         if (x <= 7 && x > 0) {
-            siirrot.addAll(vasen(tilanne, x, y));
+            siirrot.addAll(siirrotVasempaan(tilanne, x, y));
         }
         if (y < 7 && y >= 0) {
-            siirrot.addAll(alas(tilanne, x, y));
+            siirrot.addAll(siirrotAlas(tilanne, x, y));
         }
         if (y > 0 && y <= 7) {
-            siirrot.addAll(ylos(tilanne, x, y));
+            siirrot.addAll(siirrotYlos(tilanne, x, y));
         }
         return siirrot;
     }
@@ -51,7 +51,7 @@ public class Torni extends Nappula {
      * @param y tornin y-koordinaatti
      * @return palauttaa mahdollisten siirtojen koordinaatit
      */
-    public List<String> ylos(Nappula[][] tilanne, int x, int y) {
+    public List<String> siirrotYlos(Nappula[][] tilanne, int x, int y) {
         ArrayList<String> palautus = new ArrayList();
         for (int i = y - 1; i >= 0; i--) {
             if (tilanne[x][i] == null) {
@@ -75,7 +75,7 @@ public class Torni extends Nappula {
      * @param y tornin y-koordinaatti
      * @return palauttaa mahdollisten siirtojen koordinaatit
      */
-    public List<String> alas(Nappula[][] tilanne, int x, int y) {
+    public List<String> siirrotAlas(Nappula[][] tilanne, int x, int y) {
         ArrayList<String> palautus = new ArrayList();
         for (int i = y + 1; i < 8; i++) {
             if (tilanne[x][i] == null) {
@@ -99,7 +99,7 @@ public class Torni extends Nappula {
      * @param y tornin y-koordinaatti
      * @return palauttaa mahdollisten siirtojen koordinaatit
      */
-    public List<String> vasen(Nappula[][] tilanne, int x, int y) {
+    public List<String> siirrotVasempaan(Nappula[][] tilanne, int x, int y) {
         ArrayList<String> palautus = new ArrayList();
         for (int i = x - 1; i >= 0; i--) {
             if (tilanne[i][y] == null) {
@@ -123,7 +123,7 @@ public class Torni extends Nappula {
      * @param y tornin y-koordinaatti
      * @return palauttaa mahdollisten siirtojen koordinaatit
      */
-    public List<String> oikea(Nappula[][] tilanne, int x, int y) {
+    public List<String> siirrotOikeaan(Nappula[][] tilanne, int x, int y) {
         ArrayList<String> palautus = new ArrayList();
         for (int i = x + 1; i < 8; i++) {
             if (tilanne[i][y] == null) {

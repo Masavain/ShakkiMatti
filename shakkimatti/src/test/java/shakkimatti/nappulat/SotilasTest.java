@@ -176,6 +176,7 @@ public class SotilasTest {
 
         assertTrue(valkoinen.mahdollisetSiirrot(lauta.getLauta()).contains("2,0"));
     }
+
     @Test
     public void eiVoiSyodaOmanVaristaMusta() {
         Sotilas eka = new Sotilas(0, 0, Pelaaja.MUSTA, false);
@@ -194,6 +195,24 @@ public class SotilasTest {
         lauta.asetaNappula(toka, 1, 1);
 
         assertFalse(toka.mahdollisetSiirrot(lauta.getLauta()).contains("0,0"));
+    }
+
+    @Test
+    public void eiVoiLiikkuaKahtaNappulanLapiMusta() {
+        Sotilas sotilas = new Sotilas(1, 1, Pelaaja.MUSTA, false);
+        Sotilas sotilas2 = new Sotilas(1, 2, Pelaaja.MUSTA, false);
+        lauta.asetaNappula(sotilas, 1, 1);
+        lauta.asetaNappula(sotilas2, 1, 2);
+        assertFalse(sotilas.mahdollisetSiirrot(lauta.getLauta()).contains("1,3"));
+    }
+
+    @Test
+    public void eiVoiLiikkuaKahtaNappulanLapiValk() {
+        Sotilas sotilas = new Sotilas(1, 6, Pelaaja.VALKOINEN, false);
+        Sotilas sotilas2 = new Sotilas(1, 5, Pelaaja.VALKOINEN, false);
+        lauta.asetaNappula(sotilas, 1, 6);
+        lauta.asetaNappula(sotilas2, 1, 5);
+        assertFalse(sotilas.mahdollisetSiirrot(lauta.getLauta()).contains("1,4"));
     }
 
 }
