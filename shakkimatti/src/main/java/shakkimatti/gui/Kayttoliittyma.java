@@ -32,9 +32,12 @@ public class Kayttoliittyma extends Application {
     private ArrayList<Rectangle> keltaiset = new ArrayList();
     private Rectangle punainen = null;
     private Timeline timeline;
-    private Label timerLabel = new Label();
+    private Label timerLabel1 = new Label();
+    private Label timerLabel2 = new Label();
     private Label shakkiLabel = new Label();
-    private Integer timeSeconds = 0;
+    private Integer ValkTimeSeconds = -1;
+    private Integer MustaTimeSeconds = -1;
+    private Integer timeSeconds = ValkTimeSeconds;
 
     /**
      * käynnistää pelin ja kellon.
@@ -44,16 +47,19 @@ public class Kayttoliittyma extends Application {
     @Override
     public void start(Stage primaryStage) {
         Timeline timeline = new Timeline(new KeyFrame(
-                Duration.seconds(1), ae -> timeSeconds++), new KeyFrame(Duration.seconds(1), ae -> timerLabel.setText((" Aika: " + timeSeconds.toString())))
+                Duration.seconds(1), ae -> timeSeconds++), new KeyFrame(Duration.seconds(1), ae -> timerLabel1.setText((timeSeconds / 60 + ":" + timeSeconds % 60)))
         );
         timeline.setCycleCount(Animation.INDEFINITE);
         timeline.play();
-        timerLabel.prefWidthProperty().bind(primaryStage.widthProperty());
+        timerLabel1.prefWidthProperty().bind(primaryStage.widthProperty());
+        timerLabel2.prefWidthProperty().bind(primaryStage.widthProperty());
+        timerLabel2.setText("valkoisen aika ");
         shakkiLabel.prefWidthProperty().bind(primaryStage.widthProperty());
 
         GridPane komponenttiryhma = new GridPane();
-        komponenttiryhma.add(timerLabel, 0, 0);
-        komponenttiryhma.add(shakkiLabel, 1, 0);
+        komponenttiryhma.add(timerLabel2, 0, 0);
+        komponenttiryhma.add(timerLabel1, 1, 0);
+        komponenttiryhma.add(shakkiLabel, 2, 0);
         root.setBottom(komponenttiryhma);
 
         nappula = null;
@@ -98,7 +104,8 @@ public class Kayttoliittyma extends Application {
     }
 
     /**
-     * värittää shakkilaudan ruudut (tässä tapauksessa beigeksi ja pinkiksi).
+     * värittää shakkilaudan ruudut (tässä tapauksessa beigeksi ja pinkiksi)
+     * , sekä pitää yllä kellon vaihtamista vuoron vaihtuessa.
      * kutsuu myös logiikkaa ruutua hiirellä klikatessa.
      */
     public void varitaRuudukko() {
@@ -134,6 +141,7 @@ public class Kayttoliittyma extends Application {
                                 } else {
                                     shakkiLabel.setText("");
                                 }
+
                                 System.out.println(peli.getPelilauta().getLauta()[x][y] + "," + peli.getPelilauta().getLauta()[x][y].getPelaaja() + "liikutettu");
                                 System.out.println(peli.getPelilauta().toString());
                                 keltaisetTakaisin();
@@ -146,7 +154,15 @@ public class Kayttoliittyma extends Application {
                                     peli.getPelilauta().asetaNappula(new Kuningatar(x, y, nappula.getPelaaja()), x, y);
                                 }
                                 nappula = null;
-
+                                if (peli.getPelaaja() == Pelaaja.MUSTA) {
+                                    timerLabel2.setText("mustan aika ");
+                                    ValkTimeSeconds = timeSeconds;
+                                    timeSeconds = MustaTimeSeconds;
+                                } else {
+                                    timerLabel2.setText("valkoisen aika ");
+                                    MustaTimeSeconds = timeSeconds;
+                                    timeSeconds = ValkTimeSeconds;
+                                }
                             } else {
                                 nappula = null;
                                 keltaisetTakaisin();
@@ -272,4 +288,5 @@ public class Kayttoliittyma extends Application {
         }
         return null;
     }
+    
 }
