@@ -15,7 +15,6 @@ import javafx.scene.shape.*;
 import shakkimatti.logiikka.*;
 import shakkimatti.nappulat.Nappula;
 import javafx.animation.*;
-import javafx.event.EventType;
 import javafx.util.*;
 import javafx.event.ActionEvent;
 import shakkimatti.nappulat.*;
