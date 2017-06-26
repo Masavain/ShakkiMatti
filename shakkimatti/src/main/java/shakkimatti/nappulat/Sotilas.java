@@ -59,6 +59,7 @@ public class Sotilas extends Nappula {
     /**
      * apumetodi mahdollisetSiirrot -metodille. tarkastaa mustan sotilaan
      * liikkumisen
+     *
      * @param tilanne pelilaudan tilanne
      * @param x sotilaan x-koordinaatti
      * @param y sotilaan y-koordinaatti
@@ -70,7 +71,7 @@ public class Sotilas extends Nappula {
             if (tilanne[x][y + 1] == null) {
                 palautus.add(x + "," + (y + 1));
             }
-            if (y < 6 && !this.liikutettu && tilanne[x][y + 2] == null && tilanne[x][y + 1] == null){
+            if (y < 6 && !this.liikutettu && tilanne[x][y + 2] == null && tilanne[x][y + 1] == null) {
                 palautus.add(x + "," + (y + 2));
             }
         }
@@ -80,6 +81,7 @@ public class Sotilas extends Nappula {
     /**
      * apumetodi mahdollisetSiirrot -metodille. tarkastaa valkoisen sotilaan
      * liikkumisen
+     *
      * @param tilanne pelilaudan tilanne
      * @param x sotilaan x-koordinaatti
      * @param y sotilaan y-koordinaatti
@@ -101,6 +103,7 @@ public class Sotilas extends Nappula {
     /**
      * apumetodi mahdollisetSiirrot -metodille. tarkastaa mustan sotilaan
      * syömisen yläviistoon
+     *
      * @param tilanne pelilaudan tilanne
      * @param x sotilaan x-koordinaatti
      * @param y sotilaan y-koordinaatti
@@ -124,6 +127,7 @@ public class Sotilas extends Nappula {
     /**
      * apumetodi mahdollisetSiirrot -metodille. tarkastaa valkoisen sotilaan
      * syömisen yläviistoon
+     *
      * @param tilanne pelilaudan tilanne
      * @param x sotilaan x-koordinaatti
      * @param y sotilaan y-koordinaatti

@@ -35,9 +35,9 @@ public class Kayttoliittyma extends Application {
     private Label timerLabel1 = new Label();
     private Label timerLabel2 = new Label();
     private Label shakkiLabel = new Label();
-    private Integer ValkTimeSeconds = -1;
-    private Integer MustaTimeSeconds = -1;
-    private Integer timeSeconds = ValkTimeSeconds;
+    private Integer valkTimeSeconds = -1;
+    private Integer mustaTimeSeconds = -1;
+    private Integer timeSeconds = valkTimeSeconds;
 
     /**
      * käynnistää pelin ja kellon.
@@ -156,12 +156,12 @@ public class Kayttoliittyma extends Application {
                                 nappula = null;
                                 if (peli.getPelaaja() == Pelaaja.MUSTA) {
                                     timerLabel2.setText("mustan aika ");
-                                    ValkTimeSeconds = timeSeconds;
-                                    timeSeconds = MustaTimeSeconds;
+                                    valkTimeSeconds = timeSeconds;
+                                    timeSeconds = mustaTimeSeconds;
                                 } else {
                                     timerLabel2.setText("valkoisen aika ");
-                                    MustaTimeSeconds = timeSeconds;
-                                    timeSeconds = ValkTimeSeconds;
+                                    mustaTimeSeconds = timeSeconds;
+                                    timeSeconds = valkTimeSeconds;
                                 }
                             } else {
                                 nappula = null;
