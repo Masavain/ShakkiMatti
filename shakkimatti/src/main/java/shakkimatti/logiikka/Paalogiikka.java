@@ -1,6 +1,7 @@
 package shakkimatti.logiikka;
 
 import shakkimatti.nappulat.*;
+import java.util.ArrayList;
 
 /**
  * päälogiikkaluokka shakkipelin vuorojen kontrollointiin sekä pelin
@@ -69,6 +70,7 @@ public class Paalogiikka {
 
     /**
      * Etsii laudalta kuninkaan koordinaatit.
+     *
      * @return palauttaa löydetyn kuninkaan, tai null.
      */
     public Kuningas getKunkku() {
@@ -84,8 +86,11 @@ public class Paalogiikka {
     }
 
     /**
+     * /**
      * tarkastaa onko kuningas shakissa, eli onko vastapelaajalla mahdollista
      * syödä kuningas.
+     *
+     * @param lauta pelilaudan tilanne
      * @return palauttaa true jos kuningas uhattuna, false muuten;
      */
     public boolean checkShakki() {

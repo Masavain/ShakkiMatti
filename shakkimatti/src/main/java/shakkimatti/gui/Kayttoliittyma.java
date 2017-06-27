@@ -14,8 +14,6 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.*;
 import shakkimatti.logiikka.*;
 import shakkimatti.nappulat.Nappula;
-import javafx.animation.*;
-import javafx.util.*;
 import javafx.event.ActionEvent;
 import shakkimatti.nappulat.*;
 
@@ -29,15 +27,11 @@ public class Kayttoliittyma extends Application {
     private GridPane ruudukko = new GridPane();
     private Nappula nappula;
     public Paalogiikka peli = new Paalogiikka();
+    public KelloLabel kello;
     private ArrayList<Rectangle> keltaiset = new ArrayList();
     private Rectangle punainen = null;
-    private Timeline timeline;
-    private Label timerLabel1 = new Label();
-    private Label timerLabel2 = new Label();
+
     private Label shakkiLabel = new Label();
-    private Integer valkTimeSeconds = -1;
-    private Integer mustaTimeSeconds = -1;
-    private Integer timeSeconds = valkTimeSeconds;
 
     /**
      * käynnistää pelin ja kellon.
@@ -46,19 +40,12 @@ public class Kayttoliittyma extends Application {
      */
     @Override
     public void start(Stage primaryStage) {
-        Timeline timeline = new Timeline(new KeyFrame(
-                Duration.seconds(1), ae -> timeSeconds++), new KeyFrame(Duration.seconds(1), ae -> timerLabel1.setText((timeSeconds / 60 + ":" + timeSeconds % 60)))
-        );
-        timeline.setCycleCount(Animation.INDEFINITE);
-        timeline.play();
-        timerLabel1.prefWidthProperty().bind(primaryStage.widthProperty());
-        timerLabel2.prefWidthProperty().bind(primaryStage.widthProperty());
-        timerLabel2.setText("valkoisen aika ");
+        kello = new KelloLabel(peli, primaryStage);
         shakkiLabel.prefWidthProperty().bind(primaryStage.widthProperty());
 
         GridPane komponenttiryhma = new GridPane();
-        komponenttiryhma.add(timerLabel2, 0, 0);
-        komponenttiryhma.add(timerLabel1, 1, 0);
+        komponenttiryhma.add(kello.getTimerLabel2(), 0, 0);
+        komponenttiryhma.add(kello.getTimerLabel1(), 1, 0);
         komponenttiryhma.add(shakkiLabel, 2, 0);
         root.setBottom(komponenttiryhma);
 
@@ -74,10 +61,8 @@ public class Kayttoliittyma extends Application {
             kuvatGridiin();
         });
         lopetusValikko.setOnAction(actionEvent -> Platform.exit());
-
         valikko.getItems().add(uusiPeliValikko);
         valikko.getItems().add(lopetusValikko);
-
         menuBar.getMenus().addAll(valikko);
 
         ruudukko.prefHeightProperty().bind(primaryStage.heightProperty());
@@ -104,9 +89,9 @@ public class Kayttoliittyma extends Application {
     }
 
     /**
-     * värittää shakkilaudan ruudut (tässä tapauksessa beigeksi ja pinkiksi)
-     * , sekä pitää yllä kellon vaihtamista vuoron vaihtuessa.
-     * kutsuu myös logiikkaa ruutua hiirellä klikatessa.
+     * värittää shakkilaudan ruudut (tässä tapauksessa beigeksi ja pinkiksi) ,
+     * sekä pitää yllä kellon vaihtamista vuoron vaihtuessa. kutsuu myös
+     * logiikkaa ruutua hiirellä klikatessa.
      */
     public void varitaRuudukko() {
         for (int row = 0; row < 8; row++) {
@@ -141,7 +126,6 @@ public class Kayttoliittyma extends Application {
                                 } else {
                                     shakkiLabel.setText("");
                                 }
-
                                 System.out.println(peli.getPelilauta().getLauta()[x][y] + "," + peli.getPelilauta().getLauta()[x][y].getPelaaja() + "liikutettu");
                                 System.out.println(peli.getPelilauta().toString());
                                 keltaisetTakaisin();
@@ -154,15 +138,8 @@ public class Kayttoliittyma extends Application {
                                     peli.getPelilauta().asetaNappula(new Kuningatar(x, y, nappula.getPelaaja()), x, y);
                                 }
                                 nappula = null;
-                                if (peli.getPelaaja() == Pelaaja.MUSTA) {
-                                    timerLabel2.setText("mustan aika ");
-                                    valkTimeSeconds = timeSeconds;
-                                    timeSeconds = mustaTimeSeconds;
-                                } else {
-                                    timerLabel2.setText("valkoisen aika ");
-                                    mustaTimeSeconds = timeSeconds;
-                                    timeSeconds = valkTimeSeconds;
-                                }
+                                
+                                kello.vaihdaKelloa();
                             } else {
                                 nappula = null;
                                 keltaisetTakaisin();
@@ -288,5 +265,4 @@ public class Kayttoliittyma extends Application {
         }
         return null;
     }
-    
 }

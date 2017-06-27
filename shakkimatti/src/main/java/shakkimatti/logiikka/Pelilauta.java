@@ -6,7 +6,7 @@ import shakkimatti.nappulat.*;
  * luokka kuvastaa shakkilautaa (8x8 ruudukko).
  *
  */
-public class Pelilauta {
+public class Pelilauta implements Cloneable {
 
     private Nappula[][] lauta;
     private final int size = 8;
@@ -18,6 +18,10 @@ public class Pelilauta {
         this.lauta = new Nappula[8][8];
     }
 
+    @Override
+    protected Object clone() throws CloneNotSupportedException {
+        return super.clone();
+    }
     /**
      * alustaa normaalin shakkipelin alun. Asettaa pelinappulat oikeille
      * aloituspaikoilleen.
@@ -122,6 +126,10 @@ public class Pelilauta {
      */
     public void asetaNappula(Nappula n, int x, int y) {
         this.lauta[x][y] = n;
+    }
+
+    public void setLauta(Nappula[][] lauta) {
+        this.lauta = lauta;
     }
 
 }
