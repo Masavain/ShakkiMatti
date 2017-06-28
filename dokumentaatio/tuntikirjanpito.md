@@ -17,3 +17,4 @@ Päivä | Tunnit | Kuvaus
 21.06.2017 | 2h | refaktorointia/fiksailua
 25.06.2017 | 1,5h | GUI-kellon muokkaus
 27.06.2017 | 2h | viimeistelyä
+28.06.2017 | 0,5h | vikat säädöt ja lopullinen palautus (deadline 6)
