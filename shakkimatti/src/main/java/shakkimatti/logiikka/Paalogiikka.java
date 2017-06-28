@@ -90,7 +90,6 @@ public class Paalogiikka {
      * tarkastaa onko kuningas shakissa, eli onko vastapelaajalla mahdollista
      * syödä kuningas.
      *
-     * @param lauta pelilaudan tilanne
      * @return palauttaa true jos kuningas uhattuna, false muuten;
      */
     public boolean checkShakki() {
