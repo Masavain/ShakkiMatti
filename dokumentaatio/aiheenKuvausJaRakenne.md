@@ -20,6 +20,4 @@ Shakkilautaa kuvaa luokka Pelilauta, jossa on Nappula-olioista koostuva 8x8 taul
 
 ![shakki](https://github.com/Masavain/ShakkiMatti/blob/master/dokumentaatio/shakkiSekvenssi.png)
 
-**Käyttöohjeet**
 
-ShakkiMatin pelaaminen on helppoa. Pelin auetessa alkaa uusi peli heti. Valkoinen pelaaja aloittaa. Voit klikata hiirellä nappulaa, jolloin valitset sen, ja peli näyttää valitun nappulan mahdolliset siirrot värjäämällä ruutujen reunat keltaisiksi. Voit joko liikkua valitsemalla hiirellä haluamasi ruudun tai poistaa valinnan klikkaamalla jotain muuta ruutua. Siirron tehtyäsi vuoro vaihtuu aina toiselle pelaajalle. Peli jatkuu normaalin shakin tapaan, kunnes vastapelaajan kuningas on shakissa, eikä pysty millään laillisella siirrolla torjumaan shakkia (tämä on pelaajien omissa käsissä). Pelin aikana voit myös valita ylävalikosta joko uuden pelin, jolloin peli alkaa alusta, tai lopettaa pelin, jolloin ohjelma sulkeutuu.
